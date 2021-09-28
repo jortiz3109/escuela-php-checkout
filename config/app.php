@@ -79,8 +79,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
-    'locale' => 'en',
+    'locale' => str_replace('_', '-', app()->getLocale()),
 
     /*
     |--------------------------------------------------------------------------

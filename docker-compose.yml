@@ -1,0 +1,51 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:stable
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - /home/arik/www/escuela-php-checkout/:/var/www/html/escuela-php-checkout
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    networks:
+      - app-network
+  php74:
+    build:
+      args:
+        user: arik # your username on your machine, you can get it by running echo $USER
+        uid: 1000
+      context: .
+      dockerfile: /home/arik/www/escuela-php-checkout/Dockerfile
+    image: 7.4-fpm
+    ports:
+      - "9000:9000"
+    volumes:
+       - /home/arik/www/escuela-php-checkout/:/var/www/html/escuela-php-checkout
+    networks:
+      - app-network
+  mysql57:
+    image: mysql:5.7.32
+    container_name: mysql57
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: checkout
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    networks:
+      - app-network
+ 
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+  
