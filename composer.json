@@ -48,7 +48,8 @@
             "@php artisan key:generate --ansi"
         ],
         "phpcs": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php",
-        "phpcs-validate": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --stop-on-violation --using-cache=no"
+        "phpcs-validate": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --dry-run --stop-on-violation --using-cache=no",
+        "testdox": "XDEBUG_MODE=coverage vendor/bin/phpunit --testdox --coverage-clover coverage.xml"
     },
     "extra": {
         "laravel": {
