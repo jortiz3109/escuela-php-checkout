@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class LangAuto
 {
-    const LOCALES = ['en', 'es'];
+    public const LOCALES = ['en', 'es'];
     /**
      * Handle an incoming request.
      *
@@ -15,7 +15,6 @@ class LangAuto
      * @param  \Closure  $next
      * @return mixed
      */
-
     public function handle(Request $request, Closure $next)
     {
         app()->setLocale($request->getPreferredLanguage(self::LOCALES));
