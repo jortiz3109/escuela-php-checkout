@@ -1,0 +1,42 @@
+.step-active{
+    @apply bg-green-500 text-white;
+}
+
+.step-inactive{
+    @apply bg-white text-gray-400;
+}
+
+.step-circle
+{
+    @apply w-14 h-14 border-2 mx-auto rounded-full text-lg flex items-center;
+}
+
+.step-line-parent
+{
+    @apply w-1/6 items-center align-middle content-center flex;
+}
+
+.step-line-child1
+{
+    @apply w-full rounded border flex-1;
+}
+
+.step-line-child2
+{
+    @apply text-xs leading-none py-1 text-center rounded;
+}
+
+.step-text-circle
+{
+    @apply text-center w-full;
+}
+
+.step-text-inactive
+{
+    @apply text-gray-400;
+}
+
+.step-text-active
+{
+    @apply text-white;
+}

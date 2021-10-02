@@ -1,0 +1,9 @@
+.input-default
+{
+    @apply w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow focus:ring-2 ring-offset-current ring-offset-2;
+}
+
+.label-input-default
+{
+    @apply text-base leading-7 text-gray-500;
+}

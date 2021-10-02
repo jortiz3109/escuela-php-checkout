@@ -79,7 +79,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-    'locale' => str_replace('_', '-', app()->getLocale()),
+    'locale' => substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2),
 
     /*
     |--------------------------------------------------------------------------

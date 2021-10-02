@@ -1,53 +1,54 @@
 <template>
-    <div class="w-10/12 mx-auto rounded overflow-hidden px-5 py-3 bg-gray">	
-        <div class="max-w-xl mx-auto my-4 border-b-2 pb-4">	
+    <div class="w-10/12 mx-auto rounded overflow-hidden px-5 py-3 bg-gray">
+        <div class="max-w-3xl mx-auto my-4 border-b-2 pb-4">
             <div class="flex pb-3">
                 <div class="flex-1">
                 </div>
 
                 <div class="flex-1">
-                    <div class="w-10 h-10 bg-green-400 mx-auto rounded-full text-lg text-white flex items-center">
-                        <span class="text-white text-center w-full">1<i class="fa fa-check w-full fill-current white"></i></span>
+                    <div 
+                        :class="{'step-circle':true, 'step-inactive': currentSteps.indexOf('ownerData') == -1, 'step-active': currentSteps.indexOf('ownerData') != -1}">
+                        <span :class="{'step-text-circle':true, 'step-text-inactive': currentSteps.indexOf('ownerData') == -1, 'step-text-active': currentSteps.indexOf('ownerData') != -1 }">1</span>
                     </div>
                 </div>
 
 
-                <div class="w-1/6 align-center items-center align-middle content-center flex">
-                    <div class="w-full bg-green-400 rounded items-center align-middle align-center flex-1">
-                        <div class="bg-green-400-light text-xs leading-none py-1 text-center text-grey-darkest rounded " style="width: 100%"></div>
+                <div class="step-line-parent">
+                    <div :class="{'step-line-child1': true, 'step-inactive': currentSteps.indexOf('paymentMethod') == -1, 'step-active': currentSteps.indexOf('paymentMethod') != -1}">
+                        <div class="step-line-child2"></div>
                     </div>
                 </div>
 
                 
                 <div class="flex-1">
-                    <div class="w-10 h-10 bg-green-400 border-2 border-grey-light mx-auto rounded-full text-lg text-white flex items-center">
-                        <span class="text-white text-center w-full">2<i class="fa fa-check w-full fill-current white"></i></span>
+                    <div :class="{'step-circle':true, 'step-inactive':currentSteps.indexOf('paymentMethod') == -1, 'step-active':currentSteps.indexOf('paymentMethod') != -1}">
+                        <span :class="{'step-text-circle':true, 'step-text-inactive': currentSteps.indexOf('paymentMethod') == -1, 'step-text-active': currentSteps.indexOf('paymentMethod') != -1 }">2</span>
                     </div>
                 </div>
 
-                <div class="w-1/6 align-center items-center align-middle content-center flex">
-                    <div class="w-full bg-green-400 rounded items-center align-middle align-center flex-1">
-                        <div class="bg-green-400-light text-xs leading-none py-1 text-center text-grey-darkest rounded " style="width: 20%"></div>
+                <div class="step-line-parent">
+                    <div :class="{'step-line-child1': true, 'step-inactive': currentSteps.indexOf('payment') == -1, 'step-active': currentSteps.indexOf('payment') != -1}">
+                        <div class="step-line-child2"></div>
                     </div>
                 </div>
 
                 <div class="flex-1">
-                    <div class="w-10 h-10 bg-green-400 border-2 border-grey-light mx-auto rounded-full text-lg text-white flex items-center">
-                        <span class="text-grey-darker text-center w-full">3</span>
+                    <div :class="{'step-circle':true, 'step-inactive':currentSteps.indexOf('payment') == -1, 'step-active':currentSteps.indexOf('payment') != -1}">
+                        <span :class="{'step-text-circle':true, 'step-text-inactive': currentSteps.indexOf('payment') == -1, 'step-text-active': currentSteps.indexOf('payment') != -1 }">3</span>
                     </div>
                 </div>
 
 
-                <div class="w-1/6 align-center items-center align-middle content-center flex">
-                    <div class="w-full bg-grey-light rounded items-center align-middle align-center flex-1">
-                        <div class="bg-green-400-light text-xs leading-none py-1 text-center text-grey-darkest rounded " style="width: 0%"></div>
+                <div class="step-line-parent">
+                    <div :class="{'step-line-child1': true, 'step-inactive': currentSteps.indexOf('result') == -1, 'step-active': currentSteps.indexOf('result') != -1}">
+                        <div class="step-line-child2"></div>
                     </div>
                 </div>
 
 
                 <div class="flex-1">
-                    <div class="w-10 h-10 bg-white border-2 border-grey-light mx-auto rounded-full text-lg text-white flex items-center">
-                        <span class="text-grey-darker text-center w-full">4</span>
+                    <div :class="{'step-circle':true, 'step-inactive':currentSteps.indexOf('result') == -1, 'step-active':currentSteps.indexOf('result') != -1}">
+                        <span :class="{'step-text-circle':true, 'step-text-inactive': currentSteps.indexOf('result') == -1, 'step-text-active': currentSteps.indexOf('result') != -1 }">4</span>
                     </div>
                 </div>
 
@@ -58,36 +59,41 @@
 
             <div class="flex text-s content-center text-center">
                 <div class="w-3/4">
-                    1 Datos del titular
+                    1 <slot name="ownerData">Owner data</slot>
                 </div>
                 
                 <div class="w-3/4">
-                    2 Metodo de Pago
+                    2 <slot name="paymentMethod">Payment method</slot>
                 </div>
                 
                 <div class="w-3/4">
-                    3 Pago
+                    3 <slot name="payment">Payment</slot>
                 </div>
                 
                 <div class="w-3/4">
-                    4 Resultado
-                </div>			
+                    4 <slot name="result">Result</slot>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
 export default {
+    props:{
+        currentSteps: Array
+    },
     data()
     {
-        return {}
+        return {
+
+        }
     },
     created()
     {
 
     },
     mounted() {
-        console.log('Component mounted.')
+        
     },
     methods:
     {
