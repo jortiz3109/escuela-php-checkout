@@ -7,22 +7,22 @@ services:
       - "443:443"
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - /home/arik/www/escuela-php-checkout/:/var/www/html/escuela-php-checkout
+      - ./:/var/www/html
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     networks:
       - app-network
   php74:
     build:
       args:
-        user: arik # your username on your machine, you can get it by running echo $USER
+        user: $USER # your username on your machine, you can get it by running echo $USER
         uid: 1000
       context: .
-      dockerfile: /home/arik/www/escuela-php-checkout/Dockerfile
+      dockerfile: ./Dockerfile
     image: 7.4-fpm
     ports:
       - "9000:9000"
     volumes:
-       - /home/arik/www/escuela-php-checkout/:/var/www/html/escuela-php-checkout
+       - ./:/var/www/html
     networks:
       - app-network
   mysql57:
