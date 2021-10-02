@@ -35,9 +35,9 @@ class SessionFactory extends Factory
                 'name' => 'US dollar',
                 'minor_unit' => 2,
                 'alphabetic_code' => 'USD',
-                'numeric_code' => '840'
+                'numeric_code' => '840',
             ]),
-            'total_amount' => $this->faker->numberBetween(1,999999),
+            'total_amount' => $this->faker->numberBetween(1, 999999),
             'date' => $this->faker->dateTime(),
             'expiration' => $this->faker->dateTime(),
             'ip_address' => $this->faker->ipv6(),
