@@ -9,5 +9,5 @@ class Person extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public const DOCUMENT_TYPES = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT'];
+    protected $table = 'persons';
 }
