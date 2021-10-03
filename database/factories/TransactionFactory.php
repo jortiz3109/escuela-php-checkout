@@ -29,13 +29,13 @@ class TransactionFactory extends Factory
             'session_id' => Session::factory(),
             'status' => Transaction::STATUS_PENDING,
             'response_code' => '?-',
-            'payment_method_id_id' => PaymentMethod::firstOrCreate([
+            'payment_method_id' => PaymentMethod::firstOrCreate([
                 'name' => 'VISA DEBIT',
             ]),
             'pan' => $this->faker->creditCardNumber(),
             'receipt' => $this->faker->numberBetween(100000, 999999),
             'authorization' => $this->faker->numberBetween(100000, 999999),
-            'date' => $this->faker->dateTime,
+            'date' => $this->faker->dateTime(),
         ];
     }
 }
