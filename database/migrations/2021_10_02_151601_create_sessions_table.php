@@ -26,8 +26,8 @@ class CreateSessionsTable extends Migration
             $table->unsignedBigInteger('total_amount');
             $table->dateTime('date');
             $table->dateTime('expiration');
-            $table->string('ip_address', 20);
-            $table->string('user_agent', 120);
+            $table->string('ip_address', 40);
+            $table->string('user_agent', 150);
             $table->string('return_url', 255);
         });
     }
