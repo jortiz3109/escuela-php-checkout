@@ -20,12 +20,12 @@ class TokenFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'token' => $this->faker->sha256(),
             'merchant_id' => Merchant::factory(),
-            'expiration' => $this->faker->dateTime(),
+            'expiration' => now()->addDay(),
             'active' => true,
         ];
     }

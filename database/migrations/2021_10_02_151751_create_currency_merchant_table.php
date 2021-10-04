@@ -11,7 +11,7 @@ class CreateCurrencyMerchantTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('currency_merchant', function (Blueprint $table) {
             $table->foreignId('merchant_id');
@@ -25,7 +25,7 @@ class CreateCurrencyMerchantTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('currency_merchant');
     }

@@ -11,7 +11,7 @@ class CreateMerchantPaymentMethodTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('merchant_payment_method', function (Blueprint $table) {
             $table->foreignId('merchant_id');
@@ -25,7 +25,7 @@ class CreateMerchantPaymentMethodTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('merchant_payment_method');
     }

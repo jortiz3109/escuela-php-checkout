@@ -11,7 +11,7 @@ class CreateMerchantsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
@@ -27,7 +27,7 @@ class CreateMerchantsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('merchants');
     }
