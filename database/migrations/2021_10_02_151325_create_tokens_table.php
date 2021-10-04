@@ -17,7 +17,7 @@ class CreateTokensTable extends Migration
             $table->id();
             $table->string('token', 64)->unique();
             $table->foreignId('merchant_id');
-            $table->dateTime('expiration');
+            $table->timestamp('expiration');
             $table->boolean('active');
         });
     }
