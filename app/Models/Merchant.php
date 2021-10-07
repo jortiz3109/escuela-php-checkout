@@ -10,4 +10,9 @@ class Merchant extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }
