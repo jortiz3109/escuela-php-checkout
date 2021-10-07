@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('payment_method_id');
             $table->string('pan', 19);
             $table->string('receipt', 16);
-            $table->string('authorization', 40);
+            $table->string('authorization', 40)->nullable();
             $table->dateTime('date');
         });
     }

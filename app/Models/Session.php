@@ -24,4 +24,9 @@ class Session extends Model
     {
         return $this->belongsTo(Merchant::class);
     }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }
