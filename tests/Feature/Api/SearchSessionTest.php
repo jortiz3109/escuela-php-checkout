@@ -37,11 +37,15 @@ class SearchSessionTest extends TestCase
         $response->assertHeader('content-type', 'application/json');
     }
 
-    /*public function testItReturnAnArrayOfData()
+    public function testItCannotSearchOtherMerchantSession()
     {
-        $response = $this->getJson('/api/{$merchant->uuid}/show/{$session->uuid}');
+        $merchant = Merchant::factory()->create();
+        $session = Session::factory()->create();
 
-        $response->assertJson(fn (AssertableJson $json) => );
+        self::assertNotEquals($session->merchant->id, $merchant->id);
 
-    }*/
+        $response = $this->getJson("/api/{$merchant->uuid}/search/{$session->uuid}");
+
+        $response->assertStatus(404);
+    }
 }
