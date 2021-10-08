@@ -9,6 +9,8 @@ class SessionController extends Controller
 {
     public function payment(Session $session, Request $request)
     {
-        return view('session.payment');
+        $paymentMethods = $session->merchant->paymentMethods;
+
+        return view('session.payment', compact('paymentMethods'));
     }
 }

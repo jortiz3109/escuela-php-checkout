@@ -19,4 +19,9 @@ class Session extends Model
     ];
 
     public $timestamps = false;
+
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
 }

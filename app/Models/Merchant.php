@@ -10,4 +10,14 @@ class Merchant extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    public function paymentMethods()
+    {
+        return $this->belongsToMany(PaymentMethod::class);
+    }
 }
