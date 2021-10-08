@@ -9,6 +9,6 @@ class SessionController extends Controller
 {
     public function payment(Session $session, Request $request)
     {
-        return view('payment');
+        return view('session.payment');
     }
 }
