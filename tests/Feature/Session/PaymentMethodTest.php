@@ -29,7 +29,6 @@ class PaymentMethodTest extends TestCase
         $response = $this->get("/{$session->uuid}/payment");
 
         $response->assertViewIs('session.payment');
-        $response->assertSeeText('Payments');
     }
 
     public function testItCanListMerchantPaymentMethods()

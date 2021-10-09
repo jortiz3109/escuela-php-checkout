@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Payments</h1>
-    <steps-bar/>
-    <ul>
-        @foreach($paymentMethods as $paymentMethod)
-            <li>{{ $paymentMethod->name }}</li>
-        @endforeach
-    </ul>
+    <div class="h-full">
+        <div class="bg-gray-100 p-4">
+            <progress-bar></progress-bar>
+            </div>
+        </div>
+        <div>
+            <ul>
+                @foreach($paymentMethods as $paymentMethod)
+                    <li>{{ $paymentMethod->name }}</li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 @endsection

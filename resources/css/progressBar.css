@@ -1,0 +1,12 @@
+.p-bar {
+    transition: width 0.3s ease-out;
+}
+
+.p-step {
+    @apply flex justify-center items-center bg-white h-10 w-10 rounded-full border-4 border-blue-100 font-bold;
+    transition: border-color 0.3s ease-out;
+}
+
+.p-step.p-step-active {
+    @apply border-blue-800;
+}

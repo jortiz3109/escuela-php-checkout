@@ -1,11 +1,11 @@
 require('./bootstrap');
 
 import { createApp } from "vue";
-import StepsBar from "../components/StepsBar";
+import ProgressBar from "../components/ProgressBar";
 
 const app = createApp({
     components: {
-        StepsBar
+        ProgressBar
     }
 });
 
