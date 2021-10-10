@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Merchant;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SessionRequest;
+use App\Models\Session;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Response;
 
 class SessionController extends Controller
 {
-    public function payment(SessionRequest $request)
+    public function payment(SessionRequest $request) :JsonResponse
     {
         $session = Session::create([
             'uuid' => Str::uuid(),
