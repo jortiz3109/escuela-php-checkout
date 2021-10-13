@@ -9,7 +9,9 @@
         "prod": "npm run production",
         "production": "mix --production",
         "test": "jest",
-        "testing": "jest --watch"
+        "testing": "jest --watch",
+        "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue --fix",
+        "eslint-ci": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue"
     },
     "devDependencies": {
         "@babel/core": "^7.15.8",
@@ -22,6 +24,15 @@
         "axios": "^0.21",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^27.2.5",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "eslint-plugin-vue": "^7.19.1",
         "jest": "^27.2.5",
         "laravel-mix": "^6.0.0-beta.17",
         "lodash": "^4.17.19",
