@@ -1,5 +1,5 @@
 module.exports = {
-    testRegex: "tests/components/.*.test.js$",
+    testRegex: "tests/Javascript/.*.test.js$",
     moduleFileExtensions: ["js", "vue"],
     moduleNameMapper: {
         "^@/(.*)$": "<rootDir>/resources/js/$1",
