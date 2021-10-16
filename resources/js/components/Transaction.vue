@@ -1,11 +1,17 @@
 <template>
-    <div>Transaction</div>
+  <payer-data />
 </template>
 
 <script>
+import PayerData from './PayerData';
+
 export default {
-    name: "Transaction"
-}
+	name: 'Transaction',
+
+	components: {
+		PayerData
+	}
+};
 </script>
 
 <style scoped>

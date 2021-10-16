@@ -3,15 +3,12 @@ require('./bootstrap');
 require('alpinejs');
 
 import { createApp } from 'vue';
-
-import Example from "./components/Example";
-import Transaction from "./components/Transaction";
-import Stepper from "./components/Stepper";
+import Transaction from './components/Transaction';
+import Countdown from './components/Countdown';
 
 createApp({
-    components: {
-        Example,
-        Transaction,
-        Stepper
-    }
-}).mount("#app")
+	components: {
+		Transaction,
+		Countdown
+	}
+}).mount('#app');

@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center px-10">La sesion expirara en: 00:14:59</div>
+            <countdown expiration="2021-10-16T23:24:00"></countdown>
         </section>
     </main>
 </x-app-layout>
