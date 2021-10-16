@@ -18,16 +18,16 @@
             <div class="flex flex-col justify-center gap-12 w-full">
                 <div class="">
                     <p class="text-2xl">{{ $session->currency->alphabetic_code }}</p>
-                    <p class="text-4xl text-bold text-center">{{ $session->total_amount }}</p>
+                    <p class="text-4xl text-bold text-center">{{ $session->formattedAmount() }}</p>
                 </div>
                 <div class="flex flex-col gap-8">
-                    <div class="flex justify-between">
+                    <div class="flex justify-between items-baseline">
                         <p class="text-semibold text-xl">{{ __('Reference') }}</p>
                         <p class="text-base pr-4">{{ $session->reference }}</p>
                     </div>
                     <div class="">
                         <p class="text-semibold text-xl pb-2">{{ __('Description') }}</p>
-                        <p class="text-base">
+                        <p class="text-justify">
                             {{ $session->description }}
                         </p>
                     </div>

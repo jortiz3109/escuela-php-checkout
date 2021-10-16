@@ -48,6 +48,18 @@ class PaymentTest extends TestCase
         $response->assertSeeText($this->session->merchant->display_name);
     }
 
+    public function testItCanSeeFormattedTotalAmount()
+    {
+        /** @var Session $session */
+        $session = Session::factory()->create([
+            'total_amount' => 15450,
+        ]);
+
+        $response = $this->getSessionPaymentInterface($session);
+
+        $response->assertSeeText('15,450.00');
+    }
+
     protected function getSessionPaymentInterface(?Session $session = null): TestResponse
     {
         $session ??= $this->session;
