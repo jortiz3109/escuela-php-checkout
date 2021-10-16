@@ -115,6 +115,8 @@ $rules = [
 
 $finder = Finder::create()
     ->notPath('vendor')
+    ->notPath('bootstrap')
+    ->notPath('storage')
     ->in(getcwd())
     ->name('*.php')
     ->ignoreDotFiles(true)

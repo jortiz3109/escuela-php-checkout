@@ -37,6 +37,17 @@ class PaymentTest extends TestCase
         $response->assertViewIs('session.payment');
     }
 
+    public function testItCanSeeSessionData()
+    {
+        $response = $this->getSessionPaymentInterface();
+
+        $response->assertSeeText($this->session->reference);
+        $response->assertSeeText($this->session->description);
+        $response->assertSeeText($this->session->currency->alphabetic_code);
+        $response->assertSeeText($this->session->totalAmount);
+        $response->assertSeeText($this->session->merchant->display_name);
+    }
+
     protected function getSessionPaymentInterface(?Session $session = null): TestResponse
     {
         $session ??= $this->session;
