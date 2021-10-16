@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{session:uuid}/payment', [SessionController::class, 'payment'])->name('payment');
+Route::get('/session/{session:uuid}', [SessionController::class, 'payment'])->name('payment');
