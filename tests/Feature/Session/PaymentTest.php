@@ -44,7 +44,7 @@ class PaymentTest extends TestCase
         $response->assertSeeText($this->session->reference);
         $response->assertSeeText($this->session->description);
         $response->assertSeeText($this->session->currency->alphabetic_code);
-        $response->assertSeeText($this->session->totalAmount);
+        $response->assertSeeText($this->session->formattedAmount());
         $response->assertSeeText($this->session->merchant->display_name);
     }
 
