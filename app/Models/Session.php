@@ -11,7 +11,7 @@ class Session extends Model
     use HasFactory;
 
     protected $casts = [
-        'expiration' => 'datetime'
+        'expiration' => 'datetime',
     ];
 
     public const STATUS_APPROVED = 'APPROVED';
