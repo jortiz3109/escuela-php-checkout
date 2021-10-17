@@ -6,10 +6,10 @@
         for="name"
       >Name</label>
       <input
+        id="name"
         class="border-gray-400 rounded-lg"
         type="text"
         name="name"
-        id="name"
       >
     </div>
     <div class="flex flex-col">
@@ -18,10 +18,10 @@
         for="surname"
       >Surname</label>
       <input
+        id="surname"
         class="border-gray-400 rounded-lg"
         type="text"
         name="surname"
-        id="surname"
       >
     </div>
     <div class="flex flex-col">
@@ -31,9 +31,9 @@
       >Document</label>
       <div class="flex gap-4">
         <select
+          id="documentType"
           class="text-gray-700 border-gray-400 rounded-lg"
           name="documentType"
-          id="documentType"
         >
           <option value="CC">
             CC
@@ -43,10 +43,10 @@
           </option>
         </select>
         <input
+          id="document"
           class="border-gray-400 rounded-lg"
           type="text"
           name="document"
-          id="document"
         >
       </div>
     </div>
@@ -56,10 +56,10 @@
         for="email"
       >Email</label>
       <input
+        id="email"
         class="border-gray-400 rounded-lg"
         type="email"
         name="email"
-        id="email"
       >
     </div>
     <div class="flex flex-col col-start-1 col-end-2">
@@ -68,10 +68,10 @@
         for="mobile"
       >Mobile</label>
       <input
+        id="mobile"
         class="border-gray-400 rounded-lg"
         type="text"
         name="mobile"
-        id="mobile"
       >
     </div>
     <div class="flex col-span-2 justify-self-end self-start">

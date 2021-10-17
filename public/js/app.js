@@ -21112,13 +21112,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     remaining: function remaining() {
-      var remaining = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(this.expiration).diff(this.now, ['hours', 'minutes', 'seconds', 'milliseconds']);
-
-      if (remaining <= 0) {
-        this.$emit('expired');
-      }
-
-      remaining = remaining.toObject();
+      var remaining = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(this.expiration).diff(luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now(), ['hours', 'minutes', 'seconds', 'milliseconds']).toObject();
       return {
         hours: remaining.hours.toString().padStart(2, '0'),
         minutes: remaining.minutes.toString().padStart(2, '0'),
@@ -21126,19 +21120,12 @@ __webpack_require__.r(__webpack_exports__);
       };
     }
   },
-  methods: {
-    stopClock: function stopClock() {
-      this.clock = false;
-    }
-  },
   created: function created() {
     var _this = this;
 
-    if (this.clock) {
-      setInterval(function () {
-        _this.now = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now();
-      }, 1000);
-    }
+    setInterval(function () {
+      _this.now = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now();
+    }, 1000);
   }
 });
 
@@ -21210,7 +21197,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "2xl:text-left px-1",
     onExpired: _cache[0] || (_cache[0] = function () {
-      return $options.stopClock && $options.stopClock.apply($options, arguments);
+      return _ctx.stopClock && _ctx.stopClock.apply(_ctx, arguments);
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.seconds), 33
   /* TEXT, HYDRATE_EVENTS */
@@ -21236,7 +21223,7 @@ var _hoisted_1 = {
   "class": "grid grid-cols-2 grid-rows-4 gap-x-6 gap-y-8"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"name\">Name</label><input class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"name\" id=\"name\"></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"surname\">Surname</label><input class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"surname\" id=\"surname\"></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"document\">Document</label><div class=\"flex gap-4\"><select class=\"text-gray-700 border-gray-400 rounded-lg\" name=\"documentType\" id=\"documentType\"><option value=\"CC\"> CC </option><option value=\"CE\"> CE </option></select><input class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"document\" id=\"document\"></div></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"email\">Email</label><input class=\"border-gray-400 rounded-lg\" type=\"email\" name=\"email\" id=\"email\"></div><div class=\"flex flex-col col-start-1 col-end-2\"><label class=\"text-gray-700\" for=\"mobile\">Mobile</label><input class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"mobile\" id=\"mobile\"></div><div class=\"flex col-span-2 justify-self-end self-start\"><button class=\"border px-8 py-3 bg-gray-300 rounded-lg\"> Next </button></div>", 6);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"name\">Name</label><input id=\"name\" class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"name\"></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"surname\">Surname</label><input id=\"surname\" class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"surname\"></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"document\">Document</label><div class=\"flex gap-4\"><select id=\"documentType\" class=\"text-gray-700 border-gray-400 rounded-lg\" name=\"documentType\"><option value=\"CC\"> CC </option><option value=\"CE\"> CE </option></select><input id=\"document\" class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"document\"></div></div><div class=\"flex flex-col\"><label class=\"text-gray-700\" for=\"email\">Email</label><input id=\"email\" class=\"border-gray-400 rounded-lg\" type=\"email\" name=\"email\"></div><div class=\"flex flex-col col-start-1 col-end-2\"><label class=\"text-gray-700\" for=\"mobile\">Mobile</label><input id=\"mobile\" class=\"border-gray-400 rounded-lg\" type=\"text\" name=\"mobile\"></div><div class=\"flex col-span-2 justify-self-end self-start\"><button class=\"border px-8 py-3 bg-gray-300 rounded-lg\"> Next </button></div>", 6);
 
 var _hoisted_8 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
