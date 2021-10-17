@@ -21099,33 +21099,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/build/cjs-browser/luxon.js");
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/build/cjs-browser/luxon.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _functions_useCurrentTime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../functions/useCurrentTime */ "./resources/js/functions/useCurrentTime.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Countdown',
   props: ['expiration'],
-  data: function data() {
-    return {
-      now: luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now(),
-      clock: true
-    };
-  },
-  computed: {
-    remaining: function remaining() {
-      var remaining = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(this.expiration).diff(luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now(), ['hours', 'minutes', 'seconds', 'milliseconds']).toObject();
-      return {
-        hours: remaining.hours.toString().padStart(2, '0'),
-        minutes: remaining.minutes.toString().padStart(2, '0'),
-        seconds: remaining.seconds.toString().padStart(2, '0')
-      };
-    }
-  },
-  created: function created() {
-    var _this = this;
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
 
-    setInterval(function () {
-      _this.now = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now();
-    }, 1000);
+    var _useCurrentTime = (0,_functions_useCurrentTime__WEBPACK_IMPORTED_MODULE_1__.useCurrentTime)(),
+        currentTime = _useCurrentTime.currentTime,
+        intervalHandle = _useCurrentTime.intervalHandle;
+
+    function getDuration() {
+      var duration = luxon__WEBPACK_IMPORTED_MODULE_2__.DateTime.fromISO(props.expiration).diff(luxon__WEBPACK_IMPORTED_MODULE_2__.DateTime.fromJSDate(currentTime.value), ['hours', 'minutes', 'seconds', 'milliseconds']);
+
+      if (duration < 0) {
+        return luxon__WEBPACK_IMPORTED_MODULE_2__.Duration.fromObject({
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
+      }
+
+      return duration;
+    }
+
+    var remaining = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      hours: getDuration().toObject().hours.toString().padStart(2, '0'),
+      minutes: getDuration().toObject().minutes.toString().padStart(2, '0'),
+      seconds: getDuration().toObject().seconds.toString().padStart(2, '0')
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return currentTime.value;
+    }, function () {
+      if (getDuration() <= 0) {
+        emit('expired');
+        clearInterval(intervalHandle);
+      }
+
+      remaining.hours = getDuration().toObject().hours.toString().padStart(2, '0');
+      remaining.minutes = getDuration().toObject().minutes.toString().padStart(2, '0');
+      remaining.seconds = getDuration().toObject().seconds.toString().padStart(2, '0');
+    });
+    return {
+      remaining: remaining
+    };
   }
 });
 
@@ -21199,7 +21222,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onExpired: _cache[0] || (_cache[0] = function () {
       return _ctx.stopClock && _ctx.stopClock.apply(_ctx, arguments);
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.seconds), 33
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.seconds), 33
   /* TEXT, HYDRATE_EVENTS */
   )]);
 }
@@ -21308,6 +21331,38 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/functions/useCurrentTime.js":
+/*!**************************************************!*\
+  !*** ./resources/js/functions/useCurrentTime.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useCurrentTime": () => (/* binding */ useCurrentTime)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var useCurrentTime = function useCurrentTime() {
+  var currentTime = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(new Date());
+
+  var updateCurrentTime = function updateCurrentTime() {
+    currentTime.value = new Date();
+  };
+
+  var intervalHandle = setInterval(updateCurrentTime, 1000);
+  (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount)(function () {
+    return clearInterval(intervalHandle.value);
+  });
+  return {
+    currentTime: currentTime,
+    intervalHandle: intervalHandle
+  };
+};
 
 /***/ }),
 

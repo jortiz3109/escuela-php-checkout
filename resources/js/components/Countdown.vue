@@ -13,36 +13,56 @@
 </template>
 
 <script>
-import {DateTime} from 'luxon';
+import { DateTime, Duration } from 'luxon';
+import {watch, reactive} from 'vue';
+import { useCurrentTime } from '../functions/useCurrentTime';
+
 export default {
 	name: 'Countdown',
 
 	props: ['expiration'],
 
-	data () {
+	setup(props, { emit }) {
+		const { currentTime, intervalHandle } = useCurrentTime();
+
+		function getDuration() {
+			let duration = DateTime.fromISO(props.expiration).diff(DateTime.fromJSDate(currentTime.value), ['hours', 'minutes', 'seconds', 'milliseconds']);
+
+			if (duration < 0) {
+				return Duration.fromObject({
+					hours: 0,
+					minutes: 0,
+					seconds: 0
+				});
+			}
+
+			return duration;
+		}
+
+		const remaining = reactive({
+			hours: getDuration().toObject().hours.toString().padStart(2, '0'),
+			minutes: getDuration().toObject().minutes.toString().padStart(2, '0'),
+			seconds: getDuration().toObject().seconds.toString().padStart(2, '0'),
+		});
+
+		watch(
+			() => currentTime.value,
+			() => {
+				if (getDuration() <= 0) {
+					emit('expired');
+					clearInterval(intervalHandle);
+				}
+
+				remaining.hours = getDuration().toObject().hours.toString().padStart(2, '0');
+				remaining.minutes = getDuration().toObject().minutes.toString().padStart(2, '0');
+				remaining.seconds = getDuration().toObject().seconds.toString().padStart(2, '0');
+			}
+		);
+
 		return {
-			now: DateTime.now(),
-			clock: true
+			remaining,
 		};
 	},
-
-	computed: {
-		remaining () {
-			let remaining = DateTime.fromISO(this.expiration).diff(DateTime.now(), ['hours', 'minutes', 'seconds', 'milliseconds']).toObject();
-
-			return {
-				hours: remaining.hours.toString().padStart(2, '0'),
-				minutes: remaining.minutes.toString().padStart(2, '0'),
-				seconds: remaining.seconds.toString().padStart(2, '0'),
-			};
-		}
-	},
-
-	created() {
-		setInterval(() => {
-			this.now = DateTime.now();
-		}, 1000);
-	}
 };
 </script>
 
