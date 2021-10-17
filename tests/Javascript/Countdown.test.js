@@ -17,11 +17,11 @@ describe('Countdown', () => {
 
     afterEach(() => clock.restore());
 
-    test('renders a countdown timer', () => {
+    test('it renders a countdown timer', () => {
         see('00:15:00');
     })
 
-    test('reduces the countdown every second', () => {
+    test('it reduces the countdown every second', () => {
         see('00:15:00');
 
         clock.tick(1000);
@@ -31,13 +31,36 @@ describe('Countdown', () => {
         });
     })
 
-    test('broadcasts when the countdown has completed', () => {
+    test('it stops countdown when gets to zero', () => {
+        see('00:15:00');
+
+        clock.tick(900000); // 15 minutes
+
+        wrapper.vm.$nextTick(() => {
+            see('00:00:00');
+            expect(wrapper.vm.intervalHandle).toBeUndefined()
+        });
+    })
+
+    test('it shows zero if session is expired', () => {
+        wrapper = mount(Countdown, {
+            props: {
+                expiration: DateTime.now().plus({minutes: -15}).toISO()
+            }
+        });
+
+        see('00:00:00');
+    })
+
+    test('it broadcasts when session is expired', () => {
+        see('00:15:00');
+
         clock.tick(900000); // 15 minutes
 
         wrapper.vm.$nextTick(() => {
             expect(wrapper.emitted().expired).toBeTruthy()
         });
-    });
+    })
 
     // Helper functions
     let see = (text, selector) => {
