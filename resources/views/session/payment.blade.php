@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-6">
-            <img src="https://picsum.photos/id/1/400/400" alt="merchant-log" class="h-16 rounded-full shadow">
+            <img src="{{ $session->merchant->logo }}" alt="merchant-log" class="h-16 rounded-full shadow">
             <h1 class="text-bold text-gray-700 text-2xl tracking-wide">{{ $session->merchant->display_name }}</h1>
         </div>
         <div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <countdown expiration="2021-10-16T17:29:00"></countdown>
+            <countdown expiration="{{ $session->expiration->toDateTimeLocalString() }}"></countdown>
         </section>
     </main>
 </x-app-layout>
