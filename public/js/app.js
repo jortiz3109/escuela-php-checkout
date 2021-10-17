@@ -21104,14 +21104,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Countdown',
   props: ['expiration'],
+  data: function data() {
+    return {
+      now: luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now(),
+      clock: true
+    };
+  },
   computed: {
     remaining: function remaining() {
-      var remaining = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(this.expiration).diff(luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now(), ['hours', 'minutes', 'seconds', 'milliseconds']).toObject();
+      var remaining = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(this.expiration).diff(this.now, ['hours', 'minutes', 'seconds', 'milliseconds']);
+
+      if (remaining <= 0) {
+        this.$emit('expired');
+      }
+
+      remaining = remaining.toObject();
       return {
         hours: remaining.hours.toString().padStart(2, '0'),
         minutes: remaining.minutes.toString().padStart(2, '0'),
         seconds: remaining.seconds.toString().padStart(2, '0')
       };
+    }
+  },
+  methods: {
+    stopClock: function stopClock() {
+      this.clock = false;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    if (this.clock) {
+      setInterval(function () {
+        _this.now = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now();
+      }, 1000);
     }
   }
 });
@@ -21180,12 +21206,14 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_3 = {
-  "class": "2xl:text-left px-1"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.seconds), 1
-  /* TEXT */
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "2xl:text-left px-1",
+    onExpired: _cache[0] || (_cache[0] = function () {
+      return $options.stopClock && $options.stopClock.apply($options, arguments);
+    })
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.remaining.seconds), 33
+  /* TEXT, HYDRATE_EVENTS */
   )]);
 }
 

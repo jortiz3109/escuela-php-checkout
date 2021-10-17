@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <countdown expiration="2021-10-16T23:24:00"></countdown>
+            <countdown expiration="2021-10-16T17:29:00"></countdown>
         </section>
     </main>
 </x-app-layout>

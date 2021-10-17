@@ -21,6 +21,24 @@ describe('Countdown', () => {
         see('00:15:00');
     })
 
+    test('reduces the countdown every second', () => {
+        see('00:15:00');
+
+        clock.tick(1000);
+
+        wrapper.vm.$nextTick(() => {
+            see('00:14:59');
+        });
+    })
+
+    test('broadcasts when the countdown has completed', () => {
+        clock.tick(900000); // 15 minutes
+
+        wrapper.vm.$nextTick(() => {
+            expect(wrapper.emitted().expired).toBeTruthy()
+        });
+    });
+
     // Helper functions
     let see = (text, selector) => {
         let wrap = selector ? wrapper.find(selector) : wrapper;

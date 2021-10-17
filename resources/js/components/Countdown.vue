@@ -3,7 +3,10 @@
     <p class="2xl:text-right">
       La sesion expirara en:
     </p>
-    <p class="2xl:text-left px-1">
+    <p
+      class="2xl:text-left px-1"
+      @expired="stopClock"
+    >
       {{ remaining.hours }}:{{ remaining.minutes }}:{{ remaining.seconds }}
     </p>
   </div>
@@ -16,6 +19,13 @@ export default {
 
 	props: ['expiration'],
 
+	data () {
+		return {
+			now: DateTime.now(),
+			clock: true
+		};
+	},
+
 	computed: {
 		remaining () {
 			let remaining = DateTime.fromISO(this.expiration).diff(DateTime.now(), ['hours', 'minutes', 'seconds', 'milliseconds']).toObject();
@@ -26,6 +36,12 @@ export default {
 				seconds: remaining.seconds.toString().padStart(2, '0'),
 			};
 		}
+	},
+
+	created() {
+		setInterval(() => {
+			this.now = DateTime.now();
+		}, 1000);
 	}
 };
 </script>
