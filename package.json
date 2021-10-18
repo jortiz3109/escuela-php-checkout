@@ -10,7 +10,7 @@
         "production": "mix --production",
         "test": "jest",
         "testing": "jest --watch",
-        "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue --fix",
+        "eslint": "./node_modules/.bin/eslint resources/js/ tests/Javascript --ext .js,.vue --fix",
         "eslint-ci": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue"
     },
     "devDependencies": {
