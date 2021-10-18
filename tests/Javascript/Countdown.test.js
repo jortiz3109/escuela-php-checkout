@@ -1,13 +1,12 @@
 import Countdown from "../../resources/js/components/Countdown";
 import { mount } from '@vue/test-utils';
 import { DateTime } from "luxon";
-import sinon from "sinon";
 
 describe('Countdown', () => {
     let wrapper, clock;
 
     beforeEach(() => {
-        clock = sinon.useFakeTimers();
+        clock = jest.useFakeTimers();
         wrapper = mount(Countdown, {
             props: {
                 expiration: DateTime.now().plus({minutes: 15}).toISO()
@@ -15,7 +14,7 @@ describe('Countdown', () => {
         });
     })
 
-    afterEach(() => clock.restore());
+    afterEach(() =>  jest.useRealTimers());
 
     test('it renders a countdown timer', () => {
         see('00:15:00');
@@ -24,7 +23,7 @@ describe('Countdown', () => {
     test('it reduces the countdown every second', () => {
         see('00:15:00');
 
-        clock.tick(1000);
+        clock.advanceTimersByTime(1000);
 
         wrapper.vm.$nextTick(() => {
             see('00:14:59');
@@ -34,7 +33,7 @@ describe('Countdown', () => {
     test('it stops countdown when gets to zero', () => {
         see('00:15:00');
 
-        clock.tick(900000); // 15 minutes
+        clock.advanceTimersByTime(900000); // 15 minutes
 
         wrapper.vm.$nextTick(() => {
             see('00:00:00');
@@ -55,7 +54,7 @@ describe('Countdown', () => {
     test('it broadcasts when session is expired', () => {
         see('00:15:00');
 
-        clock.tick(900000); // 15 minutes
+        clock.advanceTimersByTime(900000); // 15 minutes
 
         wrapper.vm.$nextTick(() => {
             expect(wrapper.emitted().expired).toBeTruthy()
