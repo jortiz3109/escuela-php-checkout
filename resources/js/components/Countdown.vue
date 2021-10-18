@@ -22,6 +22,8 @@ export default {
 
 	props: ['expiration'],
 
+    emits: ['expired'],
+
 	setup(props, { emit }) {
 		const { currentTime, intervalHandle } = useCurrentTime();
 
