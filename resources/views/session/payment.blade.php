@@ -36,4 +36,8 @@
             <countdown expiration="{{ $session->expiration->toDateTimeLocalString() }}"></countdown>
         </section>
     </main>
+    @push('meta-data')
+        <meta name="token" content="{{ $token ?? null }}">
+        <meta name="session" content="{{ $session->uuid ?? null }}">
+    @endpush
 </x-app-layout>

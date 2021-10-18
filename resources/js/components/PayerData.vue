@@ -3,6 +3,7 @@
     v-slot="{ errors }"
     :validation-schema="schema"
     class="grid grid-cols-2 grid-rows-4 gap-x-6 gap-y-8"
+    :initial-values="payer"
     @submit="onSubmit"
   >
     <div class="flex flex-col">
@@ -112,7 +113,7 @@
     <div class="flex col-span-2 justify-self-end self-start">
       <button
         type="submit"
-        class="border px-8 py-3 bg-gray-300 rounded-lg"
+        class="border px-8 py-3 bg-gray-500 rounded-lg hover:bg-gray-700 text-white"
       >
         Next
       </button>
@@ -128,6 +129,13 @@ export default {
 	name: 'PayerData',
 
 	components: { Form, Field},
+
+	props: {
+		payer: {
+			type: Object,
+			default: () => {}
+		}
+	},
 
 	emits: ['save-payer'],
 

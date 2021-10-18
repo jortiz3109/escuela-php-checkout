@@ -1,12 +1,9 @@
 <template>
   <div class="flex flex-col justify-center px-10 2xl:flex-row">
     <p class="2xl:text-right">
-      La sesion expirara en:
+      Session expires in:
     </p>
-    <p
-      class="2xl:text-left px-1"
-      @expired="stopClock"
-    >
+    <p class="2xl:text-left px-1">
       {{ remaining.hours }}:{{ remaining.minutes }}:{{ remaining.seconds }}
     </p>
   </div>
@@ -20,7 +17,12 @@ import { useCurrentTime } from '../functions/useCurrentTime';
 export default {
 	name: 'Countdown',
 
-	props: ['expiration'],
+	props: {
+		expiration: {
+			type: String,
+			default: ''
+		}
+	},
 
 	emits: ['expired'],
 
