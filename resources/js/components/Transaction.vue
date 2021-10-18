@@ -1,10 +1,13 @@
 <template>
-  <payer-data v-if="step === 'payer'" @save-payer="savePayerData"/>
+  <payer-data
+    v-if="step === 'payer'"
+    @save-payer="savePayerData"
+  />
 </template>
 
 <script>
 import PayerData from './PayerData';
-import {reactive, ref} from 'vue';
+import { ref } from 'vue';
 
 export default {
 	name: 'Transaction',
@@ -13,20 +16,20 @@ export default {
 		PayerData
 	},
 
-    setup() {
-        const step = ref('payer');
+	setup() {
+		const step = ref('payer');
 
-        const payer = ref({})
+		const payer = ref({});
 
-        function savePayerData(values) {
-            payer.value = values
-            step.value = 'payment-methods'
-        }
+		function savePayerData(values) {
+			payer.value = values;
+			step.value = 'payment-methods';
+		}
 
-        return {
-            payer, step, savePayerData
-        }
-    }
+		return {
+			payer, step, savePayerData
+		};
+	}
 };
 </script>
 

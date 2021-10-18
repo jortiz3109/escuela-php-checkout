@@ -22083,8 +22083,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'PayerData',
   components: {
     Form: vee_validate__WEBPACK_IMPORTED_MODULE_1__.Form,
-    Field: vee_validate__WEBPACK_IMPORTED_MODULE_1__.Field,
-    ErrorMessage: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ErrorMessage
+    Field: vee_validate__WEBPACK_IMPORTED_MODULE_1__.Field
   },
   emits: ['save-payer'],
   setup: function setup(props, _ref) {
@@ -22280,9 +22279,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Form");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Form, {
-    onSubmit: $setup.onSubmit,
     "validation-schema": $setup.schema,
-    "class": "grid grid-cols-2 grid-rows-4 gap-x-6 gap-y-8"
+    "class": "grid grid-cols-2 grid-rows-4 gap-x-6 gap-y-8",
+    onSubmit: $setup.onSubmit
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var errors = _ref.errors;
@@ -22309,8 +22308,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(errors.surname), 513
       /* TEXT, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, errors.surname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Field, {
-        as: "select",
         id: "documentType",
+        as: "select",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-gray-700 border-gray-400 rounded-lg", errors.documentType ? 'border-red-500' : '']),
         name: "documentType"
       }, {
@@ -22362,7 +22361,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onSubmit", "validation-schema"]);
+  , ["validation-schema", "onSubmit"]);
 }
 
 /***/ }),
