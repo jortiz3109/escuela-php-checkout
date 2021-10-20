@@ -24,7 +24,7 @@ import PaymentMethods from './PaymentMethods';
 import SuspenseComponent from './SuspenseComponent';
 import Footer from './Footer';
 import useStep from '../functions/useStep';
-import {email} from "@vee-validate/rules";
+import {email} from '@vee-validate/rules';
 
 export default {
 	name: 'Transaction',
@@ -40,13 +40,13 @@ export default {
 		const { step, stepBack, stepForward, isStepEqual } = useStep();
 
 		const payer = ref({
-            name: 'l',
-            surname: 'q',
-            documentType: 'CC',
-            document: '1',
-            email: 'admin@gmail.com',
-            mobile: '123'
-        });
+			name: 'l',
+			surname: 'q',
+			documentType: 'CC',
+			document: '1',
+			email: 'admin@gmail.com',
+			mobile: '123'
+		});
 		const paymentMethods = ref({});
 
 		function savePayerData(values) {

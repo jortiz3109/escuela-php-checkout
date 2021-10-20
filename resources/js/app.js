@@ -11,7 +11,7 @@ import Countdown from './components/Countdown';
 createApp({
 	components: {
 		Transaction,
-        Stepper,
+		Stepper,
 		Countdown
 	}
 }).mount('#app');
