@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-1/5 items-center">
+  <div class="flex flex-col w-96 items-center">
     <div class="flex relative justify-between w-5/6 self-center">
       <div class="step-circle border-blue-900">
         1
@@ -72,7 +72,7 @@ export default {
 }
 
 .step-text {
-    @apply text-center text-sm;
+    @apply text-center text-sm py-1 px-2;
 }
 
 .bar {
