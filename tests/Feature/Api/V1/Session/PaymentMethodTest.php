@@ -1,0 +1,58 @@
+<?php
+
+namespace Tests\Feature\Api\V1\Session;
+
+use App\Models\PaymentMethod;
+use App\Models\Session;
+use Database\Seeders\PaymentMethodSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Testing\TestResponse;
+use Tests\TestCase;
+
+class PaymentMethodTest extends TestCase
+{
+
+    use RefreshDatabase;
+
+    private $session;
+
+    protected function request(): TestResponse
+    {
+        return $this->get('/api/v1/session/' . $this->session->uuid . '/payment-methods');
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(PaymentMethodSeeder::class);
+
+        $this->session = Session::factory()->create();
+
+        $this->session->merchant->paymentMethods()->attach(PaymentMethod::first());
+    }
+
+    public function testItCanRequestPaymentMethods()
+    {
+        $response = $this->request();
+        $response->assertOk();
+    }
+
+    public function testItReturnsPaymentMethodsData()
+    {
+        $response = $this->request();
+
+        $paymentMethod = $this->session->merchant->paymentMethods->first();
+
+        $response->assertJson(
+            fn (AssertableJson $json) => $json->has('data', 1)->has(
+                'data.0',
+                fn (AssertableJson $json) => $json
+                    ->where('id', $paymentMethod->id)
+                    ->where('name', $paymentMethod->name)
+                    ->where('logo', $paymentMethod->logo)
+            )
+        );
+    }
+}
