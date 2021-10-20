@@ -24,7 +24,6 @@ import PaymentMethods from './PaymentMethods';
 import SuspenseComponent from './SuspenseComponent';
 import Footer from './Footer';
 import useStep from '../functions/useStep';
-import {email} from '@vee-validate/rules';
 
 export default {
 	name: 'Transaction',

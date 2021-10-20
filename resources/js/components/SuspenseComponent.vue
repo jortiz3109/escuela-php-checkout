@@ -23,7 +23,7 @@ export default {
 		const suspenseError = ref(null);
 
 		onErrorCaptured(e => {
-			suspenseError.vaSupenseComponentlue = e.message;
+			suspenseError.value = e.message;
 		});
 
 		return { suspenseError };
