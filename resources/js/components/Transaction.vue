@@ -47,6 +47,7 @@ export default {
 			email: '',
 			mobile: ''
 		});
+
 		const paymentMethods = ref({});
 
 		function savePayerData(values) {

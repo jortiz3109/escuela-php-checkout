@@ -11,7 +11,7 @@
 
 <script>
 import { DateTime, Duration } from 'luxon';
-import {watch, reactive} from 'vue';
+import { watch, reactive } from 'vue';
 import { useCurrentTime } from '../functions/useCurrentTime';
 
 export default {

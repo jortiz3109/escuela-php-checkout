@@ -1,6 +1,6 @@
 import PaymentMethods from '../../resources/js/components/PaymentMethods';
 import { flushPromises, mount } from '@vue/test-utils';
-import {defineComponent, h, Suspense} from 'vue';
+import { defineComponent, h, Suspense } from 'vue';
 import api from '../../resources/js/api.js';
 
 describe('PaymentMethods', () => {
