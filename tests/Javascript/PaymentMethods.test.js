@@ -53,7 +53,7 @@ describe('PaymentMethods', () => {
 	test('it broadcasts when a payment method is selected', async () => {
 		const paymentMethodsComponent = wrapper.findComponent(PaymentMethods);
 
-		paymentMethodsComponent.findAll('.cursor-pointer').at(0).trigger('click');
+		paymentMethodsComponent.find('.cursor-pointer').trigger('click');
 
 		expect(paymentMethodsComponent.emitted('select-payment-method')).toBeTruthy();
 		expect(paymentMethodsComponent.emitted('select-payment-method').length).toEqual(1);
