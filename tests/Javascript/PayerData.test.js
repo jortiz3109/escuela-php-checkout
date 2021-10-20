@@ -1,6 +1,8 @@
 import PayerData from '../../resources/js/components/PayerData';
 import { mount, flushPromises } from '@vue/test-utils';
 
+const invalidMessageText = (field) => `The field ${field} is invalid`;
+
 describe('PayerData', () => {
 	let wrapper;
 
@@ -17,11 +19,11 @@ describe('PayerData', () => {
 		await input.setValue('Julia');
 
 		expect(input.element.value).toBe('Julia');
-		dontSee('The field name is invalid');
+		dontSee(invalidMessageText('name'));
 	});
 
 	test('it can validate name as required', async () => {
-		dontSee('The field name is invalid');
+		dontSee(invalidMessageText('name'));
 
 		const input = wrapper.find('input[name=name]');
 
@@ -30,11 +32,11 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field name is invalid');
+		see(invalidMessageText('name'));
 	});
 
 	test('it can validate name is too long', async () => {
-		dontSee('The field name is invalid');
+		dontSee(invalidMessageText('name'));
 
 		const input = wrapper.find('input[name=name]');
 
@@ -43,7 +45,7 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field name is invalid');
+		see(invalidMessageText('name'));
 	});
 
 	test('it can set a surname', async () => {
@@ -52,11 +54,11 @@ describe('PayerData', () => {
 		await input.setValue('Costa');
 
 		expect(input.element.value).toBe('Costa');
-		dontSee('The field surname is invalid');
+		dontSee(invalidMessageText('surname'));
 	});
 
 	test('it can validate surname as required', async () => {
-		dontSee('The field surname is invalid');
+		dontSee(invalidMessageText('surname'));
 
 		const input = wrapper.find('input[name=surname]');
 
@@ -65,11 +67,11 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field surname is invalid');
+		see(invalidMessageText('surname'));
 	});
 
 	test('it can validate surname is too long', async () => {
-		dontSee('The field surname is invalid');
+		dontSee(invalidMessageText('surname'));
 
 		const input = wrapper.find('input[name=surname]');
 
@@ -78,7 +80,7 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field surname is invalid');
+		see(invalidMessageText('surname'));
 	});
 
 	test('it can select a document type', async () => {
@@ -100,6 +102,21 @@ describe('PayerData', () => {
 		await flushPromises();
 
 		expect(select.classes()).toContain('border-red-500');
+		see(invalidMessageText('documentType'));
+	});
+
+	test('it can validate document type is in valid values', async () => {
+		const select = wrapper.find('select[name=documentType]');
+
+		expect(select.classes()).not.toContain('border-red-500');
+
+		await select.setValue('XX');
+
+		jest.runAllTimers();
+		await flushPromises();
+
+		expect(select.classes()).toContain('border-red-500');
+		see(invalidMessageText('documentType'));
 	});
 
 	test('it can set a document', async () => {
@@ -108,11 +125,11 @@ describe('PayerData', () => {
 		await input.setValue('FR725498');
 
 		expect(input.element.value).toBe('FR725498');
-		dontSee('The field document is invalid');
+		dontSee(invalidMessageText('document'));
 	});
 
 	test('it can validate document as required', async () => {
-		dontSee('The field document is invalid');
+		dontSee(invalidMessageText('document'));
 
 		const input = wrapper.find('input[name=document]');
 
@@ -121,7 +138,20 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field document is invalid');
+		see(invalidMessageText('document'));
+	});
+
+	test('it can validate document does not have special characters', async () => {
+		dontSee(invalidMessageText('document'));
+
+		const input = wrapper.find('input[name=document]');
+
+		await input.setValue('+12a*');
+
+		jest.runAllTimers();
+		await flushPromises();
+
+		see(invalidMessageText('document'));
 	});
 
 	test('it can set a email', async () => {
@@ -130,11 +160,11 @@ describe('PayerData', () => {
 		await input.setValue('admin@gmail.com');
 
 		expect(input.element.value).toBe('admin@gmail.com');
-		dontSee('The field email is invalid');
+		dontSee(invalidMessageText('email'));
 	});
 
 	test('it can validate email as required', async () => {
-		dontSee('The field email is invalid');
+		dontSee(invalidMessageText('email'));
 
 		const input = wrapper.find('input[name=email]');
 
@@ -143,11 +173,11 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field email is invalid');
+		see(invalidMessageText('email'));
 	});
 
 	test('it can validate email as valid email', async () => {
-		dontSee('The field email is invalid');
+		dontSee(invalidMessageText('email'));
 
 		const input = wrapper.find('input[name=email]');
 
@@ -156,7 +186,7 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field email is invalid');
+		see(invalidMessageText('email'));
 	});
 
 	test('it can set a mobile', async () => {
@@ -165,11 +195,11 @@ describe('PayerData', () => {
 		await input.setValue('3008923456');
 
 		expect(input.element.value).toBe('3008923456');
-		dontSee('The field mobile is invalid');
+		dontSee(invalidMessageText('mobile'));
 	});
 
 	test('it can validate mobile as required', async () => {
-		dontSee('The field mobile is invalid');
+		dontSee(invalidMessageText('mobile'));
 
 		const input = wrapper.find('input[name=mobile]');
 
@@ -178,7 +208,20 @@ describe('PayerData', () => {
 		jest.runAllTimers();
 		await flushPromises();
 
-		see('The field mobile is invalid');
+		see(invalidMessageText('mobile'));
+	});
+
+	test('it can validate mobile as numeric', async () => {
+		dontSee(invalidMessageText('mobile'));
+
+		const input = wrapper.find('input[name=mobile]');
+
+		await input.setValue('ACBD');
+
+		jest.runAllTimers();
+		await flushPromises();
+
+		see(invalidMessageText('mobile'));
 	});
 
 	test.skip('it broadcasts when submit correctly', async () => {

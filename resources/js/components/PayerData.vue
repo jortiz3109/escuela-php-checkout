@@ -52,11 +52,12 @@
           name="documentType"
           :class="errors.documentType ? 'border-red-500' : '' "
         >
-          <option value="CC">
-            CC
-          </option>
-          <option value="CE">
-            CE
+          <option
+            v-for="documentType in documentTypes"
+            :key="documentType"
+            :value="documentType"
+          >
+            {{ documentType }}
           </option>
         </Field>
         <Field
@@ -67,12 +68,20 @@
           :class="errors.document ? 'border-red-500' : '' "
         />
       </div>
-      <p
-        v-show="errors.document"
-        class="text-red-500"
-      >
-        {{ errors.document }}
-      </p>
+      <div class="flex flex-col">
+        <p
+          v-show="errors.documentType"
+          class="text-red-500"
+        >
+          {{ errors.documentType }}
+        </p>
+        <p
+          v-show="errors.document"
+          class="text-red-500"
+        >
+          {{ errors.document }}
+        </p>
+      </div>
     </div>
     <div class="flex flex-col">
       <label
@@ -140,13 +149,15 @@ export default {
 	emits: ['save-payer'],
 
 	setup(props, { emit }) {
+		const documentTypes = [ 'CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT' ];
+
 		const schema = {
 			name: 'required|min:1|max:80',
 			surname: 'required|min:1|max:80',
-			documentType: 'required',
-			document: 'required',
+			documentType: `required|one_of:${documentTypes}`,
+			document: 'required|alpha_num',
 			email: 'required|email',
-			mobile: 'required'
+			mobile: 'required|numeric'
 		};
 
 		function onSubmit(values) {
@@ -155,6 +166,7 @@ export default {
 
 		return {
 			schema,
+			documentTypes,
 			onSubmit,
 		};
 	}

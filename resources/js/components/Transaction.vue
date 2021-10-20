@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full justify-between">
-    <div class="flex items-center justify-items-center h-5/6">
+    <div class="flex items-center justify-items-center h-5/6 mt-32">
       <PayerData
         v-if="isStepEqual(1)"
         :payer="payer"
@@ -13,7 +13,7 @@
         />
       </SuspenseComponent>
     </div>
-    <Footer />
+    <Footer class="h-1/6" />
   </div>
 </template>
 
@@ -40,12 +40,12 @@ export default {
 		const { step, stepBack, stepForward, isStepEqual } = useStep();
 
 		const payer = ref({
-			name: 'l',
-			surname: 'q',
-			documentType: 'CC',
-			document: '1',
-			email: 'admin@gmail.com',
-			mobile: '123'
+			name: '',
+			surname: '',
+			documentType: '',
+			document: '',
+			email: '',
+			mobile: ''
 		});
 		const paymentMethods = ref({});
 

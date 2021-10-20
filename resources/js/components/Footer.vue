@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 items-baseline h-1/6 w-full">
+  <div class="grid grid-cols-2 items-baseline w-full">
     <button
       v-if="step > 1"
       class="bg-gray-500 text-white shadow py-3 px-12 my-8 rounded-lg justify-self-start hover:bg-gray-700"
