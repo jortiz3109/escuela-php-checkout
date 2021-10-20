@@ -115,6 +115,7 @@ $rules = [
 
 $finder = Finder::create()
     ->notPath('vendor')
+    ->notPath('node_modules')
     ->notPath('bootstrap')
     ->notPath('storage')
     ->in(getcwd())
