@@ -6,7 +6,7 @@
           1
         </div>
         <p class="step-text">
-          payer data
+          Payer data
         </p>
       </div>
       <div class="flex flex-col items-center z-10">
@@ -17,7 +17,7 @@
           2
         </div>
         <p class="step-text">
-          select method
+          Select payment method
         </p>
       </div>
       <div class="flex flex-col items-center z-10">
@@ -28,7 +28,7 @@
           3
         </div>
         <p class="step-text">
-          payment data
+          Card data
         </p>
       </div>
       <div class="absolute w-5/6 self-center left-4 top-1/4">

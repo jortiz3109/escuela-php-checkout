@@ -6,49 +6,45 @@
     :initial-values="payer"
     @submit="onSubmit"
   >
-    <div class="flex flex-col">
-      <label class="text-gray-700">Name</label>
+    <div class="field-group">
+      <label class="field-label">Name</label>
       <Field
         id="name"
-        class="border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:border-gray-200"
+        class="field-input"
         type="text"
         name="name"
         :class="errors.name ? 'border-red-500' : '' "
       />
       <p
         v-show="errors.name"
-        class="text-red-500"
+        class="error-message"
       >
         {{ errors.name }}
       </p>
     </div>
-    <div class="flex flex-col">
-      <label
-        class="text-gray-700"
-      >Surname</label>
+    <div class="field-group">
+      <label class="field-label">Surname</label>
       <Field
         id="surname"
-        class="border-gray-400 rounded-lg"
+        class="field-input"
         type="text"
         name="surname"
         :class="errors.surname ? 'border-red-500' : '' "
       />
       <p
         v-show="errors.surname"
-        class="text-red-500"
+        class="error-message"
       >
         {{ errors.surname }}
       </p>
     </div>
-    <div class="flex flex-col">
-      <label
-        class="text-gray-700"
-      >Document</label>
+    <div class="field-group">
+      <label class="field-label">Document</label>
       <div class="flex gap-4">
         <Field
           id="documentType"
           as="select"
-          class="text-gray-700 border-gray-400 rounded-lg"
+          class="field-label field-input"
           name="documentType"
           :class="errors.documentType ? 'border-red-500' : '' "
         >
@@ -62,59 +58,55 @@
         </Field>
         <Field
           id="document"
-          class="border-gray-400 rounded-lg"
+          class="field-input"
           type="text"
           name="document"
           :class="errors.document ? 'border-red-500' : '' "
         />
       </div>
-      <div class="flex flex-col">
+      <div class="field-group">
         <p
           v-show="errors.documentType"
-          class="text-red-500"
+          class="error-message"
         >
           {{ errors.documentType }}
         </p>
         <p
           v-show="errors.document"
-          class="text-red-500"
+          class="error-message"
         >
           {{ errors.document }}
         </p>
       </div>
     </div>
-    <div class="flex flex-col">
-      <label
-        class="text-gray-700"
-      >Email</label>
+    <div class="field-group">
+      <label class="field-label">Email</label>
       <Field
         id="email"
-        class="border-gray-400 rounded-lg"
+        class="field-input"
         type="email"
         name="email"
         :class="errors.email ? 'border-red-500' : '' "
       />
       <p
         v-show="errors.email"
-        class="text-red-500"
+        class="error-message"
       >
         {{ errors.email }}
       </p>
     </div>
-    <div class="flex flex-col col-start-1 col-end-2">
-      <label
-        class="text-gray-700"
-      >Mobile</label>
+    <div class="field-group col-start-1 col-end-2">
+      <label class="field-label">Mobile</label>
       <Field
         id="mobile"
-        class="border-gray-400 rounded-lg"
+        class="field-input"
         type="text"
         name="mobile"
         :class="errors.mobile ? 'border-red-500' : '' "
       />
       <p
         v-show="errors.mobile"
-        class="text-red-500"
+        class="error-message"
       >
         {{ errors.mobile }}
       </p>
@@ -174,5 +166,19 @@ export default {
 </script>
 
 <style scoped>
+    .field-group {
+        @apply flex flex-col;
+    }
 
+    .field-label {
+        @apply text-gray-700;
+    }
+
+    .field-input {
+        @apply border-gray-400 rounded-lg;
+    }
+
+    .error-message {
+        @apply text-red-500 pt-1;
+    }
 </style>
