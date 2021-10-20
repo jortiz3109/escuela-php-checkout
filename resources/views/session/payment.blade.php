@@ -4,7 +4,6 @@
     <div class="h-full">
         <div class="bg-gray-100 p-4">
             <progress-bar></progress-bar>
-            </div>
         </div>
         <div>
             <ul>
@@ -13,5 +12,6 @@
                 @endforeach
             </ul>
         </div>
+        <test-request></test-request>
     </div>
 @endsection
