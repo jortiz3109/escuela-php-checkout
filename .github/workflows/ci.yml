@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-        run: npm install && npm run production
+      - run: npm install && npm run production
       - name: Check javaScript code style
         run: npm run eslint-ci
       - name: Generate key
