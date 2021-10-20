@@ -12,7 +12,6 @@ use Tests\TestCase;
 
 class PaymentMethodTest extends TestCase
 {
-
     use RefreshDatabase;
 
     private $session;
