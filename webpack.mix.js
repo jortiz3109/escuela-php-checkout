@@ -22,5 +22,17 @@ mix.js("resources/js/app.js", "public/js")
 mix.webpackConfig({
     stats: {
         children: true
-    }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(postcss)$/,
+                use: [
+                    'vue-style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    'postcss-loader'
+                ]
+            }
+        ],
+    },
 });

@@ -4,14 +4,12 @@
             <img src="{{ $session->merchant->logo }}" alt="merchant-log" class="h-16 rounded-full shadow">
             <h1 class="text-bold text-gray-700 text-2xl tracking-wide">{{ $session->merchant->display_name }}</h1>
         </div>
-        <div>
-            stepper
-        </div>
+        <Stepper></Stepper>
     </x-slot>
 
     <main class="px-16 py-10 bg-white flex flex-grow rounded-3xl flex">
         <section class="w-3/4 bg-gray-200 flex items-center justify-center rounded-l-3xl">
-            <transaction></transaction>
+            <Transaction></Transaction>
         </section>
         <section
             class="w-1/4 bg-blue-900 text-white flex flex-col items-center justify-between rounded-r-3xl px-8 pt-24 pb-14">
@@ -33,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <countdown expiration="{{ $session->expiration->toDateTimeLocalString() }}"></countdown>
+            <Countdown expiration="{{ $session->expiration->toDateTimeLocalString() }}"></Countdown>
         </section>
     </main>
     @push('meta-data')
