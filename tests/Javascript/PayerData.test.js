@@ -84,7 +84,7 @@ describe('PayerData', () => {
 	});
 
 	test('it can select a document type', async () => {
-		const select = wrapper.find('select[name=documentType]');
+		const select = wrapper.find('select');
 
 		await select.setValue('CC');
 
@@ -92,30 +92,11 @@ describe('PayerData', () => {
 	});
 
 	test('it can validate document type as required', async () => {
-		const select = wrapper.find('select[name=documentType]');
+        await wrapper.find('button').trigger('click');
 
-		expect(select.classes()).not.toContain('border-red-500');
+        jest.runAllTimers();
+        await flushPromises();
 
-		await select.setValue('');
-
-		jest.runAllTimers();
-		await flushPromises();
-
-		expect(select.classes()).toContain('border-red-500');
-		see(invalidMessageText('documentType'));
-	});
-
-	test('it can validate document type is in valid values', async () => {
-		const select = wrapper.find('select[name=documentType]');
-
-		expect(select.classes()).not.toContain('border-red-500');
-
-		await select.setValue('XX');
-
-		jest.runAllTimers();
-		await flushPromises();
-
-		expect(select.classes()).toContain('border-red-500');
 		see(invalidMessageText('documentType'));
 	});
 
@@ -224,25 +205,28 @@ describe('PayerData', () => {
 		see(invalidMessageText('mobile'));
 	});
 
-	test.skip('it broadcasts when submit correctly', async () => {
+	test('it broadcasts when submit correctly', async () => {
 		await wrapper.find('input[name=name]').setValue('Julia');
 		await wrapper.find('input[name=surname]').setValue('Costa');
-		await wrapper.find('select[name=documentType]').setValue('CC');
+		await wrapper.find('select').setValue('CC');
 		await wrapper.find('input[name=document]').setValue('1092823456');
 		await wrapper.find('input[name=email]').setValue('julia.costa@gmail.com');
 		await wrapper.find('input[name=mobile]').setValue('3009283456');
 
-		await wrapper.find('button[type=submit]').trigger('click');
+		await wrapper.find('button').trigger('click');
+
+		jest.runAllTimers();
+		await flushPromises();
 
 		expect(wrapper.emitted()).toHaveProperty('save-payer');
-		expect(wrapper.emitted('save-payer')[0]).toEqual({
+		expect(wrapper.emitted('save-payer')[0]).toEqual([{
 			name: 'Julia',
 			surname: 'Costa',
 			documentType: 'CC',
 			document: '1092823456',
 			email: 'julia.costa@gmail.com',
 			mobile: '3009283456',
-		});
+		}]);
 	});
 
 	// Helper functions

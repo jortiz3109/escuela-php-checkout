@@ -1,9 +1,10 @@
 <template>
   <div class="flex flex-col h-full justify-between">
-    <div class="flex items-center justify-items-center h-5/6 mt-32">
+    <div class="flex items-center justify-items-center h-5/6 mt-12">
       <PayerData
         v-if="isStepEqual(1)"
         :payer="payer"
+        class=" mt-20"
         @save-payer="savePayerData"
       />
       <SuspenseComponent>
