@@ -25,29 +25,29 @@ class SearchSessionTest extends TestCase
         $this->session = $this->merchant->sessions->first();
     }
 
-    public function testItAccessSearchEndpoint()
+    public function testItAccessSearchEndpoint(): void
     {
         $response = $this->search($this->merchant, $this->session);
 
         $response->assertOk();
     }
 
-    public function testResponseIsJson()
+    public function testResponseIsJson(): void
     {
         $response = $this->search($this->merchant, $this->session);
 
         $response->assertHeader('content-type', 'application/json');
     }
 
-    public function testItCanSeeSearchedSessionData()
+    public function testItCanSeeSearchedSessionData(): void
     {
         $response = $this->search($this->merchant, $this->session);
 
-        self::assertEquals($this->session->uuid, $response['requestId']);
+        $this->assertEquals($this->session->uuid, $response['requestId']);
 
+        self::assertEquals($this->session->reason, $response['status']['reason']);
         self::assertEquals($this->session->status, $response['status']['status']);
-        self::assertEquals('00', $response['status']['reason']);
-        self::assertEquals('Approved', $response['status']['message']);
+        self::assertEquals($this->session->message, $response['status']['message']);
         self::assertEquals($this->session->date, $response['status']['date']);
 
         self::assertNotEmpty($response['payment']['status']);
@@ -58,7 +58,7 @@ class SearchSessionTest extends TestCase
         self::assertNull($response['payment']['receipt']);
     }
 
-    public function testItCannotSearchOtherMerchantSession()
+    public function testItCannotSearchOtherMerchantSession(): void
     {
         $otherSession = Session::factory()->create();
 

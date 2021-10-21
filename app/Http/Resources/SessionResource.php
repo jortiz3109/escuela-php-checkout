@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SessionResource extends JsonResource
 {
-    public function toArray($request)
+    public function toArray($request): array
     {
         $transaction = optional($this->transactions)->last();
 

@@ -20,7 +20,7 @@ class Session extends Model
 
     public $timestamps = false;
 
-    public function merchant()
+    public function merchant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Merchant::class);
     }
