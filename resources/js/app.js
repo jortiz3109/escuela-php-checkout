@@ -2,14 +2,14 @@ require('./bootstrap');
 
 import { createApp } from 'vue';
 
-import Transaction from './components/Transaction';
-import Stepper from './components/Stepper';
 import Countdown from './components/Countdown';
+import Stepper from './components/Stepper';
+import Transaction from './components/Transaction';
 
 createApp({
 	components: {
-		Transaction,
-		Stepper,
-		Countdown
-	}
+        Countdown,
+        Stepper,
+        Transaction
+    }
 }).mount('#app');

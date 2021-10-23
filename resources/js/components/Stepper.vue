@@ -1,85 +1,84 @@
 <template>
-  <div class="flex flex-col w-96 items-center">
-    <div class="flex relative justify-between w-5/6 self-center">
-      <div class="step-circle border-blue-900">
-        1
-      </div>
-
-      <div
-        class="step-circle"
-        :class="step < 2 ? 'border-blue-100' : 'border-blue-900'"
-      >
-        2
-      </div>
-
-      <div
-        class="step-circle"
-        :class="step < 3 ? 'border-blue-100' : 'border-blue-900'"
-      >
-        3
-      </div>
-
-      <div class="absolute w-full self-center">
-        <div class="bar bg-blue-100 w-full" />
-        <div
-          class="bar bg-blue-900 transition-bar"
-          :class="barLength()"
-        />
-      </div>
+    <div class="flex items-center relative w-full">
+        <div class="container">
+            <ul class="progressbar">
+                <li class="step-group" v-for="(description, index) in descriptions" :key="index">
+                    <div class="step" :class="step >= index ? 'active' : ''">
+                        <div class="step-circle">
+                            {{ index }}
+                        </div>
+                        <div class="text-center">
+                            {{ description }}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="flex relative justify-between w-full">
-      <p class="step-text">
-        Fill in payer data
-      </p>
-      <p class="step-text">
-        Select payment method
-      </p>
-      <p class="step-text">
-        Insert card data
-      </p>
-    </div>
-  </div>
 </template>
 
 <script>
 import useStep from '../functions/useStep';
 
 export default {
-	name: 'Stepper',
+    name: 'Stepper',
 
-	setup() {
-		const {step} = useStep();
+    setup() {
+        const {step} = useStep();
 
-		function barLength() {
-			const lengths = {
-				step1: 'w-1/4',
-				step2: 'w-3/4',
-				step3: 'w-full'
-			};
+        const descriptions = {
+            1: 'Fill in payer data',
+            2: 'Select payment method',
+            3: 'Insert card data',
+        }
 
-			return lengths['step' + step.value];
-		}
-
-		return {step, barLength};
-	}
+        return {step, descriptions};
+    }
 };
 </script>
 
 <style scoped>
+.container {
+    @apply w-full absolute z-20;
+}
+
+.progressbar {
+    @apply flex justify-evenly;
+}
+
+.progressbar li {
+    @apply flex w-full;
+}
+
+.step {
+    @apply flex flex-col relative w-full items-center justify-items-center;
+}
+
 .step-circle {
-    @apply flex bg-white border-4 h-10 w-10 rounded-full font-bold justify-center items-center shadow z-10;
+    @apply flex w-10 h-10 bg-white border-gray-300 border-4 rounded-full items-center justify-center;
     transition: border-color 0.5s ease-in-out 0.1s;
 }
 
-.step-text {
-    @apply text-center text-sm py-1 px-2;
+.active .step-circle {
+    @apply border-blue-900;
 }
 
-.bar {
-    @apply absolute self-center h-1.5 rounded-full z-0 shadow;
+.active.step:before{
+    @apply bg-blue-900;
 }
 
-.transition-bar {
-    transition: width 0.5s ease-out;
+.step:before {
+    @apply w-full absolute h-1 bg-gray-300 top-5;
+    content: '';
+    z-index: -1;
+    transition: background 0.5s ease-in-out;
+}
+
+.step-group:first-child .step:before {
+    @apply w-1/2 self-end;
+}
+
+.step-group:last-child .step:before {
+    @apply w-1/2 self-start;
 }
 </style>

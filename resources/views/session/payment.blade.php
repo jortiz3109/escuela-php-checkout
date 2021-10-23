@@ -4,7 +4,9 @@
             <img src="{{ $session->merchant->logo }}" alt="merchant-log" class="h-16 rounded-full shadow">
             <h1 class="text-bold text-gray-700 text-2xl tracking-wide">{{ $session->merchant->display_name }}</h1>
         </div>
-        <Stepper></Stepper>
+        <div class="w-1/3">
+            <Stepper></Stepper>
+        </div>
     </x-slot>
 
     <main class="px-16 py-10 bg-white flex flex-grow rounded-3xl flex">
