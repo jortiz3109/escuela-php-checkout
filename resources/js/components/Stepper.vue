@@ -1,39 +1,46 @@
 <template>
-    <div class="flex items-center relative w-full">
-        <div class="container">
-            <ul class="progressbar">
-                <li class="step-group" v-for="(description, index) in descriptions" :key="index">
-                    <div class="step" :class="step >= index ? 'active' : ''">
-                        <div class="step-circle">
-                            {{ index }}
-                        </div>
-                        <div class="text-center">
-                            {{ description }}
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+  <div class="flex items-center relative w-full">
+    <div class="container">
+      <ul class="progressbar">
+        <li
+          v-for="(description, index) in descriptions"
+          :key="index"
+          class="step-group"
+        >
+          <div
+            class="step"
+            :class="step >= index ? 'active' : ''"
+          >
+            <div class="step-circle">
+              {{ index }}
+            </div>
+            <div class="text-center">
+              {{ description }}
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script>
 import useStep from '../functions/useStep';
 
 export default {
-    name: 'Stepper',
+	name: 'Stepper',
 
-    setup() {
-        const {step} = useStep();
+	setup() {
+		const {step} = useStep();
 
-        const descriptions = {
-            1: 'Fill in payer data',
-            2: 'Select payment method',
-            3: 'Insert card data',
-        }
+		const descriptions = {
+			1: 'Fill in payer data',
+			2: 'Select payment method',
+			3: 'Insert card data',
+		};
 
-        return {step, descriptions};
-    }
+		return {step, descriptions};
+	}
 };
 </script>
 

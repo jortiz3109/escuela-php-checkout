@@ -8,8 +8,8 @@ import Transaction from './components/Transaction';
 
 createApp({
 	components: {
-        Countdown,
-        Stepper,
-        Transaction
-    }
+		Countdown,
+		Stepper,
+		Transaction
+	}
 }).mount('#app');
