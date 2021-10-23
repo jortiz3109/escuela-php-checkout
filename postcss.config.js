@@ -1,7 +1,9 @@
 const purgecss = require('@fullhuman/postcss-purgecss')({
     content: [
+        "./storage/framework/views/*.php",
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
         './resources/**/*.vue',
-        './resources/**/*.js'
     ],
     whitelistPatterns: [ /-(leave|enter|appear)(|-(to|from|active))$/, /data-v-.*/, /v-deep/ ],
     whitelistPatternsChildren: [ /pretty$/, /xmx-.*$/, /^(.*?)\.tooltip/ ],
