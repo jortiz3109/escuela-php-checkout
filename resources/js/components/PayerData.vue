@@ -178,21 +178,3 @@ export default {
 	}
 };
 </script>
-
-<style scoped>
-    .field-group {
-        @apply flex flex-col;
-    }
-
-    .field-label {
-        @apply text-gray-700;
-    }
-
-    .field-input {
-        @apply border-gray-400 rounded-lg;
-    }
-
-    .error-message {
-        @apply text-red-500 pt-1;
-    }
-</style>
