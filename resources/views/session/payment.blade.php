@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-6">
-            <img src="{{ $session->merchant->logo }}" alt="merchant-log" class="h-16 rounded-full shadow">
+            <img src="{{ $session->merchant->logo }}" alt="{{ $session->merchant->name }}" class="h-16 rounded-full shadow">
             <h1 class="text-bold text-gray-700 text-2xl tracking-wide">{{ $session->merchant->display_name }}</h1>
         </div>
         <div class="w-1/3">
@@ -22,11 +22,11 @@
                 </div>
                 <div class="flex flex-col gap-8">
                     <div class="flex justify-between items-baseline">
-                        <p class="text-semibold text-xl">{{ __('Reference') }}</p>
+                        <p class="text-semibold text-xl">@lang('Reference')</p>
                         <p class="text-base pr-4">{{ $session->reference }}</p>
                     </div>
                     <div class="">
-                        <p class="text-semibold text-xl pb-2">{{ __('Description') }}</p>
+                        <p class="text-semibold text-xl pb-2">@lang('Description')</p>
                         <p class="text-justify">
                             {{ $session->description }}
                         </p>

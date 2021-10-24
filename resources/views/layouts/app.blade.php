@@ -8,24 +8,18 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-        <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <!-- Scripts -->
         <script src="{{ asset('js/manifest.js') }}" defer></script>
         <script src="{{ asset('js/vendor.js') }}" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased flex flex-col h-screen" id="app">
-            <!-- Page Heading -->
-        <header class=" bg-gray-100 shadow flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
+        <header class=" bg-gray-100 shadow-2xl flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
             {{ $header }}
         </header>
 
-    <!-- Page Content -->
         {{ $slot }}
     </body>
 </html>

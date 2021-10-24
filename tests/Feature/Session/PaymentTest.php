@@ -23,21 +23,21 @@ class PaymentTest extends TestCase
         $this->session = Session::factory()->create();
     }
 
-    public function testItCanGetPaymentInterface()
+    public function testItCanGetPaymentInterface(): void
     {
         $response = $this->getSessionPaymentInterface();
 
         $response->assertOk();
     }
 
-    public function testSessionPaymentIsAView()
+    public function testSessionPaymentIsAView(): void
     {
         $response = $this->getSessionPaymentInterface();
 
         $response->assertViewIs('session.payment');
     }
 
-    public function testItCanSeeSessionData()
+    public function testItCanSeeSessionData(): void
     {
         $response = $this->getSessionPaymentInterface();
 
@@ -48,7 +48,7 @@ class PaymentTest extends TestCase
         $response->assertSeeText($this->session->merchant->display_name);
     }
 
-    public function testItCanSeeFormattedTotalAmount()
+    public function testItCanSeeFormattedTotalAmount(): void
     {
         /** @var Session $session */
         $session = Session::factory()->create([
