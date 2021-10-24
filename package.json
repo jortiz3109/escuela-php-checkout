@@ -45,6 +45,7 @@
         "vee-validate": "^4.5.3",
         "vue": "^3.2.20",
         "vue-loader": "^16.8.1",
+        "vue-spinner": "^1.0.4",
         "vue3-jest": "^27.0.0-alpha.1"
     }
 }

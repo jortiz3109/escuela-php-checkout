@@ -16,7 +16,7 @@ function stepForward() {
 	}
 }
 
-function isStepEqual(value) {
+function inStep(value) {
 	return step.value === value;
 }
 
@@ -25,6 +25,6 @@ export default function () {
 		step,
 		stepBack,
 		stepForward,
-		isStepEqual
+		inStep
 	};
 }

@@ -1,15 +1,14 @@
 <template>
-  <div class="flex flex-col h-full justify-between">
+  <div class="flex flex-col h-full justify-between w-full items-center">
     <div class="flex items-center justify-items-center h-5/6 mt-12">
       <PayerData
-        v-if="isStepEqual(1)"
+        v-if="inStep(1)"
         :payer="payer"
-        class=" mt-20"
+        class="mt-20"
         @save-payer="savePayerData"
       />
-      <SuspenseComponent>
+      <SuspenseComponent v-if="inStep(2)">
         <PaymentMethods
-          v-if="isStepEqual(2)"
           @select-payment-method="selectPaymentMethod"
         />
       </SuspenseComponent>
@@ -37,15 +36,15 @@ export default {
 	},
 
 	setup() {
-		const { step, stepBack, stepForward, isStepEqual } = useStep();
+		const { step, stepBack, stepForward, inStep } = useStep();
 
 		const payer = ref({
-			name: '',
-			surname: '',
-			documentType: '',
-			document: '',
-			email: '',
-			mobile: ''
+			name: 'a',
+			surname: 's',
+			documentType: 'CC',
+			document: '1',
+			email: 'admin@gmail.com',
+			mobile: '1'
 		});
 
 		const paymentMethods = ref({});
@@ -61,7 +60,7 @@ export default {
 		}
 
 		return {
-			payer, step, stepBack, isStepEqual, savePayerData, selectPaymentMethod
+			payer, step, stepBack, inStep, savePayerData, selectPaymentMethod
 		};
 	}
 };
