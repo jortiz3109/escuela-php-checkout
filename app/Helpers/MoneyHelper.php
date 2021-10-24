@@ -26,8 +26,8 @@ class MoneyHelper
     public static function formattedAmount(float $amount, Currency $currency, ?bool $withSymbol = true): string
     {
         $minorUnit = $currency->minor_unit;
-        $symbol = $withSymbol ? $currency->symbol.' ' : '';
+        $symbol = $withSymbol ? $currency->symbol . ' ' : '';
 
-        return $symbol.number_format($amount, $minorUnit);
+        return $symbol . number_format($amount, $minorUnit);
     }
 }
