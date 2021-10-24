@@ -17,8 +17,6 @@
 
 <script>
 import  useStep  from '../functions/useStep';
-import PulseLoader from 'vue-spinner/src/PulseLoader'
-
 
 export default {
 	name: 'Footer',
