@@ -34,20 +34,4 @@ class Session extends Model
     {
         return  $this->belongsTo(Merchant::class);
     }
-
-    public function getTotalAmountAttribute(int $value): ?string
-    {
-        $minorUnit = $this->currency->minor_unit;
-        return bcdiv($value, bcpow(10, $minorUnit), $minorUnit);
-    }
-
-    public function setTotalAmountAttribute(float $value): void
-    {
-        $this->attributes['total_amount'] = bcmul($value, bcpow(10, $this->currency->minor_unit));
-    }
-
-    public function formattedAmount(): string
-    {
-        return number_format($this->total_amount, $this->currency->minor_unit);
-    }
 }

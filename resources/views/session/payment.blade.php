@@ -18,7 +18,9 @@
             <div class="flex flex-col justify-center gap-12 w-full">
                 <div class="">
                     <p class="text-2xl">{{ $session->currency->alphabetic_code }}</p>
-                    <p class="text-4xl text-bold text-center">{{ $session->formattedAmount() }}</p>
+                    <p class="text-4xl text-bold text-center">
+                        {{ \App\Helpers\MoneyHelper::formattedAmountFromInteger($session->total_amount, $session->currency) }}
+                    </p>
                 </div>
                 <div class="flex flex-col gap-8">
                     <div class="flex justify-between items-baseline">

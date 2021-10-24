@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Session;
 
+use App\Helpers\MoneyHelper;
 use App\Models\Session;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -44,7 +45,7 @@ class PaymentTest extends TestCase
         $response->assertSeeText($this->session->reference);
         $response->assertSeeText($this->session->description);
         $response->assertSeeText($this->session->currency->alphabetic_code);
-        $response->assertSeeText($this->session->formattedAmount());
+        $response->assertSeeText(MoneyHelper::formattedAmountFromInteger($this->session->total_amount, $this->session->currency));
         $response->assertSeeText($this->session->merchant->display_name);
     }
 
@@ -52,12 +53,12 @@ class PaymentTest extends TestCase
     {
         /** @var Session $session */
         $session = Session::factory()->create([
-            'total_amount' => 15450,
+            'total_amount' => 1545000,
         ]);
 
         $response = $this->getSessionPaymentInterface($session);
 
-        $response->assertSeeText('15,450.00');
+        $response->assertSeeText('$ 15,450.00');
     }
 
     protected function getSessionPaymentInterface(?Session $session = null): TestResponse
