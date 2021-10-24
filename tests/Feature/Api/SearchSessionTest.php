@@ -67,14 +67,14 @@ class SearchSessionTest extends TestCase
     {
         $otherSession = Session::factory()->create();
 
-        self::assertNotEquals($otherSession->merchant->id, $this->merchant->id);
+        $this->assertNotEquals($otherSession->merchant->id, $this->merchant->id);
 
         $response = $this->search($this->merchant, $otherSession);
 
         $response->assertStatus(404);
     }
 
-    protected function search(Merchant $merchant, Session $session)
+    private function search(Merchant $merchant, Session $session): \Illuminate\Testing\TestResponse
     {
         return $this->getJson("/api/{$merchant->uuid}/search/{$session->uuid}");
     }
