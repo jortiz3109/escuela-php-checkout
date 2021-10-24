@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTokensTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
     {
         Schema::create('tokens', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreateTokensTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down(): void
     {
         Schema::dropIfExists('tokens');
