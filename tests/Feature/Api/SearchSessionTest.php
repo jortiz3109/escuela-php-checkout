@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use App\Models\Merchant;
 use App\Models\Session;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class SearchSessionTest extends TestCase
@@ -43,19 +44,23 @@ class SearchSessionTest extends TestCase
     {
         $response = $this->search($this->merchant, $this->session);
 
-        $this->assertEquals($this->session->uuid, $response['requestId']);
+        $response->assertJson(
+            fn (assertableJson $json) => $json
 
-        self::assertEquals($this->session->reason, $response['status']['reason']);
-        self::assertEquals($this->session->status, $response['status']['status']);
-        self::assertEquals($this->session->message, $response['status']['message']);
-        self::assertEquals($this->session->date, $response['status']['date']);
+                ->where('requestId', $this->session->uuid)
 
-        self::assertNotEmpty($response['payment']['status']);
-        self::assertEquals($this->session->total_amount, $response['payment']['amount']['total']);
-        self::assertEquals($this->session->currency->alphabetic_code, $response['payment']['amount']['currency']);
-        self::assertEquals($this->session->reference, $response['payment']['reference']);
-        self::assertNull($response['payment']['authorization']);
-        self::assertNull($response['payment']['receipt']);
+                ->where('status.reason', $this->session->reason)
+                ->where('status.status', $this->session->status)
+                ->where('status.message', $this->session->message)
+                ->where('status.date', $this->session->date)
+
+                ->has('payment.status.status')
+                ->where('payment.amount.total', $this->session->total_amount)
+                ->where('payment.amount.currency', $this->session->currency->alphabetic_code)
+                ->where('payment.reference', $this->session->reference)
+                ->has('payment.authorization')
+                ->has('payment.receipt')
+        );
     }
 
     public function testItCannotSearchOtherMerchantSession(): void

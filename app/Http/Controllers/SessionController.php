@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SessionResource;
 use App\Models\Merchant;
 use App\Models\Session;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class SessionController extends Controller
 {

@@ -15,8 +15,8 @@ class SessionResource extends JsonResource
             'requestId' => $this->uuid,
             'status' => [
                 'status' => $this->status,
-                'reason' => '00',
-                'message' => 'Approved',
+                'reason' => $this->reason,
+                'message' => $this->message,
                 'date' => $this->date,
             ],
             'payment' => [
