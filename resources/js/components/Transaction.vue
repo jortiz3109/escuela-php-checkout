@@ -39,12 +39,12 @@ export default {
 		const { step, stepBack, stepForward, inStep } = useStep();
 
 		const payer = ref({
-			name: 'a',
-			surname: 's',
-			documentType: 'CC',
-			document: '1',
-			email: 'admin@gmail.com',
-			mobile: '1'
+			name: '',
+			surname: '',
+			documentType: '',
+			document: '',
+			email: '',
+			mobile: ''
 		});
 
 		const paymentMethods = ref({});
