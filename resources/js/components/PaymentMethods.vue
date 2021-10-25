@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import useApi from "../functions/useApi";
+import useApi from '../functions/useApi';
 
 export default {
 	name: 'PaymentMethods',
@@ -27,9 +27,9 @@ export default {
 	emits: ['select-payment-method'],
 
 	async setup(props, { emit }) {
-        const { getPaymentMethods } = useApi();
+		const { getPaymentMethods } = useApi();
 
-        const paymentMethods = await getPaymentMethods();
+		const paymentMethods = await getPaymentMethods();
 
 		function select(paymentMethod) {
 			emit('select-payment-method', paymentMethod);

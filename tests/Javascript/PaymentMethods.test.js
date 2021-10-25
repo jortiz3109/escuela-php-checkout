@@ -1,7 +1,7 @@
 import PaymentMethods from '../../resources/js/components/PaymentMethods';
 import { flushPromises, mount } from '@vue/test-utils';
 import { defineComponent, h, Suspense } from 'vue';
-import axios from "axios";
+import axios from 'axios';
 
 jest.mock('axios');
 
@@ -23,7 +23,7 @@ describe('PaymentMethods', () => {
 		},
 	];
 
-    axios.get.mockResolvedValue({data: mockPaymentMethodsList});
+	axios.get.mockResolvedValue({data: mockPaymentMethodsList});
 
 	const mountSuspense =  async (component, options) => {
 		const wrapper = mount(defineComponent({
@@ -40,11 +40,11 @@ describe('PaymentMethods', () => {
 	};
 
 	beforeEach(async () => {
-        createMeta('session', 'd216cc99-e54f-3425-92d7-62aca86b84fc')
-        createMeta('token', 'd216cc99-e54f-3425-92d7-62aca86b84fc')
+		createMeta('session', 'd216cc99-e54f-3425-92d7-62aca86b84fc');
+		createMeta('token', 'd216cc99-e54f-3425-92d7-62aca86b84fc');
 
 		wrapper = await mountSuspense(PaymentMethods);
-        flushPromises();
+		flushPromises();
 	});
 
 	test('it can fetch payment methods', () => {
@@ -73,10 +73,10 @@ describe('PaymentMethods', () => {
 		expect(wrap.html()).toContain(text);
 	};
 
-    let createMeta = (name, value) => {
-        let meta = document.createElement('meta');
-        meta.setAttribute('name', name);
-        meta.content = value;
-        document.getElementsByTagName('head')[0].appendChild(meta);
-    }
+	let createMeta = (name, value) => {
+		let meta = document.createElement('meta');
+		meta.setAttribute('name', name);
+		meta.content = value;
+		document.getElementsByTagName('head')[0].appendChild(meta);
+	};
 });

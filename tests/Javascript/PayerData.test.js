@@ -92,10 +92,10 @@ describe('PayerData', () => {
 	});
 
 	test('it can validate document type as required', async () => {
-        await wrapper.find('button').trigger('click');
+		await wrapper.find('button').trigger('click');
 
-        jest.runAllTimers();
-        await flushPromises();
+		jest.runAllTimers();
+		await flushPromises();
 
 		see(invalidMessageText('documentType'));
 	});
