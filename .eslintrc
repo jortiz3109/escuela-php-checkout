@@ -16,8 +16,21 @@
         "quotes": ["error", "single"],
         "semi": ["error", "never"],
         "block-spacing": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+        "vue/keyword-spacing": ["error", { "before": true, "after": true }],
+        "vue/no-irregular-whitespace": ["error", { "skipComments": true }],
         "vue/padding-line-between-blocks": ["error", "always"],
         "vue/static-class-names-order": "error",
+        "vue/space-infix-ops": "error",
+        "vue/no-multi-spaces": "error",
+        "vue/no-parsing-error": "error",
+        "vue/require-v-for-key": "error",
+        "vue/use-v-on-exact": "error",
+        "vue/valid-v-show": "error",
+        "vue/valid-v-slot": "error",
+        "vue/valid-v-text": "error",
+        "vue/valid-v-bind": "error",
         "vue/no-template-shadow": "off",
         "vue/max-attributes-per-line": [
             "error",
@@ -52,7 +65,7 @@
                  *
                  * @default true
                  */
-                "template": true,
+                "template": false,
 
                 /**
                  * Use prettier to process `<script>` blocks or not
@@ -62,14 +75,14 @@
                  *
                  * @default true
                  */
-                "script": true,
+                "script": false,
 
                 /**
                  * Use prettier to process `<style>` blocks or not
                  *
                  * @default true
                  */
-                "style": true
+                "style": false
             }
         }
     }
