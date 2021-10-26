@@ -34,7 +34,7 @@ export default {
   },
 
   setup() {
-    const { step, stepBack, stepForward, inStep } = useStep()
+    const { step, stepForward, inStep } = useStep()
 
     const payer = ref({
       name: '',
@@ -60,7 +60,6 @@ export default {
     return {
       payer,
       step,
-      stepBack,
       inStep,
       savePayerData,
       selectPaymentMethod,
