@@ -1,47 +1,44 @@
 <template>
-  <div class="flex items-center relative w-full">
-    <div class="container">
-      <ul class="progressbar">
-        <li
-          v-for="(description, index) in descriptions"
-          :key="index"
-          class="step-group"
-        >
-          <div
-            class="step"
-            :class="step >= index ? 'active' : ''"
-          >
-            <div class="step-circle">
-              {{ index }}
-            </div>
-            <div class="text-center">
-              {{ description }}
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="flex items-center relative w-full">
+        <div class="container">
+            <ul class="progressbar">
+                <li
+                    v-for="(description, index) in descriptions"
+                    :key="index"
+                    class="step-group"
+                >
+                    <div class="step" :class="step >= index ? 'active' : ''">
+                        <div class="step-circle">
+                            {{ index }}
+                        </div>
+                        <div class="text-center">
+                            {{ description }}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import useStep from '../functions/useStep';
+import useStep from '../functions/useStep'
 
 export default {
   name: 'Stepper',
 
   setup() {
-    const {step} = useStep();
+    const { step } = useStep()
 
     const descriptions = {
       1: 'Fill in payer data',
       2: 'Select payment method',
       3: 'Insert card data',
-    };
+    }
 
-    return {step, descriptions};
-  }
-};
+    return { step, descriptions }
+  },
+}
 </script>
 
 <style scoped>
@@ -70,13 +67,13 @@ export default {
     @apply border-blue-900;
 }
 
-.active.step:before{
+.active.step:before {
     @apply bg-blue-900;
 }
 
 .step:before {
     @apply w-full absolute h-1 bg-gray-300 top-5;
-    content: '';
+    content: "";
     z-index: -1;
     transition: background 0.5s ease-in-out;
 }

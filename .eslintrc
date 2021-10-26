@@ -9,18 +9,27 @@
         "eslint:recommended",
         "plugin:vue/vue3-recommended",
         "plugin:jest/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier-vue/recommended",
+        "prettier"
     ],
-    "parserOptions": {
-        "sourceType": "module"
-    },
     "rules": {
-        "indent": ["error", 2],
         "quotes": ["error", "single"],
-        "semi": ["error", "always"],
+        "semi": ["error", "never"],
         "block-spacing": ["error", "always"],
         "vue/padding-line-between-blocks": ["error", "always"],
         "vue/static-class-names-order": "error",
+        "vue/no-template-shadow": "off",
+        "vue/max-attributes-per-line": [
+            "error",
+            {
+                "singleline": 3,
+                "multiline": {
+                    "max": 1,
+                    "allowFirstLine": false
+                }
+            }
+        ],
+        "prettier-vue/prettier": "warn",
         "jest/expect-expect": [
             "error",
             {
@@ -31,5 +40,37 @@
                 ]
             }
         ]
+    },
+    "settings": {
+        "prettier-vue": {
+            "SFCBlocks": {
+                /**
+                 * Use prettier to process `<template>` blocks or not
+                 *
+                 * If set to `false`, you may need to enable those vue rules that are disabled by `eslint-config-prettier`,
+                 * because you need them to lint `<template>` blocks
+                 *
+                 * @default true
+                 */
+                "template": true,
+
+                /**
+                 * Use prettier to process `<script>` blocks or not
+                 *
+                 * If set to `false`, you may need to enable those rules that are disabled by `eslint-config-prettier`,
+                 * because you need them to lint `<script>` blocks
+                 *
+                 * @default true
+                 */
+                "script": true,
+
+                /**
+                 * Use prettier to process `<style>` blocks or not
+                 *
+                 * @default true
+                 */
+                "style": true
+            }
+        }
     }
 }
