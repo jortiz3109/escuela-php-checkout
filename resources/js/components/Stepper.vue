@@ -28,19 +28,19 @@
 import useStep from '../functions/useStep';
 
 export default {
-	name: 'Stepper',
+  name: 'Stepper',
 
-	setup() {
-		const {step} = useStep();
+  setup() {
+    const {step} = useStep();
 
-		const descriptions = {
-			1: 'Fill in payer data',
-			2: 'Select payment method',
-			3: 'Insert card data',
-		};
+    const descriptions = {
+      1: 'Fill in payer data',
+      2: 'Select payment method',
+      3: 'Insert card data',
+    };
 
-		return {step, descriptions};
-	}
+    return {step, descriptions};
+  }
 };
 </script>
 

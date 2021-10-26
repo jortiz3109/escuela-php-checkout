@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-full justify-between w-full items-center">
-    <div class="flex items-center justify-items-center h-5/6 mt-12">
+  <div class="flex flex-col h-full items-center justify-between w-full">
+    <div class="flex h-5/6 items-center justify-items-center mt-12">
       <PayerData
         v-if="inStep(1)"
         :payer="payer"
@@ -26,42 +26,42 @@ import Footer from './Footer';
 import useStep from '../functions/useStep';
 
 export default {
-	name: 'Transaction',
+  name: 'Transaction',
 
-	components: {
-		PayerData,
-		PaymentMethods,
-		SuspenseComponent,
-		Footer
-	},
+  components: {
+    PayerData,
+    PaymentMethods,
+    SuspenseComponent,
+    Footer
+  },
 
-	setup() {
-		const { step, stepBack, stepForward, inStep } = useStep();
+  setup() {
+    const { step, stepBack, stepForward, inStep } = useStep();
 
-		const payer = ref({
-			name: '',
-			surname: '',
-			documentType: '',
-			document: '',
-			email: '',
-			mobile: ''
-		});
+    const payer = ref({
+      name: '',
+      surname: '',
+      documentType: '',
+      document: '',
+      email: '',
+      mobile: ''
+    });
 
-		const paymentMethods = ref({});
+    const paymentMethods = ref({});
 
-		function savePayerData(values) {
-			payer.value = values;
-			stepForward();
-		}
+    function savePayerData(values) {
+      payer.value = values;
+      stepForward();
+    }
 
-		function selectPaymentMethod(values) {
-			paymentMethods.value = values;
-			stepForward();
-		}
+    function selectPaymentMethod(values) {
+      paymentMethods.value = values;
+      stepForward();
+    }
 
-		return {
-			payer, step, stepBack, inStep, savePayerData, selectPaymentMethod
-		};
-	}
+    return {
+      payer, step, stepBack, inStep, savePayerData, selectPaymentMethod
+    };
+  }
 };
 </script>

@@ -20,18 +20,18 @@ import MoonLoader from 'vue-spinner/src/MoonLoader';
 import { onErrorCaptured, ref } from 'vue';
 
 export default {
-	name: 'SuspenseComponent',
+  name: 'SuspenseComponent',
 
-	components: { MoonLoader },
+  components: { MoonLoader },
 
-	setup() {
-		const suspenseError = ref(null);
+  setup() {
+    const suspenseError = ref(null);
 
-		onErrorCaptured(e => {
-			suspenseError.value = e.message;
-		});
+    onErrorCaptured(e => {
+      suspenseError.value = e.message;
+    });
 
-		return { suspenseError };
-	}
+    return { suspenseError };
+  }
 };
 </script>

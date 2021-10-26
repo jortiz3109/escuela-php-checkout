@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="grid grid-cols-2 grid-rows-4 gap-x-6 gap-y-8"
-  >
+  <div class="gap-x-6 gap-y-8 grid grid-cols-2 grid-rows-4">
     <div class="field-group">
       <label class="field-label">Name</label>
       <input
@@ -42,7 +40,7 @@
         <select
           id="documentType"
           v-model="documentType"
-          class="field-label field-input"
+          class="field-input field-label"
           :class="errors.documentType ? 'border-red-500' : '' "
         >
           <option
@@ -94,7 +92,7 @@
         {{ errors.email }}
       </p>
     </div>
-    <div class="field-group col-start-1 col-end-2">
+    <div class="col-end-2 col-start-1 field-group">
       <label class="field-label">Mobile</label>
       <input
         id="mobile"
@@ -111,9 +109,9 @@
         {{ errors.mobile }}
       </p>
     </div>
-    <div class="flex col-span-2 justify-self-end self-start">
+    <div class="col-span-2 flex justify-self-end self-start">
       <button
-        class="border px-8 py-3 bg-gray-500 rounded-lg hover:bg-gray-700 text-white"
+        class="bg-gray-500 border hover:bg-gray-700 px-8 py-3 rounded-lg text-white"
         @click="onSubmit"
       >
         Next
@@ -127,54 +125,54 @@ import { useForm, useField } from 'vee-validate';
 import '../functions/validators';
 
 export default {
-	name: 'PayerData',
+  name: 'PayerData',
 
-	props: {
-		payer: {
-			type: Object,
-			default: () => {}
-		}
-	},
+  props: {
+    payer: {
+      type: Object,
+      default: () => {}
+    }
+  },
 
-	emits: ['save-payer'],
+  emits: ['save-payer'],
 
-	setup(props, { emit }) {
-		const documentTypes = [ 'CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT' ];
+  setup(props, { emit }) {
+    const documentTypes = [ 'CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT' ];
 
-		const { handleSubmit, errors } = useForm({
-			validationSchema: {
-				name: 'required|min:1|max:80',
-				surname: 'required|min:1|max:80',
-				documentType: `required|one_of:${documentTypes}`,
-				document: 'required|alpha_num',
-				email: 'required|email',
-				mobile: 'required|numeric'
-			},
-			initialValues: props.payer
-		});
+    const { handleSubmit, errors } = useForm({
+      validationSchema: {
+        name: 'required|min:1|max:80',
+        surname: 'required|min:1|max:80',
+        documentType: `required|one_of:${documentTypes}`,
+        document: 'required|alpha_num',
+        email: 'required|email',
+        mobile: 'required|numeric'
+      },
+      initialValues: props.payer
+    });
 
-		const { value: name } = useField('name');
-		const { value: surname } = useField('surname');
-		const { value: documentType } = useField('documentType');
-		const { value: document } = useField('document');
-		const { value: email } = useField('email');
-		const { value: mobile } = useField('mobile');
+    const { value: name } = useField('name');
+    const { value: surname } = useField('surname');
+    const { value: documentType } = useField('documentType');
+    const { value: document } = useField('document');
+    const { value: email } = useField('email');
+    const { value: mobile } = useField('mobile');
 
-		const onSubmit = handleSubmit(values => {
-			emit('save-payer', values);
-		});
+    const onSubmit = handleSubmit(values => {
+      emit('save-payer', values);
+    });
 
-		return {
-			documentTypes,
-			name,
-			surname,
-			documentType,
-			document,
-			email,
-			mobile,
-			errors,
-			onSubmit,
-		};
-	}
+    return {
+      documentTypes,
+      name,
+      surname,
+      documentType,
+      document,
+      email,
+      mobile,
+      errors,
+      onSubmit,
+    };
+  }
 };
 </script>

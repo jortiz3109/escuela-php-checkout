@@ -7,9 +7,9 @@ import Stepper from './components/Stepper';
 import Transaction from './components/Transaction';
 
 createApp({
-	components: {
-		Countdown,
-		Stepper,
-		Transaction
-	}
+  components: {
+    Countdown,
+    Stepper,
+    Transaction
+  }
 }).mount('#app');

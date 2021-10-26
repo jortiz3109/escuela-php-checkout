@@ -3,79 +3,79 @@ import { mount } from '@vue/test-utils';
 import { DateTime } from 'luxon';
 import useState from '../../resources/js/functions/useState';
 
-describe('Countdown', () => {
-	let wrapper, clock;
+describe('countdown', () => {
+  let wrapper, clock;
 
-	const { expired } = useState();
+  const { expired } = useState();
 
-	beforeEach(() => {
-		clock = jest.useFakeTimers();
-		wrapper = mount(Countdown, {
-			props: {
-				expiration: DateTime.now().plus({minutes: 15}).toISO()
-			}
-		});
-	});
+  beforeEach(() => {
+    clock = jest.useFakeTimers();
+    wrapper = mount(Countdown, {
+      props: {
+        expiration: DateTime.now().plus({minutes: 15}).toISO()
+      }
+    });
+  });
 
-	afterEach(() =>  {
-		jest.useRealTimers();
-		expired.value = false;
-	});
+  afterEach(() =>  {
+    jest.useRealTimers();
+    expired.value = false;
+  });
 
-	test('it renders a countdown timer', () => {
-		see('00:15:00');
-	});
+  it('renders a countdown timer', () => {
+    see('00:15:00');
+  });
 
-	test('it reduces the countdown every second', () => {
-		see('00:15:00');
+  it('reduces the countdown every second', () => {
+    see('00:15:00');
 
-		clock.advanceTimersByTime(1000);
+    clock.advanceTimersByTime(1000);
 
-		wrapper.vm.$nextTick(() => {
-			see('00:14:59');
-		});
-	});
+    wrapper.vm.$nextTick(() => {
+      see('00:14:59');
+    });
+  });
 
-	test('it stops countdown when gets to zero', () => {
-		see('00:15:00');
+  it('stops countdown when gets to zero', () => {
+    see('00:15:00');
 
-		clock.advanceTimersByTime(900000); // 15 minutes
+    clock.advanceTimersByTime(900000); // 15 minutes
 
-		wrapper.vm.$nextTick(() => {
-			see('00:00:00');
-			expect(wrapper.vm.intervalHandle).toBeUndefined();
-		});
-	});
+    wrapper.vm.$nextTick(() => {
+      see('00:00:00');
+      expect(wrapper.vm.intervalHandle).toBeUndefined();
+    });
+  });
 
-	test('it shows zero if session is expired', () => {
-		wrapper = mount(Countdown, {
-			props: {
-				expiration: DateTime.now().plus({minutes: -15}).toISO()
-			}
-		});
+  it('shows zero if session is expired', () => {
+    wrapper = mount(Countdown, {
+      props: {
+        expiration: DateTime.now().plus({minutes: -15}).toISO()
+      }
+    });
 
-		see('00:00:00');
-	});
+    see('00:00:00');
+  });
 
-	test('it update global state as expired', () => {
-		const { expired } = useState();
-		expect(expired.value).toBeFalsy();
+  it('update global state as expired', () => {
+    const { expired } = useState();
+    expect(expired.value).toBeFalsy();
 
-		see('00:15:00');
+    see('00:15:00');
 
-		clock.advanceTimersByTime(900000); // 15 minutes
+    clock.advanceTimersByTime(900000); // 15 minutes
 
-		jest.useRealTimers();
+    jest.useRealTimers();
 
-		wrapper.vm.$nextTick(() => {
-			expect(expired.value).toBeTruthy();
-		});
-	});
+    wrapper.vm.$nextTick(() => {
+      expect(expired.value).toBeTruthy();
+    });
+  });
 
-	// Helper functions
-	let see = (text, selector) => {
-		let wrap = selector ? wrapper.find(selector) : wrapper;
+  // Helper functions
+  let see = (text, selector) => {
+    let wrap = selector ? wrapper.find(selector) : wrapper;
 
-		expect(wrap.html()).toContain(text);
-	};
+    expect(wrap.html()).toContain(text);
+  };
 });

@@ -2,19 +2,34 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/vue3-recommended"
+        "plugin:vue/vue3-recommended",
+        "plugin:jest/recommended",
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "sourceType": "module"
     },
     "rules": {
-        "indent": ["error", "tab"],
-        "linebreak-style": ["error", "unix"],
+        "indent": ["error", 2],
         "quotes": ["error", "single"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "block-spacing": ["error", "always"],
+        "vue/padding-line-between-blocks": ["error", "always"],
+        "vue/static-class-names-order": "error",
+        "jest/expect-expect": [
+            "error",
+            {
+                "assertFunctionNames": [
+                    "expect",
+                    "see",
+                    "dontSee"
+                ]
+            }
+        ]
     }
 }
