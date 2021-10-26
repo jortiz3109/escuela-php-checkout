@@ -1,11 +1,14 @@
 import Countdown from '../../resources/js/components/Countdown';
 import { mount } from '@vue/test-utils';
 import { DateTime } from 'luxon';
+import useState from "../../resources/js/functions/useState";
 
 describe('Countdown', () => {
 	let wrapper, clock;
 
-	beforeEach(() => {
+    const { expired } = useState();
+
+    beforeEach(() => {
 		clock = jest.useFakeTimers();
 		wrapper = mount(Countdown, {
 			props: {
@@ -14,7 +17,10 @@ describe('Countdown', () => {
 		});
 	});
 
-	afterEach(() =>  jest.useRealTimers());
+	afterEach(() =>  {
+        jest.useRealTimers()
+        expired.value = false;
+    });
 
 	test('it renders a countdown timer', () => {
 		see('00:15:00');
@@ -51,15 +57,20 @@ describe('Countdown', () => {
 		see('00:00:00');
 	});
 
-	test('it broadcasts when session is expired', () => {
-		see('00:15:00');
+	test('it update global state as expired', () => {
+		const { expired } = useState();
+        expect(expired.value).toBeFalsy();
+
+        see('00:15:00');
 
 		clock.advanceTimersByTime(900000); // 15 minutes
 
-		wrapper.vm.$nextTick(() => {
-			expect(wrapper.emitted().expired).toBeTruthy();
-		});
-	});
+        jest.useRealTimers()
+
+        wrapper.vm.$nextTick(() => {
+            expect(expired.value).toBeTruthy();
+        })
+    });
 
 	// Helper functions
 	let see = (text, selector) => {

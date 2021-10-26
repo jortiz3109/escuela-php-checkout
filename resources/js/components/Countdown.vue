@@ -11,8 +11,8 @@
 
 <script>
 import { DateTime, Duration } from 'luxon';
-import { watch, reactive } from 'vue';
-import { useCurrentTime } from '../functions/useCurrentTime';
+import { ref, computed, onBeforeMount, watch } from 'vue';
+import useState from "../functions/useState";
 
 export default {
 	name: 'Countdown',
@@ -24,44 +24,43 @@ export default {
 		}
 	},
 
-	emits: ['expired'],
+	setup(props) {
+        let timer;
+        const now = ref(new Date());
+        const { expired, expireSession } = useState();
 
-	setup(props, { emit }) {
-		const { currentTime, intervalHandle } = useCurrentTime();
+        const remaining = computed(() => {
+            let duration = DateTime.fromISO(props.expiration).diff(DateTime.fromJSDate(now.value), ['hours', 'minutes', 'seconds', 'milliseconds']);
 
-		function getDuration() {
-			let duration = DateTime.fromISO(props.expiration).diff(DateTime.fromJSDate(currentTime.value), ['hours', 'minutes', 'seconds', 'milliseconds']);
+            if (duration <= 0) {
+                expireSession();
+                if (duration < 0) {
+                    duration = Duration.fromObject({
+                        hours: 0,
+                        minutes: 0,
+                        seconds: 0
+                    });
+                }
+            }
 
-			if (duration < 0) {
-				return Duration.fromObject({
-					hours: 0,
-					minutes: 0,
-					seconds: 0
-				});
-			}
+            return {
+                hours: duration.toObject().hours.toString().padStart(2, '0'),
+                minutes: duration.toObject().minutes.toString().padStart(2, '0'),
+                seconds: duration.toObject().seconds.toString().padStart(2, '0'),
+            }
+        })
 
-			return duration;
-		}
+        watch(() => expired.value, (newValue) => {
+            if (newValue) {
+                clearInterval(timer)
+            }
+        })
 
-		const remaining = reactive({
-			hours: getDuration().toObject().hours.toString().padStart(2, '0'),
-			minutes: getDuration().toObject().minutes.toString().padStart(2, '0'),
-			seconds: getDuration().toObject().seconds.toString().padStart(2, '0'),
-		});
-
-		watch(
-			() => currentTime.value,
-			() => {
-				if (getDuration() <= 0) {
-					emit('expired');
-					clearInterval(intervalHandle);
-				}
-
-				remaining.hours = getDuration().toObject().hours.toString().padStart(2, '0');
-				remaining.minutes = getDuration().toObject().minutes.toString().padStart(2, '0');
-				remaining.seconds = getDuration().toObject().seconds.toString().padStart(2, '0');
-			}
-		);
+        onBeforeMount(() => {
+            timer = setInterval(() => {
+                now.value = new Date();
+            }, 1000)
+        })
 
 		return {
 			remaining,
