@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCurrencyMerchantTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
     {
         Schema::create('currency_merchant', function (Blueprint $table) {
@@ -20,11 +15,6 @@ class CreateCurrencyMerchantTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down(): void
     {
         Schema::dropIfExists('currency_merchant');
