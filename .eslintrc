@@ -57,31 +57,8 @@
     "settings": {
         "prettier-vue": {
             "SFCBlocks": {
-                /**
-                 * Use prettier to process `<template>` blocks or not
-                 *
-                 * If set to `false`, you may need to enable those vue rules that are disabled by `eslint-config-prettier`,
-                 * because you need them to lint `<template>` blocks
-                 *
-                 * @default true
-                 */
                 "template": false,
-
-                /**
-                 * Use prettier to process `<script>` blocks or not
-                 *
-                 * If set to `false`, you may need to enable those rules that are disabled by `eslint-config-prettier`,
-                 * because you need them to lint `<script>` blocks
-                 *
-                 * @default true
-                 */
                 "script": false,
-
-                /**
-                 * Use prettier to process `<style>` blocks or not
-                 *
-                 * @default true
-                 */
                 "style": false
             }
         }
