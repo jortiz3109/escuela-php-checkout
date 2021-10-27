@@ -11,7 +11,7 @@ class Merchant extends Model
 
     public $timestamps = false;
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Session::class);
     }
