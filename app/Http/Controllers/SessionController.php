@@ -19,4 +19,3 @@ class SessionController extends Controller
         return response()->view('session.payment', compact('session'));
     }
 }
-
