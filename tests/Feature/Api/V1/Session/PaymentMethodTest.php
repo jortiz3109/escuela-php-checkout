@@ -41,17 +41,18 @@ class PaymentMethodTest extends TestCase
     public function testItReturnsPaymentMethodsData()
     {
         $response = $this->request();
-
-        $paymentMethod = $this->session->merchant->paymentMethods->first();
+        $paymentMethod = PaymentMethod::first();
 
         $response->assertJson(
-            fn (AssertableJson $json) => $json->has('data', 1)->has(
-                'data.0',
-                fn (AssertableJson $json) => $json
+            fn (AssertableJson $json) => $json->has('meta')
+                ->has('data', 1)
+                ->has(
+                    'data.0',
+                    fn (AssertableJson $json) => $json
                     ->where('id', $paymentMethod->id)
                     ->where('name', $paymentMethod->name)
                     ->where('logo', $paymentMethod->logo)
-            )
+                )
         );
     }
 }

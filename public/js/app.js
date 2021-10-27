@@ -19182,12 +19182,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TestRequest",
   setup: function setup() {
-    var sessionUuid = '8cc1318f-5107-31ac-ae60-de963a5b5f31';
+    var sessionUuid = 'a7828659-b5a6-3f2e-8a7f-90bb33e9a710';
 
     var test = function test() {
       (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.withCredentials) = true;
-      (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.Accept) = 'application/json';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://escuela-php-checkout.test/api/v1/session/".concat(sessionUuid, "/payment-methods"));
+      (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = 'http://escuela-php-checkout.test';
+      (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.Accept) = 'application/json'; // axios.get('/sanctum/csrf-cookie').then(response => {
+      //
+      // });
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/v1/session/".concat(sessionUuid, "/payment-methods"));
     };
 
     return {

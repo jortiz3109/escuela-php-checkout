@@ -7,16 +7,13 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PaymentMethodCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @param  Request  $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            'data' => $this->collection,
+            'data' => PaymentMethodResource::collection($this->collection),
+            'meta' => [
+                'payment_methods_count' => $this->collection->count(),
+            ],
         ];
     }
 }

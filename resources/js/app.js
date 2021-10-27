@@ -1,14 +1,9 @@
 require('./bootstrap');
 
 import { createApp } from "vue";
-import ProgressBar from "../components/ProgressBar";
-import TestRequest from "../components/TestRequest";
 
 const app = createApp({
-    components: {
-        ProgressBar,
-        TestRequest
-    }
+    components: {}
 });
 
 app.mount("#app");
