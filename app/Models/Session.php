@@ -10,6 +10,10 @@ class Session extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'expiration' => 'datetime',
+    ];
+
     public const STATUS_APPROVED = 'APPROVED';
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_EXPIRED = 'EXPIRED';
@@ -20,6 +24,11 @@ class Session extends Model
     ];
 
     public $timestamps = false;
+
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class);
+    }
 
     public function merchant(): BelongsTo
     {

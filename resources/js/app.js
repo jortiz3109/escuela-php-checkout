@@ -1,9 +1,15 @@
-require('./bootstrap');
+require('./bootstrap')
 
-import { createApp } from "vue";
+import { createApp } from 'vue'
 
-const app = createApp({
-    components: {}
-});
+import Countdown from './components/Countdown'
+import Stepper from './components/Stepper'
+import Transaction from './components/Transaction'
 
-app.mount("#app");
+createApp({
+    components: {
+        Countdown,
+        Stepper,
+        Transaction,
+    },
+}).mount('#app')

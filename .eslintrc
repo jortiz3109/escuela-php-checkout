@@ -1,0 +1,66 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/vue3-recommended",
+        "plugin:jest/recommended",
+        "plugin:prettier-vue/recommended",
+        "prettier"
+    ],
+    "rules": {
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"],
+        "block-spacing": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+        "vue/keyword-spacing": ["error", { "before": true, "after": true }],
+        "vue/no-irregular-whitespace": ["error", { "skipComments": true }],
+        "vue/padding-line-between-blocks": ["error", "always"],
+        "vue/static-class-names-order": "error",
+        "vue/space-infix-ops": "error",
+        "vue/no-multi-spaces": "error",
+        "vue/no-parsing-error": "error",
+        "vue/require-v-for-key": "error",
+        "vue/use-v-on-exact": "error",
+        "vue/valid-v-show": "error",
+        "vue/valid-v-slot": "error",
+        "vue/valid-v-text": "error",
+        "vue/valid-v-bind": "error",
+        "vue/no-template-shadow": "off",
+        "vue/max-attributes-per-line": [
+            "error",
+            {
+                "singleline": 3,
+                "multiline": {
+                    "max": 1,
+                    "allowFirstLine": false
+                }
+            }
+        ],
+        "prettier-vue/prettier": "warn",
+        "jest/expect-expect": [
+            "error",
+            {
+                "assertFunctionNames": [
+                    "expect",
+                    "see",
+                    "dontSee"
+                ]
+            }
+        ]
+    },
+    "settings": {
+        "prettier-vue": {
+            "SFCBlocks": {
+                "template": false,
+                "script": false,
+                "style": false
+            }
+        }
+    }
+}

@@ -1,23 +1,28 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
-mix.browserSync({
-    proxy: process.env.APP_URL,
-    notify: false
-});
-
-mix.js('resources/js/app.js', 'public/js')
+mix.js("resources/js/app.js", "public/js")
     .vue({version: 3})
-    .webpackConfig((webpack) => {
-        return {
-            plugins: [
-                new webpack.DefinePlugin({
-                    __VUE_OPTIONS_API__: true,
-                    __VUE_PROD_DEVTOOLS__: false,
-                }),
-            ],
-        };
-    });
+    .extract()
+    .postCss("resources/css/app.css", "public/css", [
+        require("postcss-import"),
+        require("tailwindcss"),
+        require("autoprefixer"),
+    ]);
 
-mix.postCss('resources/css/app.css', 'public/css', [
-    require('tailwindcss'),
-]);
+mix.webpackConfig({
+    stats: {
+        children: true
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(postcss)$/,
+                use: [
+                    'vue-style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    'postcss-loader'
+                ]
+            }
+        ],
+    },
+});
