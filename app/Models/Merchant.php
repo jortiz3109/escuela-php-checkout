@@ -13,4 +13,6 @@ class Merchant extends Model implements AuthenticatableContract
     use HasFactory;
     use HasApiTokens;
     use Authenticatable;
+
+    public $timestamps = false;
 }

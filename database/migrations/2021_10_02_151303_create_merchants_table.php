@@ -14,7 +14,6 @@ class CreateMerchantsTable extends Migration
             $table->string('name', 120);
             $table->string('display_name', 120);
             $table->string('logo', 255);
-            $table->timestamps();
         });
     }
 
