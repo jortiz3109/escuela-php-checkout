@@ -19,6 +19,6 @@ class Token extends PersonalAccessToken
         'name',
         'token',
         'abilities',
-        'expiration'
+        'expiration',
     ];
 }

@@ -14,7 +14,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    const ENDPOINT = '/testing/session';
+    public const ENDPOINT = '/testing/session';
 
     /**
      * @var Merchant
@@ -59,7 +59,7 @@ class AuthenticationTest extends TestCase
     public function testItCannotAccessEndpointWithInvalidToken()
     {
         $response = $this->postJson(self::ENDPOINT, [], [
-            'Authorization' => 'Bearer ' . $this->token->plainTextToken . '+='
+            'Authorization' => 'Bearer ' . $this->token->plainTextToken . '+=',
         ]);
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);

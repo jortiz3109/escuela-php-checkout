@@ -10,5 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Merchant extends Model implements AuthenticatableContract
 {
-    use HasFactory, HasApiTokens, Authenticatable;
+    use HasFactory;
+    use HasApiTokens;
+    use Authenticatable;
 }
