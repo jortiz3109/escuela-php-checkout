@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCurrenciesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
     {
         Schema::create('currencies', function (Blueprint $table) {
@@ -19,14 +14,10 @@ class CreateCurrenciesTable extends Migration
             $table->unsignedTinyInteger('minor_unit');
             $table->char('alphabetic_code', 3)->unique();
             $table->char('numeric_code', 3)->unique();
+            $table->string('symbol', 3)->default('$');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down(): void
     {
         Schema::dropIfExists('currencies');
