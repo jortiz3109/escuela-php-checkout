@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Http\Sanctum\ValidateExpiration;
 use App\Models\Token;
-use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
