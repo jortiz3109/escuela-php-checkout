@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Token;
+use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -27,5 +28,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Sanctum::usePersonalAccessTokenModel(Token::class);
+
+        Sanctum::authenticateAccessTokensUsing(
+            static function (Token $accessToken, bool $is_valid) {
+                $expired = $accessToken->expiration && Carbon::now()->greaterThan($accessToken->expiration);
+
+                return $is_valid && !$expired;
+            }
+        );
     }
 }
