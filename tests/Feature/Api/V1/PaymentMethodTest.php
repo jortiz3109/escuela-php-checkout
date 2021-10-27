@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\V1\Session;
+namespace Tests\Feature\Api\V1;
 
 use App\Models\PaymentMethod;
 use App\Models\Session;
