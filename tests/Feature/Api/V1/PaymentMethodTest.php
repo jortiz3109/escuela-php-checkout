@@ -32,13 +32,13 @@ class PaymentMethodTest extends TestCase
         $this->session->merchant->paymentMethods()->attach(PaymentMethod::first());
     }
 
-    public function testItCanRequestPaymentMethods()
+    public function testItCanRequestPaymentMethods(): void
     {
         $response = $this->request();
         $response->assertOk();
     }
 
-    public function testItReturnsPaymentMethodsData()
+    public function testItReturnsPaymentMethodsData(): void
     {
         $response = $this->request();
         $paymentMethod = PaymentMethod::first();
