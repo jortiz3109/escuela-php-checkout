@@ -6,6 +6,7 @@ use App\Models\Merchant;
 use App\Models\Session;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class SearchSessionTest extends TestCase
@@ -74,7 +75,7 @@ class SearchSessionTest extends TestCase
         $response->assertStatus(404);
     }
 
-    private function search(Merchant $merchant, Session $session): \Illuminate\Testing\TestResponse
+    private function search(Merchant $merchant, Session $session): TestResponse
     {
         return $this->getJson("/api/{$merchant->uuid}/search/{$session->uuid}");
     }
