@@ -32,6 +32,6 @@ class Session extends Model
 
     public function merchant(): BelongsTo
     {
-        return  $this->belongsTo(Merchant::class);
+        return $this->belongsTo(Merchant::class);
     }
 }
