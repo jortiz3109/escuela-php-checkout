@@ -9,11 +9,14 @@ class CreateTokensTable extends Migration
     public function up(): void
     {
         Schema::create('tokens', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->morphs('tokenable');
+            $table->string('name', 80);
             $table->string('token', 64)->unique();
-            $table->foreignId('merchant_id');
-            $table->timestamp('expiration');
-            $table->boolean('active');
+            $table->text('abilities')->nullable();
+            $table->timestamp('expiration')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamps();
         });
     }
 
