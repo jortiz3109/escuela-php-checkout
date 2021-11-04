@@ -7,10 +7,8 @@ use Carbon\Carbon;
 
 class ValidateExpiration
 {
-    public function __invoke(Token $accessToken, bool $is_valid)
+    public function __invoke(Token $accessToken, bool $isValid)
     {
-        $expired = $accessToken->expiration && Carbon::now()->greaterThan($accessToken->expiration);
-
-        return $is_valid && !$expired;
+        return $isValid && (!$accessToken->expiration || Carbon::now()->lessThanOrEqualTo($accessToken->expiration));
     }
 }
