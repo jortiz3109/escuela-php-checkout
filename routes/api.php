@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\PaymentMethodController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,8 @@ Route::get('/session/{session:uuid}/paymentMethods', function () {
             'logo' => 'https://1000marcas.net/wp-content/uploads/2020/07/Maestro-logo-1.png',
         ],
     ]);
+});
+
+Route::prefix('v1')->group(function () {
+    Route::get('session/{session:uuid}/payment-methods', [PaymentMethodController::class, 'discover'])->name('api.v1.paymentMethods.discover');
 });
