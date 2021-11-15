@@ -23,13 +23,13 @@ class MockHandlerTest extends TestCase
                 'name' => 'Pepito',
                 'surname' => 'Jaramillo',
                 'documentType' => 'CC',
-                'document' => '12323435'
+                'document' => '12323435',
             ],
             'payment' => [
                 'amount' => [
                     'currency' => 'USD',
                     'total' => 100,
-                ]
+                ],
             ],
         ];
     }
@@ -44,7 +44,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_APPROVED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::APPROVED_TRANSACTION, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertNotEmpty($response['authorization']);
@@ -62,7 +62,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_APPROVED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::APPROVED_TRANSACTION, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertNotEmpty($response['authorization']);
@@ -78,7 +78,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_APPROVED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::APPROVED_TRANSACTION, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::APPROVED_TRANSACTION), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertNotEmpty($response['authorization']);
@@ -94,7 +94,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_REJECTED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::INVALID_TRANSACTION, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::INVALID_TRANSACTION), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::INVALID_TRANSACTION), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertEmpty($response['authorization']);
@@ -112,7 +112,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_REJECTED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::CVV_VERIFICATION_FAILED, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::CVV_VERIFICATION_FAILED), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::CVV_VERIFICATION_FAILED), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertEmpty($response['authorization']);
@@ -130,7 +130,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_REJECTED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::EXPIRATION_DATE_MISMATCH, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::EXPIRATION_DATE_MISMATCH), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::EXPIRATION_DATE_MISMATCH), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertEmpty($response['authorization']);
@@ -148,7 +148,7 @@ class MockHandlerTest extends TestCase
 
         $this->assertEquals(Transaction::STATUS_REJECTED, $response['status']['status']);
         $this->assertEquals(ReasonCodes::INVALID_AMOUNT, $response['status']['reason']);
-        $this->assertEquals(trans('reason_codes.'.ReasonCodes::INVALID_AMOUNT), $response['status']['message']);
+        $this->assertEquals(trans('reason_codes.' . ReasonCodes::INVALID_AMOUNT), $response['status']['message']);
         $this->assertEquals(now()->format('c'), $response['status']['date']);
         $this->assertNotEmpty($response['receipt']);
         $this->assertEmpty($response['authorization']);

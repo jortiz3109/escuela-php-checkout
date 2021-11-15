@@ -18,6 +18,6 @@ class StatusHelper
 
     public static function getTransactionMessage(string $reasonCode)
     {
-        return trans('reason_codes.'.$reasonCode);
+        return trans('reason_codes.' . $reasonCode);
     }
 }

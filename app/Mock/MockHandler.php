@@ -55,7 +55,6 @@ class MockHandler
                 'message' => StatusHelper::getTransactionMessage($reasonCode),
                 'date' => now()->format('c'),
             ];
-
         } catch (Throwable $exception) {
             return $this->getFailedStatus();
         }

@@ -9,7 +9,7 @@ class TestingCardValidationException extends Exception
 {
     private string $reasonCode;
 
-    public function __construct(string $reasonCode, $message = "", $code = 0, Throwable $previous = null)
+    public function __construct(string $reasonCode, $message = '', $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 

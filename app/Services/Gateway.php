@@ -44,8 +44,8 @@ class Gateway implements GatewayContract
                         'cvv' => $transaction->instrument->cvv(),
                         'expiration' => $transaction->instrument->expiration(),
                         'pin' => $transaction->instrument->pin(),
-                    ]
-                ]
+                    ],
+                ],
             ],
         ]);
 

@@ -46,8 +46,7 @@ class TestingCard
             return app(Pipeline::class)
                 ->send($card)
                 ->through($this->getValidations())
-                ->then(fn() => $this->reasonCode);
-
+                ->then(fn () => $this->reasonCode);
         } catch (TestingCardValidationException $exception) {
             return $exception->getCardReasonCode();
         }

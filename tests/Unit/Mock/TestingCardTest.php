@@ -16,7 +16,7 @@ class TestingCardTest extends TestCase
             'expiration' => '11/28',
             'pin' => '1234',
             'currency' => 'USD',
-            'maxAmount' => 125.50
+            'maxAmount' => 125.50,
         ]);
 
         $this->assertEquals('4012888888881881', $testingCard->number());

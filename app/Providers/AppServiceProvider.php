@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ClientInterface::class, function () {
             return new Client([
-                'handler' => new MockHandler
+                'handler' => new MockHandler(),
             ]);
         });
     }

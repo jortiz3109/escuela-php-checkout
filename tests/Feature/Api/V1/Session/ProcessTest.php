@@ -5,7 +5,6 @@ namespace Tests\Feature\Api\V1\Session;
 use App\Models\Session;
 use Database\Seeders\PaymentMethodSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -31,15 +30,15 @@ class ProcessTest extends TestCase
                 'documentType' => 'CC',
                 'document' => '123243564',
                 'email' => 'test@example.com',
-                'mobile' => '3002344352'
+                'mobile' => '3002344352',
             ],
             'instrument' => [
                 'paymentMethodId' => 1,
                 'card' => [
                     'number' => '4110760000000008',
-                    'cvv' => '123'
-                ]
-            ]
+                    'cvv' => '123',
+                ],
+            ],
         ];
     }
 

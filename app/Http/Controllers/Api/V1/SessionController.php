@@ -22,7 +22,7 @@ class SessionController extends Controller
         $card->setCvv($request->input('instrument.card.cvv'));
         $card->save();
 
-        $payer = new Person;
+        $payer = new Person();
         $payer->name = $request->input('payer.name');
         $payer->surname = $request->input('payer.surname');
         $payer->document_type = $request->input('payer.documentType');
@@ -31,7 +31,7 @@ class SessionController extends Controller
         $payer->mobile = $request->input('payer.mobile');
         $payer->save();
 
-        $transaction =  new Transaction([
+        $transaction = new Transaction([
             'status' => Transaction::STATUS_PENDING,
             'response_code' => ReasonCodes::REQUEST_IN_PROGRESS,
         ]);
