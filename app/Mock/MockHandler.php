@@ -3,13 +3,28 @@
 namespace App\Mock;
 
 use App\Constants\ReasonCodes;
-use App\Contracts\GatewayContract;
 use App\Helpers\StatusHelper;
 use App\Models\Transaction;
+use GuzzleHttp\Promise\FulfilledPromise;
+use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class GatewayMock implements GatewayContract
+class MockHandler
 {
+    public function __invoke(RequestInterface $request, array $options): PromiseInterface
+    {
+        return new FulfilledPromise($this->createResponse($request, $options));
+    }
+
+    private function createResponse(RequestInterface $request, array $options): ResponseInterface
+    {
+        $data = json_decode($request->getBody()->getContents(), true);
+        return new Response(200, [], json_encode($this->process($data)));
+    }
+
     public function process(array $data): array
     {
         $status = $this->getStatus($data);

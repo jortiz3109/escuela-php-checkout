@@ -2,7 +2,9 @@
 
 namespace App\Contracts;
 
+use App\Models\Transaction;
+
 interface GatewayContract
 {
-    public function process(array $data): array;
+    public function process(Transaction $transaction): Transaction;
 }

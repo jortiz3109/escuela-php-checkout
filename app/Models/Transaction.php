@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Transaction extends Model
 {
@@ -19,6 +21,20 @@ class Transaction extends Model
         self::STATUS_REJECTED,
         self::STATUS_FAILED,
     ];
+    protected $guarded = [];
 
-    public $timestamps = false;
+    public function instrument(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function session(): BelongsTo
+    {
+        return $this->belongsTo(Session::class);
+    }
+
+    public function payer()
+    {
+        return $this->belongsTo(Person::class, 'payer_id');
+    }
 }

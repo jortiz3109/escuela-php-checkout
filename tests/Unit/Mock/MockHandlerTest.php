@@ -3,20 +3,20 @@
 namespace Tests\Unit\Mock;
 
 use App\Constants\ReasonCodes;
-use App\Mock\GatewayMock;
+use App\Mock\MockHandler;
 use App\Models\Transaction;
 use Tests\TestCase;
 
-class GatewayMockTest extends TestCase
+class MockHandlerTest extends TestCase
 {
-    private GatewayMock $gateway;
+    private MockHandler $gateway;
     private array $transaction;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->gateway = new GatewayMock();
+        $this->gateway = new MockHandler();
 
         $this->transaction = [
             'payer' => [
