@@ -25,7 +25,7 @@ class MerchantFactory extends Factory
             'uuid' => $this->faker->uuid(),
             'name' => $this->faker->name(),
             'display_name' => $this->faker->name(),
-            'logo' => $this->faker->imageUrl(),
+            'logo' => $this->faker->imageUrl(70, 70),
         ];
     }
 }

@@ -1,109 +1,73 @@
 <template>
-    <div class="gap-x-6 gap-y-8 grid grid-cols-2 grid-rows-4">
-        <div class="field-group">
-            <label class="field-label">Name</label>
-            <input
+    <div class="grid grid-cols-2 gap-2">
+        <div>
+            <custom-input
                 id="name"
                 v-model="name"
-                class="field-input"
-                type="text"
-                name="name"
-                :class="errors.name ? 'border-red-500' : ''"
+                class="w-full"
+                label="Name"
+                :error="errors.name"
             />
-            <p v-show="errors.name" class="error-message">
-                {{ errors.name }}
-            </p>
         </div>
-        <div class="field-group">
-            <label class="field-label">Surname</label>
-            <input
+        <div>
+            <custom-input
                 id="surname"
                 v-model="surname"
-                class="field-input"
-                type="text"
-                name="surname"
-                :class="errors.surname ? 'border-red-500' : ''"
+                class="w-full"
+                label="Surname"
+                :error="errors.surname"
             />
-            <p v-show="errors.surname" class="error-message">
-                {{ errors.surname }}
-            </p>
         </div>
-        <div class="field-group">
-            <label class="field-label">Document</label>
-            <div class="flex gap-4">
-                <select
-                    id="documentType"
-                    v-model="documentType"
-                    class="field-input field-label"
-                    :class="errors.documentType ? 'border-red-500' : ''"
+        <div class="flex gap-2 items-start">
+            <custom-select
+                id="documentType"
+                v-model="documentType"
+                label="Document"
+                :error="errors.documentType"
+            >
+                <option
+                    v-for="documentType in documentTypes"
+                    :key="documentType"
+                    :value="documentType"
                 >
-                    <option
-                        v-for="documentType in documentTypes"
-                        :key="documentType"
-                        :value="documentType"
-                    >
-                        {{ documentType }}
-                    </option>
-                </select>
-                <input
-                    id="document"
-                    v-model="document"
-                    class="field-input"
-                    type="text"
-                    name="document"
-                    :class="errors.document ? 'border-red-500' : ''"
-                />
-            </div>
-            <div class="field-group">
-                <p v-show="errors.documentType" class="error-message">
-                    {{ errors.documentType }}
-                </p>
-                <p v-show="errors.document" class="error-message">
-                    {{ errors.document }}
-                </p>
-            </div>
+                    {{ documentType }}
+                </option>
+            </custom-select>
+            <custom-input
+                id="document"
+                v-model="document"
+                label="&nbsp;"
+                class="w-full"
+                :error="errors.document"
+            />
         </div>
-        <div class="field-group">
-            <label class="field-label">Email</label>
-            <input
+        <div>
+            <custom-input
                 id="email"
                 v-model="email"
-                class="field-input"
-                type="email"
-                name="email"
-                :class="errors.email ? 'border-red-500' : ''"
+                label="Email"
+                class="w-full"
+                :error="errors.email"
             />
-            <p v-show="errors.email" class="error-message">
-                {{ errors.email }}
-            </p>
         </div>
-        <div class="col-end-2 col-start-1 field-group">
-            <label class="field-label">Mobile</label>
-            <input
+        <div>
+            <custom-input
                 id="mobile"
                 v-model="mobile"
-                class="field-input"
-                type="text"
-                name="mobile"
-                :class="errors.mobile ? 'border-red-500' : ''"
+                label="Mobile"
+                class="w-full"
+                :error="errors.mobile"
             />
-            <p v-show="errors.mobile" class="error-message">
-                {{ errors.mobile }}
-            </p>
         </div>
-        <div class="col-span-2 flex justify-self-end self-start">
-            <button
-                class="bg-gray-500
-                    border
-                    hover:bg-gray-700
-                    px-8
-                    py-3
-                    rounded-lg
-                    text-white"
-                @click="onSubmit"
-            >
-                Next
-            </button>
+        <div class="flex justify-end">
+            <div>
+                <custom-button
+                    text="Next"
+                    icon="next"
+                    class="mt-6 ring-offset-gray-200"
+                    @click="onSubmit"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -111,11 +75,14 @@
 <script>
 import { useForm, useField } from 'vee-validate'
 import { useHelpers, useStep } from '../use'
+import CustomButton from './CustomButton'
 import '../use/validators'
+import CustomInput from './CustomInput'
+import CustomSelect from './CustomSelect'
 
 export default {
     name: 'PayerData',
-
+    components: { CustomSelect, CustomInput, CustomButton },
     setup() {
         const documentTypes = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT']
 

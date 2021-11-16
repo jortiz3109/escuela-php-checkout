@@ -1,4 +1,4 @@
-import Footer from '../../resources/js/components/Footer'
+import Footer from '../../resources/js/components/TransactionFooter'
 import { flushPromises, mount } from '@vue/test-utils'
 import useStep from '../../resources/js/use/useStep'
 

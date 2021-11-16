@@ -16,7 +16,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased flex flex-col h-screen" id="app">
-        <header class=" bg-gray-100 shadow-2xl flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
+        <header class=" bg-gray-100 shadow-lg flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
             {{ $header }}
         </header>
 

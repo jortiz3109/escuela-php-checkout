@@ -1,12 +1,11 @@
 <template>
-    <div class="flex flex-col h-full items-center justify-between w-full">
-        <div class="flex h-5/6 items-center justify-items-center mt-12">
-            <PayerData v-if="inStep(1)" class="mt-20"/>
-            <SuspenseComponent v-if="inStep(2)">
-                <PaymentMethods @select-payment-method="selectPaymentMethod"/>
-            </SuspenseComponent>
-        </div>
-        <Footer class="h-1/6"/>
+    <div class="px-12 py-6 w-full">
+        <PayerData v-if="inStep(1)" />
+        <SuspenseComponent v-if="inStep(2)">
+            <PaymentMethods @select-payment-method="selectPaymentMethod"/>
+        </SuspenseComponent>
+        <CardData v-if="inStep(3)"/>
+        <Footer class="mt-16"/>
     </div>
 </template>
 
@@ -15,13 +14,15 @@ import { ref } from 'vue'
 import PayerData from './PayerData'
 import PaymentMethods from './PaymentMethods'
 import SuspenseComponent from './SuspenseComponent'
-import Footer from './Footer'
+import CardData from './CardData'
+import Footer from './TransactionFooter'
 import useStep from '../use/useStep'
 
 export default {
     name: 'Transaction',
 
     components: {
+        CardData,
         PayerData,
         PaymentMethods,
         SuspenseComponent,

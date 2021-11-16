@@ -8,20 +8,22 @@ jest.mock('axios')
 describe('paymentMethods', () => {
     let wrapper
 
-    const mockPaymentMethodsList = [
-        {
-            id: 1,
-            name: 'Visa credit',
-            category: 'credit',
-            logo: 'https://logos-marcas.com/wp-content/uploads/2020/04/Visa-Emblema.png',
-        },
-        {
-            id: 2,
-            name: 'Visa debit',
-            category: 'debit',
-            logo: 'https://seeklogo.com/images/V/visa-electron-logo-71BEC57E8F-seeklogo.com.png',
-        },
-    ]
+    const mockPaymentMethodsList = {
+        data: [
+            {
+                id: 1,
+                name: 'Visa credit',
+                category: 'credit',
+                logo: 'https://logos-marcas.com/wp-content/uploads/2020/04/Visa-Emblema.png',
+            },
+            {
+                id: 2,
+                name: 'Visa debit',
+                category: 'debit',
+                logo: 'https://seeklogo.com/images/V/visa-electron-logo-71BEC57E8F-seeklogo.com.png',
+            },
+        ],
+    }
 
     axios.get.mockResolvedValue({ data: mockPaymentMethodsList })
 
@@ -35,7 +37,7 @@ describe('paymentMethods', () => {
                     })
                 },
             }),
-            options
+            options,
         )
 
         await flushPromises()
