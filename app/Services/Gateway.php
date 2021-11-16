@@ -23,14 +23,7 @@ class Gateway implements GatewayContract
         $response = $this->client->request('post', config('core.urls.process'), [
             'json' => [
                 'date' => $transaction->created_at->format('c'),
-                'payer' => [
-                    'name' => $transaction->payer->name,
-                    'surname' => $transaction->payer->surname,
-                    'documentType' => $transaction->payer->document_type,
-                    'document' => $transaction->payer->document_number,
-                    'email' => $transaction->payer->email,
-                    'mobile' => $transaction->payer->mobile,
-                ],
+                'payer' => $transaction->payer->toArray(),
                 'payment' => [
                     'reference' => $transaction->session->reference,
                     'description' => $transaction->session->description,
@@ -39,14 +32,7 @@ class Gateway implements GatewayContract
                         'total' =>  $transaction->session->total_amount,
                     ],
                 ],
-                'instrument' => [
-                    'card' => [
-                        'number' => Crypt::decryptString($transaction->instrument->pan),
-                        'cvv' => $transaction->instrument->cvv(),
-                        'expiration' => $transaction->instrument->expiration(),
-                        'pin' => $transaction->instrument->pin(),
-                    ],
-                ],
+                'instrument' => $transaction->instrument->toArray(),
             ],
         ]);
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Crypt;
 
 class Card extends Model
 {
@@ -55,5 +56,17 @@ class Card extends Model
     public function setPin(?string $pin): void
     {
         $this->pin = $pin;
+    }
+
+    public function toArray()
+    {
+        return [
+            'card' => [
+                'number' => Crypt::decryptString($this->pan),
+                'cvv' => $this->cvv(),
+                'expiration' => $this->expiration(),
+                'pin' => $this->pin(),
+            ]
+        ];
     }
 }

@@ -21,22 +21,8 @@ class SessionResource extends JsonResource
                 'date' => $this->created_at->format('c'),
             ],
             'uuid' => $this->uuid,
-            'payer' => [
-                'name' => $lastTransaction->payer->name,
-                'surname' => $lastTransaction->payer->surname,
-                'documentType' => $lastTransaction->payer->document_type,
-                'document' => $lastTransaction->payer->document_number,
-                'email' => $lastTransaction->payer->email,
-                'mobile' => $lastTransaction->payer->mobile,
-            ],
-            'buyer' => [
-                'name' => $this->buyer->name,
-                'surname' => $this->buyer->surname,
-                'documentType' => $this->buyer->document_type,
-                'document' => $this->buyer->document_number,
-                'email' => $this->buyer->email,
-                'mobile' => $this->buyer->mobile,
-            ],
+            'payer' => $lastTransaction->payer->toArray(),
+            'buyer' => $this->buyer->toArray(),
             'payment' => [
                 'status' => [
                     'status' => $lastTransaction->status,

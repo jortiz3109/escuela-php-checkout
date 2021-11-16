@@ -13,4 +13,16 @@ class Person extends Model
 
     public $timestamps = false;
     protected $table = 'persons';
+
+    public function toArray()
+    {
+        return [
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'documentType' => $this->document_type,
+            'document' => $this->document_number,
+            'email' => $this->email,
+            'mobile' => $this->mobile,
+        ];
+    }
 }
