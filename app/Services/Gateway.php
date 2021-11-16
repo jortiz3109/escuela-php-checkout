@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Constants\ReasonCodes;
 use App\Contracts\GatewayContract;
+use App\Models\Session;
 use App\Models\Transaction;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Facades\Crypt;
@@ -57,6 +58,13 @@ class Gateway implements GatewayContract
         $transaction->authorization = $data['authorization'] ?? null;
 
         $transaction->save();
+
+        if ($transaction->status == Transaction::STATUS_APPROVED) {
+            $session = $transaction->session;
+            $session->status = Session::STATUS_APPROVED;
+
+            $session->save();
+        }
 
         return $transaction;
     }

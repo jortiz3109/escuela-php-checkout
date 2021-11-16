@@ -85,6 +85,7 @@ class ReasonCodes
     public const DORMANT_ACCOUNT = 'T5';
 
     public const INVALID_CURRENCY = 'XC';
+    public const PENDING_SESSION = '?-';
 
     public const APPROVED_REASON_CODES = [
         self::APPROVED_TRANSACTION,

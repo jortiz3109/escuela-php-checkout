@@ -18,13 +18,12 @@ class Session extends Model
     public const STATUS_APPROVED = 'APPROVED';
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_EXPIRED = 'EXPIRED';
+
     public const STATUSES = [
         self::STATUS_APPROVED,
         self::STATUS_PENDING,
         self::STATUS_EXPIRED,
     ];
-
-    public $timestamps = false;
 
     public function currency(): BelongsTo
     {
@@ -34,6 +33,11 @@ class Session extends Model
     public function merchant(): BelongsTo
     {
         return $this->belongsTo(Merchant::class);
+    }
+
+    public function buyer(): BelongsTo
+    {
+        return $this->belongsTo(Person::class, 'buyer_id');
     }
 
     public function transactions(): HasMany

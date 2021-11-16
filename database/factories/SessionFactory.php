@@ -38,7 +38,6 @@ class SessionFactory extends Factory
                 'numeric_code' => '840',
             ]),
             'total_amount' => $this->faker->numberBetween(1, 999999),
-            'date' => $this->faker->dateTime(),
             'expiration' => $this->faker->dateTime(),
             'ip_address' => $this->faker->ipv6(),
             'user_agent' => $this->faker->userAgent(),
