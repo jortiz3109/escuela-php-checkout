@@ -1,17 +1,12 @@
 <template>
     <div class="flex flex-col h-full items-center justify-between w-full">
         <div class="flex h-5/6 items-center justify-items-center mt-12">
-            <PayerData
-                v-if="inStep(1)"
-                :payer="payer"
-                class="mt-20"
-                @save-payer="savePayerData"
-            />
+            <PayerData v-if="inStep(1)" class="mt-20"/>
             <SuspenseComponent v-if="inStep(2)">
-                <PaymentMethods @select-payment-method="selectPaymentMethod" />
+                <PaymentMethods @select-payment-method="selectPaymentMethod"/>
             </SuspenseComponent>
         </div>
-        <Footer class="h-1/6" />
+        <Footer class="h-1/6"/>
     </div>
 </template>
 
@@ -21,49 +16,33 @@ import PayerData from './PayerData'
 import PaymentMethods from './PaymentMethods'
 import SuspenseComponent from './SuspenseComponent'
 import Footer from './Footer'
-import useStep from '../functions/useStep'
+import useStep from '../use/useStep'
 
 export default {
-  name: 'Transaction',
+    name: 'Transaction',
 
-  components: {
-    PayerData,
-    PaymentMethods,
-    SuspenseComponent,
-    Footer,
-  },
+    components: {
+        PayerData,
+        PaymentMethods,
+        SuspenseComponent,
+        Footer,
+    },
 
-  setup() {
-    const { step, stepForward, inStep } = useStep()
+    setup() {
+        const { step, stepForward, inStep } = useStep()
 
-    const payer = ref({
-      name: '',
-      surname: '',
-      documentType: '',
-      document: '',
-      email: '',
-      mobile: '',
-    })
+        const paymentMethods = ref({})
 
-    const paymentMethods = ref({})
+        function selectPaymentMethod(values) {
+            paymentMethods.value = values
+            stepForward()
+        }
 
-    function savePayerData(values) {
-      payer.value = values
-      stepForward()
-    }
-
-    function selectPaymentMethod(values) {
-      paymentMethods.value = values
-      stepForward()
-    }
-
-    return {
-      payer,
-      step,
-      inStep,
-      savePayerData,
-      selectPaymentMethod,
-    }
-  },
+        return {
+            step,
+            inStep,
+            selectPaymentMethod,
+        }
+    },
 }
 </script>

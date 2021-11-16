@@ -1,6 +1,6 @@
 import Footer from '../../resources/js/components/Footer'
 import { flushPromises, mount } from '@vue/test-utils'
-import useStep from '../../resources/js/functions/useStep'
+import useStep from '../../resources/js/use/useStep'
 
 describe('footer', () => {
     let wrapper

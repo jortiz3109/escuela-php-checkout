@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import useApi from '../functions/useApi'
+import useApi from '../use/useApi'
 
 export default {
   name: 'PaymentMethods',

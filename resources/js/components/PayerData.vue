@@ -110,57 +110,54 @@
 
 <script>
 import { useForm, useField } from 'vee-validate'
-import '../functions/validators'
+import { useHelpers, useStep } from '../use'
+import '../use/validators'
 
 export default {
-  name: 'PayerData',
+    name: 'PayerData',
 
-  props: {
-    payer: {
-      type: Object,
-      default: () => {},
+    setup() {
+        const documentTypes = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT']
+
+        const { state } = useHelpers()
+        const { stepForward } = useStep()
+
+        const { handleSubmit, errors } = useForm({
+            validationSchema: {
+                name: 'required|min:1|max:80',
+                surname: 'required|min:1|max:80',
+                documentType: `required|one_of:${documentTypes}`,
+                document: 'required|alpha_num',
+                email: 'required|email',
+                mobile: 'required|numeric',
+            },
+            initialValues: state.payer,
+        })
+
+
+        const { value: name } = useField('name')
+        const { value: surname } = useField('surname')
+        const { value: documentType } = useField('documentType')
+        const { value: document } = useField('document')
+        const { value: email } = useField('email')
+        const { value: mobile } = useField('mobile')
+
+        const onSubmit = handleSubmit((values) => {
+            state.payer = values
+            stepForward()
+        })
+
+        return {
+            documentTypes,
+            name,
+            surname,
+            documentType,
+            document,
+            email,
+            mobile,
+            errors,
+            onSubmit,
+        }
     },
-  },
-
-  emits: ['save-payer'],
-
-  setup(props, { emit }) {
-    const documentTypes = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT']
-
-    const { handleSubmit, errors } = useForm({
-      validationSchema: {
-        name: 'required|min:1|max:80',
-        surname: 'required|min:1|max:80',
-        documentType: `required|one_of:${documentTypes}`,
-        document: 'required|alpha_num',
-        email: 'required|email',
-        mobile: 'required|numeric',
-      },
-      initialValues: props.payer,
-    })
-
-    const { value: name } = useField('name')
-    const { value: surname } = useField('surname')
-    const { value: documentType } = useField('documentType')
-    const { value: document } = useField('document')
-    const { value: email } = useField('email')
-    const { value: mobile } = useField('mobile')
-
-    const onSubmit = handleSubmit((values) => {
-      emit('save-payer', values)
-    })
-
-    return {
-      documentTypes,
-      name,
-      surname,
-      documentType,
-      document,
-      email,
-      mobile,
-      errors,
-      onSubmit,
-    }
-  },
 }
 </script>

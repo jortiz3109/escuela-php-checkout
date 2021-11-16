@@ -1,5 +1,6 @@
 import PayerData from '../../resources/js/components/PayerData'
 import { mount, flushPromises } from '@vue/test-utils'
+import { useHelpers } from '../../resources/js/use'
 
 const invalidMessageText = (field) => `The field ${field} is invalid`
 
@@ -218,17 +219,15 @@ describe('payerData', () => {
         jest.runAllTimers()
         await flushPromises()
 
-        expect(wrapper.emitted()).toHaveProperty('save-payer')
-        expect(wrapper.emitted('save-payer')[0]).toEqual([
-            {
-                name: 'Julia',
-                surname: 'Costa',
-                documentType: 'CC',
-                document: '1092823456',
-                email: 'julia.costa@gmail.com',
-                mobile: '3009283456',
-            },
-        ])
+        const { state } = useHelpers()
+        expect(state.payer).toEqual({
+            name: 'Julia',
+            surname: 'Costa',
+            documentType: 'CC',
+            document: '1092823456',
+            email: 'julia.costa@gmail.com',
+            mobile: '3009283456',
+        })
     })
 
     // Helper functions

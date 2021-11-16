@@ -5,7 +5,7 @@ export default function useApi() {
     const token = window.document.querySelector('meta[name="token"]').content
 
     const urls = {
-        paymentMethods: `/api/session/${session}/paymentMethods`,
+        paymentMethods: `/api/v1/session/${session}/payment-methods`,
     }
 
     const headers = {

@@ -10,7 +10,7 @@
 <script>
 import { DateTime, Duration } from 'luxon'
 import { ref, computed, onBeforeMount, watch } from 'vue'
-import useState from '../functions/useState'
+import useState from '../use/useState'
 
 export default {
   name: 'Countdown',
