@@ -757,10 +757,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.selectValue = $event;
     }),
+    "class": "block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full",
     onChange: _cache[1] || (_cache[1] = function () {
       return $setup.update && $setup.update.apply($setup, arguments);
-    }),
-    "class": "block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full"
+    })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_3), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.selectValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -786,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-2 gap-2"
+  "class": "gap-2 grid grid-cols-2"
 };
 var _hoisted_2 = {
   "class": "flex gap-2 items-start"

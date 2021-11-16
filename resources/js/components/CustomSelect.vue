@@ -4,8 +4,8 @@
         <select
             :id="id"
             v-model="selectValue"
-            @change="update"
             class="block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full"
+            @change="update"
         >
             <slot/>
         </select>

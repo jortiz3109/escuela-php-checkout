@@ -37,7 +37,7 @@ describe('paymentMethods', () => {
                     })
                 },
             }),
-            options,
+            options
         )
 
         await flushPromises()
