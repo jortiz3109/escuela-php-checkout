@@ -64,11 +64,11 @@ class ProcessTest extends TestCase
         $response = $this->request($this->transactionData);
 
         $response->assertJson(
-            fn(AssertableJson $json) => $json->has(
+            fn (AssertableJson $json) => $json->has(
                 'session',
                 fn (AssertableJson $json) => $json->has(
                     'status',
-                    fn(AssertableJson $json) => $json
+                    fn (AssertableJson $json) => $json
                         ->where('status', Session::STATUS_APPROVED)
                         ->where('reason', ReasonCodes::APPROVED_TRANSACTION)
                         ->where('message', trans('reason_codes.' . ReasonCodes::APPROVED_TRANSACTION))
@@ -77,7 +77,7 @@ class ProcessTest extends TestCase
                     ->where('uuid', $this->session->uuid)
                     ->has(
                         'payer',
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('name', $this->transactionData['payer']['name'])
                             ->where('surname', $this->transactionData['payer']['surname'])
                             ->where('documentType', $this->transactionData['payer']['documentType'])
@@ -87,7 +87,7 @@ class ProcessTest extends TestCase
                     )
                     ->has(
                         'buyer',
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->where('name', $this->session->buyer->name)
                             ->where('surname', $this->session->buyer->surname)
                             ->where('documentType', $this->session->buyer->document_type)
@@ -97,10 +97,10 @@ class ProcessTest extends TestCase
                     )
                     ->has(
                         'payment',
-                        fn(AssertableJson $json) => $json
+                        fn (AssertableJson $json) => $json
                             ->has(
                                 'status',
-                                fn(AssertableJson $json) => $json
+                                fn (AssertableJson $json) => $json
                                     ->where('status', Transaction::STATUS_APPROVED)
                                     ->where('reason', ReasonCodes::APPROVED_TRANSACTION)
                                     ->where('message', trans('reason_codes.' . ReasonCodes::APPROVED_TRANSACTION))
@@ -109,7 +109,7 @@ class ProcessTest extends TestCase
                             ->where('description', $this->session->description)
                             ->has(
                                 'amount',
-                                fn(AssertableJson $json) => $json
+                                fn (AssertableJson $json) => $json
                                     ->where('currency', $this->session->currency->alphabetic_code)
                                     ->where('total', $this->session->total_amount)
                             )->where(

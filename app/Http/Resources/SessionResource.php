@@ -17,8 +17,8 @@ class SessionResource extends JsonResource
             'status' => [
                 'status' => $this->status,
                 'reason' => $lastTransaction->response_code,
-                'message' => trans('reason_codes.'. $lastTransaction->response_code),
-                'date' => $this->created_at->format('c')
+                'message' => trans('reason_codes.' . $lastTransaction->response_code),
+                'date' => $this->created_at->format('c'),
             ],
             'uuid' => $this->uuid,
             'payer' => [
@@ -41,8 +41,8 @@ class SessionResource extends JsonResource
                 'status' => [
                     'status' => $lastTransaction->status,
                     'reason' => $lastTransaction->response_code,
-                    'message' => trans('reason_codes.'. $lastTransaction->response_code),
-                    'date' => $lastTransaction->created_at->format('c')
+                    'message' => trans('reason_codes.' . $lastTransaction->response_code),
+                    'date' => $lastTransaction->created_at->format('c'),
                 ],
                 'reference' => $this->reference,
                 'description' => $this->description,
