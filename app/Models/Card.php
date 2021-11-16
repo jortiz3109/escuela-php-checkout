@@ -66,7 +66,7 @@ class Card extends Model
                 'cvv' => $this->cvv(),
                 'expiration' => $this->expiration(),
                 'pin' => $this->pin(),
-            ]
+            ],
         ];
     }
 }

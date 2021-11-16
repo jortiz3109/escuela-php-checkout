@@ -7,7 +7,6 @@ use App\Contracts\GatewayContract;
 use App\Models\Session;
 use App\Models\Transaction;
 use GuzzleHttp\ClientInterface;
-use Illuminate\Support\Facades\Crypt;
 
 class Gateway implements GatewayContract
 {
