@@ -3,23 +3,10 @@
 namespace App\Mock;
 
 use App\Exceptions\TestingCardValidationException;
-use App\Mock\Validations\CurrencyValidation;
-use App\Mock\Validations\CvvValidation;
-use App\Mock\Validations\ExpirationValidation;
-use App\Mock\Validations\MaxAmountValidation;
-use App\Mock\Validations\PinValidation;
 use Illuminate\Pipeline\Pipeline;
 
 class TestingCard
 {
-    private const VALIDATIONS_RULES = [
-        CvvValidation::class,
-        ExpirationValidation::class,
-        PinValidation::class,
-        CurrencyValidation::class,
-        MaxAmountValidation::class,
-    ];
-
     private string $number;
     private string $reasonCode;
     private ?string $expiration;
@@ -87,7 +74,7 @@ class TestingCard
         if (empty($this->validations)) {
             $this->validations = array_map(function ($rule) {
                 return new $rule($this);
-            }, self::VALIDATIONS_RULES);
+            }, config('mock.validation_rules'));
         }
 
         return $this->validations;

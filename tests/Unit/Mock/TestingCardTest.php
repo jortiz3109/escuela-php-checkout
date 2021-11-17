@@ -4,7 +4,7 @@ namespace Tests\Unit\Mock;
 
 use App\Constants\ReasonCodes;
 use App\Mock\TestingCard;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class TestingCardTest extends TestCase
 {
