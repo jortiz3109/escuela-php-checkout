@@ -11,13 +11,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public $bindings = [
+    public array $bindings = [
         GatewayContract::class => Gateway::class,
     ];
 
     public function register(): void
     {
-        $this->app->singleton(ClientInterface::class, function () {
+        $this->app->bind(ClientInterface::class, function () {
             return new Client([
                 'handler' => new MockHandler(),
             ]);

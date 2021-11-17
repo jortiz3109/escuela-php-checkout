@@ -14,7 +14,7 @@ class Person extends Model
     public $timestamps = false;
     protected $table = 'persons';
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'name' => $this->name,

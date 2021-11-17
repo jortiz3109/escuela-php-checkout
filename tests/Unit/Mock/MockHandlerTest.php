@@ -34,7 +34,7 @@ class MockHandlerTest extends TestCase
         ];
     }
 
-    public function testItCanApprovedATransaction()
+    public function testItCanApprovedATransaction(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4110760000000008',
@@ -50,7 +50,7 @@ class MockHandlerTest extends TestCase
         $this->assertNotEmpty($response['authorization']);
     }
 
-    public function testItCanApprovedATransactionWithExpirationAndCvv()
+    public function testItCanApprovedATransactionWithExpirationAndCvv(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4012888888881881',
@@ -68,7 +68,7 @@ class MockHandlerTest extends TestCase
         $this->assertNotEmpty($response['authorization']);
     }
 
-    public function testItCanApprovedATransactionWithMaxAmount()
+    public function testItCanApprovedATransactionWithMaxAmount(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4110760000000057',
@@ -84,7 +84,7 @@ class MockHandlerTest extends TestCase
         $this->assertNotEmpty($response['authorization']);
     }
 
-    public function testItCanRejectATransaction()
+    public function testItCanRejectATransaction(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4110760000000016',
@@ -100,7 +100,7 @@ class MockHandlerTest extends TestCase
         $this->assertEmpty($response['authorization']);
     }
 
-    public function testItCanRejectATransactionWithWrongCvv()
+    public function testItCanRejectATransactionWithWrongCvv(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4012888888881881',
@@ -118,7 +118,7 @@ class MockHandlerTest extends TestCase
         $this->assertEmpty($response['authorization']);
     }
 
-    public function testItCanRejectATransactionWithWrongExpiration()
+    public function testItCanRejectATransactionWithWrongExpiration(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4012888888881881',
@@ -136,7 +136,7 @@ class MockHandlerTest extends TestCase
         $this->assertEmpty($response['authorization']);
     }
 
-    public function testItCanRejectATransactionWithInvalidAmount()
+    public function testItCanRejectATransactionWithInvalidAmount(): void
     {
         $this->transaction['instrument']['card'] = [
             'number' => '4110760000000057',

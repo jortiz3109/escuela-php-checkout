@@ -58,7 +58,7 @@ class Card extends Model
         $this->pin = $pin;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'card' => [

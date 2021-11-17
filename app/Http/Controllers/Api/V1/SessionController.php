@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
-    public function process(Session $session, Request $request, GatewayContract $gateway, StoreTransactionAction $action)
+    public function process(Session $session, Request $request, GatewayContract $gateway, StoreTransactionAction $storeTransactionAction): SessionResource
     {
-        $transaction = $action->execute($session, $request);
+        $transaction = $storeTransactionAction->execute($session, $request);
         $gateway->process($transaction);
 
         return new SessionResource($transaction->session);

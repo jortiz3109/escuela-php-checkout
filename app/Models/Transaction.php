@@ -33,7 +33,7 @@ class Transaction extends Model
         return $this->belongsTo(Session::class);
     }
 
-    public function payer()
+    public function payer(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'payer_id');
     }

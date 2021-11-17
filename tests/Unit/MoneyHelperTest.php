@@ -22,32 +22,32 @@ class MoneyHelperTest extends TestCase
         $this->currency->symbol = 'R$';
     }
 
-    public function testItCanGetAmountFromInteger()
+    public function testItCanGetAmountFromInteger(): void
     {
         $this->assertEquals(123.45, MoneyHelper::fromInteger(12345, $this->currency));
     }
 
-    public function testItCanGetAmountToInteger()
+    public function testItCanGetAmountToInteger(): void
     {
         $this->assertEquals(12345, MoneyHelper::toInteger(123.45, $this->currency));
     }
 
-    public function testItCanFormatAnAmount()
+    public function testItCanFormatAnAmount(): void
     {
         $this->assertEquals('R$ 1,234.50', MoneyHelper::formattedAmount(1234.5, $this->currency));
     }
 
-    public function testItCanFormatAnAmountWithoutSymbol()
+    public function testItCanFormatAnAmountWithoutSymbol(): void
     {
         $this->assertEquals('1,234.50', MoneyHelper::formattedAmount(1234.5, $this->currency, false));
     }
 
-    public function testItCanFormatAnAmountFromInteger()
+    public function testItCanFormatAnAmountFromInteger(): void
     {
         $this->assertEquals('R$ 1,234.50', MoneyHelper::formattedAmountFromInteger(123450, $this->currency));
     }
 
-    public function testItCanFormatAnAmountFromIntegerWithoutSymbol()
+    public function testItCanFormatAnAmountFromIntegerWithoutSymbol(): void
     {
         $this->assertEquals('1,234.50', MoneyHelper::formattedAmountFromInteger(123450, $this->currency, false));
     }

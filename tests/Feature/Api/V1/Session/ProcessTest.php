@@ -59,7 +59,7 @@ class ProcessTest extends TestCase
         $this->assertCount(1, $this->session->transactions);
     }
 
-    public function testItCanApprovedATransaction()
+    public function testItCanApprovedATransaction(): void
     {
         $response = $this->request($this->transactionData);
 

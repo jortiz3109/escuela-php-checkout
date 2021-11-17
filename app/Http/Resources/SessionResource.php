@@ -9,7 +9,7 @@ class SessionResource extends JsonResource
 {
     public static $wrap = 'session';
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         $lastTransaction = $this->transactions->last();
 
