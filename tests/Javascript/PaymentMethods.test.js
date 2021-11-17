@@ -2,13 +2,14 @@ import PaymentMethods from '../../resources/js/components/PaymentMethods'
 import { flushPromises, mount } from '@vue/test-utils'
 import { defineComponent, h, Suspense } from 'vue'
 import axios from 'axios'
+import { useHelpers } from '../../resources/js/use'
 
 jest.mock('axios')
 
 describe('paymentMethods', () => {
     let wrapper
 
-    const mockPaymentMethodsList = {
+    const mockPaymentMethodsResponse = {
         data: [
             {
                 id: 1,
@@ -23,9 +24,13 @@ describe('paymentMethods', () => {
                 logo: 'https://seeklogo.com/images/V/visa-electron-logo-71BEC57E8F-seeklogo.com.png',
             },
         ],
+        meta: {
+            payment_methods_count: 2,
+            categories: ['DEBIT', 'CREDIT'],
+        },
     }
 
-    axios.get.mockResolvedValue({ data: mockPaymentMethodsList })
+    axios.get.mockResolvedValue({ data: mockPaymentMethodsResponse })
 
     const mountSuspense = async (component, options) => {
         const wrapper = mount(
@@ -56,19 +61,21 @@ describe('paymentMethods', () => {
         expect(axios.get).toHaveBeenCalledTimes(1)
     })
 
-    it('can show the payment methods', () => {
-        see('Visa credit')
-        see('Visa debit')
+    it('can show the payment methods categories', () => {
+        see('Credit Card')
+        see('Debit Card')
     })
 
     it('broadcasts when a payment method is selected', async () => {
+        const { state } = useHelpers()
         const paymentMethodsComponent = wrapper.findComponent(PaymentMethods)
 
-        paymentMethodsComponent.find('.cursor-pointer').trigger('click')
-
-        expect(paymentMethodsComponent.emitted('select-payment-method')).toBeTruthy()
-        expect(paymentMethodsComponent.emitted('select-payment-method')).toHaveLength(1)
-        expect(paymentMethodsComponent.emitted('select-payment-method')[0]).toEqual([1])
+        expect(state.paymentMethod.category).toBeUndefined()
+        const buttons = paymentMethodsComponent.findAll('button')
+        buttons[0].trigger('click')
+        expect(state.paymentMethod.category).toEqual('DEBIT')
+        buttons[1].trigger('click')
+        expect(state.paymentMethod.category).toEqual('CREDIT')
     })
 
     // Helper functions
