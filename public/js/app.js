@@ -1120,6 +1120,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.categories.includes('DEBIT') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
+    "class": "bg-gray-200 border-2 border-gray-700 f focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.selectCategory('DEBIT');
     }),
@@ -1128,8 +1129,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onMouseleave: _cache[2] || (_cache[2] = function ($event) {
       return $setup.hovers.debit = false;
-    }),
-    "class": "bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm"
+    })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardIcon, {
     fill: "#374151",
     hover: "#fff",
@@ -1141,6 +1141,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.categories.includes('CREDIT') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
+    "class": "bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.selectCategory('CREDIT');
     }),
@@ -1149,8 +1150,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onMouseleave: _cache[5] || (_cache[5] = function ($event) {
       return $setup.hovers.credit = false;
-    }),
-    "class": "bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm"
+    })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardIcon, {
     fill: "#374151",
     hover: "#fff",
@@ -1324,7 +1324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-between items-center"
+  "class": "flex items-center justify-between"
 };
 var _hoisted_2 = {
   key: 0,
