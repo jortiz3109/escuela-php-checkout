@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\StatusHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Crypt;
 
@@ -12,12 +13,13 @@ class SessionResource extends JsonResource
     public function toArray($request): array
     {
         $lastTransaction = $this->transactions->last();
+        $sessionReason = StatusHelper::getSessionReasonCode($this->resource);
 
         return [
             'status' => [
                 'status' => $this->status,
-                'reason' => $lastTransaction->response_code,
-                'message' => trans('reason_codes.' . $lastTransaction->response_code),
+                'reason' => $sessionReason,
+                'message' => StatusHelper::getReasonCodeMessage($sessionReason),
                 'date' => $this->created_at->format('c'),
             ],
             'uuid' => $this->uuid,
@@ -27,7 +29,7 @@ class SessionResource extends JsonResource
                 'status' => [
                     'status' => $lastTransaction->status,
                     'reason' => $lastTransaction->response_code,
-                    'message' => trans('reason_codes.' . $lastTransaction->response_code),
+                    'message' => StatusHelper::getReasonCodeMessage($lastTransaction->response_code),
                     'date' => $lastTransaction->created_at->format('c'),
                 ],
                 'reference' => $this->reference,

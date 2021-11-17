@@ -60,4 +60,5 @@ return [
 
     ReasonCodes::INVALID_CURRENCY => 'Invalid currency',
     ReasonCodes::PENDING_SESSION => 'Pending',
+    ReasonCodes::EXPIRED_SESSION => 'Expired',
 ];

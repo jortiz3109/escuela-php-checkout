@@ -52,7 +52,7 @@ class MockHandler
             return [
                 'status' => StatusHelper::getTransactionStatus($reasonCode),
                 'reason' => $reasonCode,
-                'message' => StatusHelper::getTransactionMessage($reasonCode),
+                'message' => StatusHelper::getReasonCodeMessage($reasonCode),
                 'date' => now()->format('c'),
             ];
         } catch (Throwable $exception) {
@@ -72,7 +72,7 @@ class MockHandler
         return [
             'status' => Transaction::STATUS_FAILED,
             'reason' => ReasonCodes::INVALID_RESPONSE,
-            'message' => StatusHelper::getTransactionMessage(ReasonCodes::INVALID_RESPONSE),
+            'message' => StatusHelper::getReasonCodeMessage(ReasonCodes::INVALID_RESPONSE),
             'date' => now()->format('c'),
         ];
     }

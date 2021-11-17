@@ -61,6 +61,7 @@ class ReasonCodes
 
     public const INVALID_CURRENCY = 'XC';
     public const PENDING_SESSION = '?-';
+    public const EXPIRED_SESSION = 'XS';
 
     public const APPROVED_REASON_CODES = [
         self::APPROVED_TRANSACTION,

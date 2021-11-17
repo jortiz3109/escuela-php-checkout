@@ -126,6 +126,78 @@ class ProcessTest extends TestCase
         );
     }
 
+    public function testItCanRejectATransaction(): void
+    {
+        $this->transactionData['instrument']['card']['number'] = '4110760000000016';
+
+        $response = $this->request($this->transactionData);
+
+        $response->assertJson(
+            fn (AssertableJson $json) => $json->has(
+                'session',
+                fn (AssertableJson $json) => $json->has(
+                    'status',
+                    fn (AssertableJson $json) => $json
+                        ->where('status', Session::STATUS_PENDING)
+                        ->where('reason', ReasonCodes::PENDING_SESSION)
+                        ->where('message', trans('reason_codes.' . ReasonCodes::PENDING_SESSION))
+                        ->where('date', $this->session->created_at->format('c'))
+                )
+                    ->where('uuid', $this->session->uuid)
+                    ->has(
+                        'payer',
+                        fn (AssertableJson $json) => $json
+                            ->where('name', $this->transactionData['payer']['name'])
+                            ->where('surname', $this->transactionData['payer']['surname'])
+                            ->where('documentType', $this->transactionData['payer']['documentType'])
+                            ->where('document', $this->transactionData['payer']['document'])
+                            ->where('email', $this->transactionData['payer']['email'])
+                            ->where('mobile', $this->transactionData['payer']['mobile'])
+                    )
+                    ->has(
+                        'buyer',
+                        fn (AssertableJson $json) => $json
+                            ->where('name', $this->session->buyer->name)
+                            ->where('surname', $this->session->buyer->surname)
+                            ->where('documentType', $this->session->buyer->document_type)
+                            ->where('document', $this->session->buyer->document_number)
+                            ->where('email', $this->session->buyer->email)
+                            ->where('mobile', $this->session->buyer->mobile)
+                    )
+                    ->has(
+                        'payment',
+                        fn (AssertableJson $json) => $json
+                            ->has(
+                                'status',
+                                fn (AssertableJson $json) => $json
+                                    ->where('status', Transaction::STATUS_REJECTED)
+                                    ->where('reason', ReasonCodes::INVALID_TRANSACTION)
+                                    ->where('message', trans('reason_codes.' . ReasonCodes::INVALID_TRANSACTION))
+                                    ->where('date', date('c'))
+                            )->where('reference', $this->session->reference)
+                            ->where('description', $this->session->description)
+                            ->has(
+                                'amount',
+                                fn (AssertableJson $json) => $json
+                                    ->where('currency', $this->session->currency->alphabetic_code)
+                                    ->where('total', $this->session->total_amount)
+                            )->where(
+                                'paymentMethod',
+                                PaymentMethod::find($this->transactionData['instrument']['paymentMethodId'])->name
+                            )->where(
+                                'card',
+                                '411076******0016'
+                            )->where(
+                                'authorization',
+                                null
+                            )->has('receipt')
+                    )
+                    ->where('ipAddress', $this->session->ip_address)
+                    ->where('userAgent', $this->session->user_agent)
+            )
+        );
+    }
+
     protected function request(array $data = []): TestResponse
     {
         return $this->postJson('/api/v1/session/' . $this->session->uuid . '/process', $data);

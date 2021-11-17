@@ -44,4 +44,9 @@ class Session extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function lastTransaction(): ?Transaction
+    {
+        return $this->transactions->last();
+    }
 }
