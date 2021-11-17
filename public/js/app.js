@@ -504,7 +504,7 @@ __webpack_require__.r(__webpack_exports__);
     PayerData: _PayerData__WEBPACK_IMPORTED_MODULE_1__["default"],
     PaymentMethods: _PaymentMethods__WEBPACK_IMPORTED_MODULE_2__["default"],
     SuspenseComponent: _SuspenseComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Footer: _TransactionFooter__WEBPACK_IMPORTED_MODULE_5__["default"]
+    TransactionFooter: _TransactionFooter__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   setup: function setup() {
     var _useStep = (0,_use_useStep__WEBPACK_IMPORTED_MODULE_6__["default"])(),
@@ -581,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-center"
+  "class": "flex justify-center w-full"
 };
 var _hoisted_2 = {
   "class": "flex flex-col gap-2"
@@ -624,20 +624,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "2xl:flex-row flex flex-col justify-center px-10"
+  "class": "flex gap-4 justify-center"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "2xl:text-right"
-}, "Session expires in:", -1
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Session expires in:", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
-  "class": "2xl:text-left px-1"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.seconds), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.hours) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.minutes) + ":" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.remaining.seconds), 1
   /* TEXT */
   )]);
 }
@@ -786,7 +781,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "gap-2 grid grid-cols-2"
+  "class": "gap-2 grid grid-cols-2 w-full"
 };
 var _hoisted_2 = {
   "class": "flex gap-2 items-start"
@@ -1051,7 +1046,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "px-12 py-6 w-full"
+  "class": "flex flex-col h-full px-12 py-6 w-full"
+};
+var _hoisted_2 = {
+  "class": "flex flex-grow items-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PayerData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PayerData");
@@ -1062,9 +1060,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_CardData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CardData");
 
-  var _component_Footer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Footer");
+  var _component_TransactionFooter = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TransactionFooter");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.inStep(1) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PayerData, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.inStep(1) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PayerData, {
     key: 0
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.inStep(2) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_SuspenseComponent, {
     key: 1
@@ -1081,9 +1079,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.inStep(3) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_CardData, {
     key: 2
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer, {
-    "class": "mt-16"
-  })]);
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TransactionFooter)]);
 }
 
 /***/ }),
@@ -1102,7 +1098,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-between"
+  "class": "flex justify-between items-center"
 };
 var _hoisted_2 = {
   key: 0,

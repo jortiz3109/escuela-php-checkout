@@ -9,33 +9,29 @@
         </div>
     </x-slot>
 
-    <main class="flex justify-center py-8 px-16">
+    <main class="flex justify-center py-8 h-full max-h-192">
         <div class="flex w-full max-w-7xl rounded-3xl overflow-hidden shadow-lg">
-            <section class="flex items-center w-full bg-gray-200">
+            <section class="w-full bg-gray-200">
                 <Transaction></Transaction>
             </section>
-            <section class="bg-blue-700 text-white">
-                <div class="flex flex-col justify-center gap-12 w-full">
-                    <div class="">
-                        <p class="text-2xl">{{ $session->currency->alphabetic_code }}</p>
-                        <p class="text-4xl text-bold text-center">
-                            {{ \App\Helpers\MoneyHelper::formattedAmountFromInteger($session->total_amount, $session->currency) }}
-                        </p>
-                    </div>
-                    <div class="flex flex-col gap-8">
-                        <div class="flex justify-between items-baseline">
-                            <p class="text-semibold text-xl">@lang('Reference')</p>
-                            <p class="text-base pr-4">{{ $session->reference }}</p>
-                        </div>
-                        <div class="">
-                            <p class="text-semibold text-xl pb-2">@lang('Description')</p>
-                            <p class="text-justify">
-                                {{ $session->description }}
-                            </p>
-                        </div>
-                    </div>
+            <section class="flex flex-col gap-5 bg-blue-700 text-white p-6 min-w-96">
+                <div>
+                    <p class="text-xl">{{ $session->currency->alphabetic_code }}</p>
+                    <p class="text-4xl text-bold text-center">
+                        {{ \App\Helpers\MoneyHelper::formattedAmountFromInteger($session->total_amount, $session->currency) }}
+                    </p>
                 </div>
-                <Countdown expiration="{{ $session->expiration->toDateTimeLocalString() }}"></Countdown>
+                <div class="flex justify-between items-center">
+                    <p class="text-bold text-xl">@lang('Reference')</p>
+                    <p>{{ $session->reference }}</p>
+                </div>
+                <div>
+                    <p class="text-bold text-xl pb-1">@lang('Description')</p>
+                    <p>
+                        {{ $session->description }}
+                    </p>
+                </div>
+                <Countdown @class('mt-auto') expiration="{{ $session->expiration->toDateTimeLocalString() }}"></Countdown>
             </section>
         </div>
     </main>

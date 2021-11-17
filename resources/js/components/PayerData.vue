@@ -1,5 +1,5 @@
 <template>
-    <div class="gap-2 grid grid-cols-2">
+    <div class="gap-2 grid grid-cols-2 w-full">
         <div>
             <custom-input
                 id="name"

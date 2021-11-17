@@ -1,7 +1,7 @@
 <template>
-    <div class="2xl:flex-row flex flex-col justify-center px-10">
-        <p class="2xl:text-right">Session expires in:</p>
-        <p class="2xl:text-left px-1">
+    <div class="flex gap-4 justify-center">
+        <p>Session expires in:</p>
+        <p>
             {{ remaining.hours }}:{{ remaining.minutes }}:{{ remaining.seconds }}
         </p>
     </div>

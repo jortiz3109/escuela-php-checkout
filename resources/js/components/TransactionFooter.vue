@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
         <div>
             <custom-button
                 v-if="step > firstStep"

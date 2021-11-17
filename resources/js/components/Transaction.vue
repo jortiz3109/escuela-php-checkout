@@ -1,11 +1,13 @@
 <template>
-    <div class="px-12 py-6 w-full">
-        <PayerData v-if="inStep(1)" />
-        <SuspenseComponent v-if="inStep(2)">
-            <PaymentMethods @select-payment-method="selectPaymentMethod"/>
-        </SuspenseComponent>
-        <CardData v-if="inStep(3)"/>
-        <Footer class="mt-16"/>
+    <div class="flex flex-col h-full px-12 py-6 w-full">
+        <div class="flex flex-grow items-center">
+            <PayerData v-if="inStep(1)" />
+            <SuspenseComponent v-if="inStep(2)">
+                <PaymentMethods @select-payment-method="selectPaymentMethod"/>
+            </SuspenseComponent>
+            <CardData v-if="inStep(3)"/>
+        </div>
+        <TransactionFooter />
     </div>
 </template>
 
@@ -15,7 +17,7 @@ import PayerData from './PayerData'
 import PaymentMethods from './PaymentMethods'
 import SuspenseComponent from './SuspenseComponent'
 import CardData from './CardData'
-import Footer from './TransactionFooter'
+import TransactionFooter from './TransactionFooter'
 import useStep from '../use/useStep'
 
 export default {
@@ -26,7 +28,7 @@ export default {
         PayerData,
         PaymentMethods,
         SuspenseComponent,
-        Footer,
+        TransactionFooter,
     },
 
     setup() {

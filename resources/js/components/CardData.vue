@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center w-full">
         <div class="flex flex-col gap-2">
             <div><h1 class="font-black text-gray-600 text-xl">Card Information</h1></div>
             <div><custom-input placeholder="0000 0000 0000 0000"/></div>
