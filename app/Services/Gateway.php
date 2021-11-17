@@ -7,6 +7,7 @@ use App\Contracts\GatewayContract;
 use App\Models\Session;
 use App\Models\Transaction;
 use GuzzleHttp\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Gateway implements GatewayContract
 {
@@ -19,7 +20,22 @@ class Gateway implements GatewayContract
 
     public function process(Transaction $transaction): Transaction
     {
-        $response = $this->client->request('post', config('core.urls.process'), [
+        $response = $this->request($transaction);
+
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        $this->updateTransaction($data, $transaction);
+
+        if ($transaction->status == Transaction::STATUS_APPROVED) {
+            $this->updateSession($transaction);
+        }
+
+        return $transaction;
+    }
+
+    private function request(Transaction $transaction): ResponseInterface
+    {
+        return $this->client->request('post', config('core.urls.process'), [
             'json' => [
                 'date' => $transaction->created_at->format('c'),
                 'payer' => $transaction->payer->toArray(),
@@ -28,29 +44,29 @@ class Gateway implements GatewayContract
                     'description' => $transaction->session->description,
                     'amount' => [
                         'currency' => $transaction->session->currency,
-                        'total' =>  $transaction->session->total_amount,
+                        'total' => $transaction->session->total_amount,
                     ],
                 ],
                 'instrument' => $transaction->instrument->toArray(),
             ],
         ]);
+    }
 
-        $data = json_decode($response->getBody()->getContents(), true);
-
+    private function updateTransaction($data, Transaction $transaction): void
+    {
         $transaction->status = $data['status']['status'] ?? Transaction::STATUS_FAILED;
         $transaction->response_code = $data['status']['reason'] ?? ReasonCodes::INVALID_RESPONSE;
         $transaction->receipt = $data['receipt'] ?? null;
         $transaction->authorization = $data['authorization'] ?? null;
 
         $transaction->save();
+    }
 
-        if ($transaction->status == Transaction::STATUS_APPROVED) {
-            $session = $transaction->session;
-            $session->status = Session::STATUS_APPROVED;
+    private function updateSession(Transaction $transaction): void
+    {
+        $session = $transaction->session;
+        $session->status = Session::STATUS_APPROVED;
 
-            $session->save();
-        }
-
-        return $transaction;
+        $session->save();
     }
 }
