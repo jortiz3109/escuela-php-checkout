@@ -14,33 +14,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/components/CustomInput.vue");
 /* harmony import */ var _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/CardIcon */ "./resources/js/components/assets/CardIcon.vue");
 /* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../use */ "./resources/js/use/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _CustomButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CustomButton */ "./resources/js/components/CustomButton.vue");
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CardInformation',
   components: {
+    CustomButton: _CustomButton__WEBPACK_IMPORTED_MODULE_4__["default"],
     CustomInput: _CustomInput__WEBPACK_IMPORTED_MODULE_0__["default"],
     CardIcon: _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   setup: function setup() {
+    var title;
+
     var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(),
         state = _useHelpers.state;
 
-    var title;
+    var _useApi = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useApi)(),
+        postValidateCardInformation = _useApi.postValidateCardInformation;
+
     var category = state.paymentMethod.category;
     if (category === 'DEBIT') title = 'Debit Card';else title = 'Credit Card';
-    var options = {
+    var cardNumber = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
+    var cardDate = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
+    var cardCvv = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
+    var cardNumberOptions = {
       creditCard: true,
       delimiter: ' ',
       onCreditCardTypeChanged: function onCreditCardTypeChanged(type) {
         console.log(type);
       }
     };
+    var dateOptions = {
+      date: true,
+      datePattern: ['m', 'y']
+    };
+
+    var processPayment = function processPayment() {
+      var body = {
+        category: category,
+        cardNumber: cardNumber.value,
+        month: cardDate.value.substr(0, 2),
+        year: cardDate.value.substr(2, 2),
+        cvv: cardCvv.value
+      };
+      postValidateCardInformation(body);
+    };
+
     return {
       title: title,
       category: category,
-      options: options
+      cardNumberOptions: cardNumberOptions,
+      dateOptions: dateOptions,
+      cardNumber: cardNumber,
+      cardDate: cardDate,
+      cardCvv: cardCvv,
+      processPayment: processPayment
     };
   }
 });
@@ -205,20 +238,21 @@ __webpack_require__.r(__webpack_exports__);
     cleave: {
       type: Object,
       "default": null
+    },
+    maxlength: {
+      type: String,
+      "default": null
     }
   },
   emits: ['update:modelValue'],
   setup: function setup(props, _ref) {
     var emit = _ref.emit;
     var inputValue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.modelValue);
-
-    var update = function update() {
-      return emit('update:modelValue', inputValue.value);
-    };
-
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(inputValue, function (current) {
+      emit('update:modelValue', current);
+    });
     return {
-      inputValue: inputValue,
-      update: update
+      inputValue: inputValue
     };
   }
 });
@@ -714,6 +748,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_custom_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("custom-input");
 
+  var _component_custom_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("custom-button");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardIcon, {
     fill: "#4B5563",
     type: $setup.category
@@ -723,17 +759,41 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "cardNumber",
+    modelValue: $setup.cardNumber,
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.cardNumber = $event;
+    }),
     placeholder: "0000 0000 0000 0000",
-    cleave: $setup.options
+    cleave: $setup.cardNumberOptions
   }, null, 8
   /* PROPS */
-  , ["cleave"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+  , ["modelValue", "cleave"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "date",
-    placeholder: "MM/YY"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+    modelValue: $setup.cardDate,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.cardDate = $event;
+    }),
+    placeholder: "MM/YY",
+    cleave: $setup.dateOptions
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "cleave"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "cvv",
-    placeholder: "CVV"
-  })])])]);
+    modelValue: $setup.cardCvv,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.cardCvv = $event;
+    }),
+    placeholder: "CVV",
+    maxlength: "3"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_button, {
+    text: "Pay",
+    "class": "justify-center",
+    onClick: $setup.processPayment
+  }, null, 8
+  /* PROPS */
+  , ["onClick"])])]);
 }
 
 /***/ }),
@@ -821,7 +881,7 @@ var _hoisted_1 = {
   "class": "flex flex-col max-w-lg"
 };
 var _hoisted_2 = ["for"];
-var _hoisted_3 = ["id", "type", "name", "placeholder"];
+var _hoisted_3 = ["id", "type", "name", "placeholder", "maxlength"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_cleave = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("cleave");
 
@@ -841,10 +901,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: $props.type,
     name: $props.name || $props.id,
     placeholder: $props.placeholder,
+    maxlength: $props.maxlength,
     options: $props.cleave
   }, null, 8
   /* PROPS */
-  , ["id", "modelValue", "type", "name", "placeholder", "options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  , ["id", "modelValue", "type", "name", "placeholder", "maxlength", "options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 1,
     id: $props.id,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -854,11 +915,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: $props.type,
     name: $props.name || $props.id,
     placeholder: $props.placeholder,
-    onInput: _cache[2] || (_cache[2] = function () {
-      return $setup.update && $setup.update.apply($setup, arguments);
-    })
-  }, null, 40
-  /* PROPS, HYDRATE_EVENTS */
+    maxlength: $props.maxlength
+  }, null, 8
+  /* PROPS */
   , _hoisted_3)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $setup.inputValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "error-message"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.error), 513
@@ -1472,7 +1531,8 @@ function useApi() {
   var session = window.document.querySelector('meta[name="session"]').content;
   var token = window.document.querySelector('meta[name="token"]').content;
   var urls = {
-    paymentMethods: "/api/v1/session/".concat(session, "/payment-methods")
+    paymentMethods: "/api/v1/session/".concat(session, "/payment-methods"),
+    validateCardInformation: 'api/v1/validate-card-information'
   };
   var headers = {
     Accept: 'application/json',
@@ -1508,8 +1568,39 @@ function useApi() {
     };
   }();
 
+  var postValidateCardInformation = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(body) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().post(urls.validateCardInformation, {
+                headers: headers,
+                data: body
+              });
+
+            case 2:
+              response = _context2.sent;
+              return _context2.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function postValidateCardInformation(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   return {
-    getPaymentMethods: getPaymentMethods
+    getPaymentMethods: getPaymentMethods,
+    postValidateCardInformation: postValidateCardInformation
   };
 }
 

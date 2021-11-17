@@ -9,6 +9,7 @@
             :type="type"
             :name="name || id"
             :placeholder="placeholder"
+            :maxlength="maxlength"
             :options="cleave"
         />
         <input
@@ -19,7 +20,7 @@
             :type="type"
             :name="name || id"
             :placeholder="placeholder"
-            @input="update"
+            :maxlength="maxlength"
         />
         <span v-show="error" class="error-message">
             {{ error }}
@@ -28,7 +29,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export default {
     name: 'CustomInput',
@@ -41,13 +42,16 @@ export default {
         placeholder: { type: String, default: null },
         modelValue: { type: String, default: null },
         error: { type: String, default: null },
-        cleave: { type: Object, default: null }
+        cleave: { type: Object, default: null },
+        maxlength: { type: String, default: null }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
         const inputValue = ref(props.modelValue)
-        const update = () => emit('update:modelValue', inputValue.value)
-        return { inputValue, update }
+        watch(inputValue, current => {
+            emit('update:modelValue', current)
+        })
+        return { inputValue }
     }
 }
 </script>
