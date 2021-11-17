@@ -10,6 +10,9 @@ const state = reactive({
         email: undefined,
         mobile: undefined,
     },
+    paymentMethod: {
+        category: undefined,
+    },
 })
 
 const syncStatus = () => {

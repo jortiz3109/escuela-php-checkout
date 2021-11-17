@@ -1,30 +1,32 @@
 <template>
     <div class="flex flex-col h-full px-12 py-6 w-full">
+        <TransactionHeader />
         <div class="flex flex-grow items-center">
             <PayerData v-if="inStep(1)" />
             <SuspenseComponent v-if="inStep(2)">
-                <PaymentMethods @select-payment-method="selectPaymentMethod"/>
+                <PaymentMethods />
             </SuspenseComponent>
-            <CardData v-if="inStep(3)"/>
+            <CardInformation v-if="inStep(3)"/>
         </div>
         <TransactionFooter />
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
 import PayerData from './PayerData'
 import PaymentMethods from './PaymentMethods'
 import SuspenseComponent from './SuspenseComponent'
-import CardData from './CardData'
+import CardInformation from './CardInformation'
 import TransactionFooter from './TransactionFooter'
 import useStep from '../use/useStep'
+import TransactionHeader from './TransactionHeader'
 
 export default {
     name: 'Transaction',
 
     components: {
-        CardData,
+        TransactionHeader,
+        CardInformation,
         PayerData,
         PaymentMethods,
         SuspenseComponent,
@@ -32,20 +34,8 @@ export default {
     },
 
     setup() {
-        const { step, stepForward, inStep } = useStep()
-
-        const paymentMethods = ref({})
-
-        function selectPaymentMethod(values) {
-            paymentMethods.value = values
-            stepForward()
-        }
-
-        return {
-            step,
-            inStep,
-            selectPaymentMethod,
-        }
+        const { inStep } = useStep()
+        return { inStep }
     },
 }
 </script>

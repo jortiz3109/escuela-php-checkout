@@ -8,7 +8,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="shortcut icon" href="{{ asset('creditCard.svg') }}" type="svg/x-icon">
+        <link rel="shortcut icon" href="{{ asset('checkoutIcon.svg') }}" type="svg/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 

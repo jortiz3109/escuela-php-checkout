@@ -17,7 +17,7 @@ export default function useApi() {
         const response = await axios.get(urls.paymentMethods, {
             headers: headers,
         })
-        return response.data.data
+        return response.data
     }
 
     return {
