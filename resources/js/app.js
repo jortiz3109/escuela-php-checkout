@@ -2,12 +2,13 @@ require('./bootstrap')
 
 import { createApp } from 'vue'
 
+import Cleave from 'vue-cleave-component'
 import { useHelpers } from './use'
 import Countdown from './components/Countdown'
 import Stepper from './components/Stepper'
 import Transaction from './components/Transaction'
 
-createApp({
+const app = createApp({
     components: {
         Countdown,
         Stepper,
@@ -17,4 +18,6 @@ createApp({
         const { syncStatus } = useHelpers()
         syncStatus()
     },
-}).mount('#app')
+})
+app.use(Cleave)
+app.mount('#app')

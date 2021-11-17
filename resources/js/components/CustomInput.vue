@@ -1,7 +1,18 @@
 <template>
     <div class="flex flex-col max-w-lg">
         <label class="font-black text-gray-600" :class="labelClass" :for="id">{{ label }}</label>
+        <cleave
+            v-if="cleave"
+            :id="id"
+            v-model="inputValue"
+            class="block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full"
+            :type="type"
+            :name="name || id"
+            :placeholder="placeholder"
+            :options="cleave"
+        />
         <input
+            v-else
             :id="id"
             v-model="inputValue"
             class="block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full"
@@ -29,7 +40,8 @@ export default {
         name: { type: String, default: null },
         placeholder: { type: String, default: null },
         modelValue: { type: String, default: null },
-        error: { type: String, default: null }
+        error: { type: String, default: null },
+        cleave: { type: Object, default: null }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {

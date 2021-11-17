@@ -6,11 +6,11 @@
                 <h1 class="font-black text-gray-600 text-xl">{{ title }}</h1>
             </div>
             <div>
-                <custom-input id="cardNumber" placeholder="0000 0000 0000 0000"/>
+                <custom-input id="cardNumber" placeholder="0000 0000 0000 0000" :cleave="options"/>
             </div>
             <div class="flex gap-2">
-                <custom-input id="date" placeholder="MM/YY" />
-                <custom-input id="cvv" placeholder="CVV" />
+                <custom-input id="date" placeholder="MM/YY"/>
+                <custom-input id="cvv" placeholder="CVV"/>
             </div>
         </div>
     </div>
@@ -20,6 +20,7 @@
 import CustomInput from './CustomInput'
 import CardIcon from './assets/CardIcon'
 import { useHelpers } from '../use'
+
 export default {
     name: 'CardInformation',
     components: { CustomInput, CardIcon },
@@ -27,9 +28,18 @@ export default {
         const { state } = useHelpers()
         let title
         const category = state.paymentMethod.category
+
         if (category === 'DEBIT') title = 'Debit Card'
         else title = 'Credit Card'
-        return { title, category }
-    }
+
+        const options = {
+            creditCard: true,
+            delimiter: ' ',
+            onCreditCardTypeChanged: function (type) {
+                console.log(type)
+            }
+        }
+        return { title, category, options }
+    },
 }
 </script>

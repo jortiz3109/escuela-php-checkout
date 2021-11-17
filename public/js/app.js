@@ -30,9 +30,17 @@ __webpack_require__.r(__webpack_exports__);
     var title;
     var category = state.paymentMethod.category;
     if (category === 'DEBIT') title = 'Debit Card';else title = 'Credit Card';
+    var options = {
+      creditCard: true,
+      delimiter: ' ',
+      onCreditCardTypeChanged: function onCreditCardTypeChanged(type) {
+        console.log(type);
+      }
+    };
     return {
       title: title,
-      category: category
+      category: category,
+      options: options
     };
   }
 });
@@ -192,6 +200,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     error: {
       type: String,
+      "default": null
+    },
+    cleave: {
+      type: Object,
       "default": null
     }
   },
@@ -711,8 +723,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "cardNumber",
-    placeholder: "0000 0000 0000 0000"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+    placeholder: "0000 0000 0000 0000",
+    cleave: $setup.options
+  }, null, 8
+  /* PROPS */
+  , ["cleave"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "date",
     placeholder: "MM/YY"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
@@ -808,13 +823,17 @@ var _hoisted_1 = {
 var _hoisted_2 = ["for"];
 var _hoisted_3 = ["id", "type", "name", "placeholder"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_cleave = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("cleave");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["font-black text-gray-600", $props.labelClass]),
     "for": $props.id
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.label), 11
   /* TEXT, CLASS, PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_2), $props.cleave ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_cleave, {
+    key: 0,
     id: $props.id,
+    modelValue: $setup.inputValue,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.inputValue = $event;
     }),
@@ -822,12 +841,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: $props.type,
     name: $props.name || $props.id,
     placeholder: $props.placeholder,
-    onInput: _cache[1] || (_cache[1] = function () {
+    options: $props.cleave
+  }, null, 8
+  /* PROPS */
+  , ["id", "modelValue", "type", "name", "placeholder", "options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    key: 1,
+    id: $props.id,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.inputValue = $event;
+    }),
+    "class": "block border-gray-300 focus:border-gray-400 focus:ring-gray-400 rounded-md shadow-sm sm:text-sm w-full",
+    type: $props.type,
+    name: $props.name || $props.id,
+    placeholder: $props.placeholder,
+    onInput: _cache[2] || (_cache[2] = function () {
       return $setup.update && $setup.update.apply($setup, arguments);
     })
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_3), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $setup.inputValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  , _hoisted_3)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $setup.inputValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "error-message"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.error), 513
   /* TEXT, NEED_PATCH */
@@ -1325,10 +1357,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./use */ "./resources/js/use/index.js");
-/* harmony import */ var _components_Countdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Countdown */ "./resources/js/components/Countdown.vue");
-/* harmony import */ var _components_Stepper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Stepper */ "./resources/js/components/Stepper.vue");
-/* harmony import */ var _components_Transaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Transaction */ "./resources/js/components/Transaction.vue");
+/* harmony import */ var vue_cleave_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-cleave-component */ "./node_modules/vue-cleave-component/dist/vue-cleave.min.js");
+/* harmony import */ var vue_cleave_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_cleave_component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./use */ "./resources/js/use/index.js");
+/* harmony import */ var _components_Countdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Countdown */ "./resources/js/components/Countdown.vue");
+/* harmony import */ var _components_Stepper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Stepper */ "./resources/js/components/Stepper.vue");
+/* harmony import */ var _components_Transaction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Transaction */ "./resources/js/components/Transaction.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -1336,19 +1370,22 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-(0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
+
+var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
   components: {
-    Countdown: _components_Countdown__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Stepper: _components_Stepper__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Transaction: _components_Transaction__WEBPACK_IMPORTED_MODULE_4__["default"]
+    Countdown: _components_Countdown__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Stepper: _components_Stepper__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Transaction: _components_Transaction__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   setup: function setup() {
-    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_1__.useHelpers)(),
+    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(),
         syncStatus = _useHelpers.syncStatus;
 
     syncStatus();
   }
-}).mount('#app');
+});
+app.use((vue_cleave_component__WEBPACK_IMPORTED_MODULE_1___default()));
+app.mount('#app');
 
 /***/ }),
 

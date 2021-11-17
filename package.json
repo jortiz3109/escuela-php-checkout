@@ -17,6 +17,7 @@
         "@babel/core": "^7.15.8",
         "@babel/preset-env": "^7.15.8",
         "@fullhuman/postcss-purgecss": "^4.0.3",
+        "@heroicons/vue": "^1.0.5",
         "@tailwindcss/forms": "^0.2.1",
         "@vee-validate/rules": "^4.5.3",
         "@vue/compiler-sfc": "^3.2.20",
@@ -47,11 +48,9 @@
         "tailwindcss": "^2.2.16",
         "vee-validate": "^4.5.3",
         "vue": "^3.2.20",
+        "vue-cleave-component": "^3.0.1",
         "vue-loader": "^16.8.1",
         "vue-spinner": "^1.0.4",
         "vue3-jest": "^27.0.0-alpha.1"
-    },
-    "dependencies": {
-        "@heroicons/vue": "^1.0.5"
     }
 }
