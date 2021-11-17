@@ -1,11 +1,11 @@
 <template>
     <div class="flex gap-4 justify-center w-full">
-        <button v-if="categories.includes('DEBIT')" @click="selectCategory('DEDIT')" @mouseenter="hovers.debit = true" @mouseleave="hovers.debit = false" class="bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm">
+        <button v-if="categories.includes('DEBIT')" @click="selectCategory('DEBIT')" @mouseenter="hovers.debit = true" @mouseleave="hovers.debit = false" class="bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm">
             <CardIcon
                 fill="#374151"
                 hover="#fff"
                 :is-hover="hovers.debit"
-                type="debit"
+                type="DEBIT"
             />
             Debit Card
         </button>
@@ -14,7 +14,7 @@
                 fill="#374151"
                 hover="#fff"
                 :is-hover="hovers.credit"
-                type="credit"
+                type="CREDIT"
             />
             Credit Card
         </button>

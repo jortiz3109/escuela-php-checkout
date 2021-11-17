@@ -12,11 +12,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/components/CustomInput.vue");
+/* harmony import */ var _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/CardIcon */ "./resources/js/components/assets/CardIcon.vue");
+/* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../use */ "./resources/js/use/index.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CardInformation',
   components: {
-    CustomInput: _CustomInput__WEBPACK_IMPORTED_MODULE_0__["default"]
+    CustomInput: _CustomInput__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CardIcon: _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  setup: function setup() {
+    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(),
+        state = _useHelpers.state;
+
+    var title;
+    var category = state.paymentMethod.category;
+    if (category === 'DEBIT') title = 'Debit Card';else title = 'Credit Card';
+    return {
+      title: title,
+      category: category
+    };
   }
 });
 
@@ -629,7 +646,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     type: {
       type: String,
-      "default": 'debit'
+      "default": 'DEBIT'
     },
     hover: {
       type: String,
@@ -672,16 +689,34 @@ var _hoisted_2 = {
   "class": "flex flex-col gap-2"
 };
 var _hoisted_3 = {
+  "class": "flex gap-2 items-center"
+};
+var _hoisted_4 = {
+  "class": "font-black text-gray-600 text-xl"
+};
+var _hoisted_5 = {
   "class": "flex gap-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_CardIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CardIcon");
+
   var _component_custom_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("custom-input");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CardIcon, {
+    fill: "#4B5563",
+    type: $setup.category
+  }, null, 8
+  /* PROPS */
+  , ["type"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.title), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+    id: "cardNumber",
     placeholder: "0000 0000 0000 0000"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+    id: "date",
     placeholder: "MM/YY"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+    id: "cvv",
     placeholder: "CVV"
   })])])]);
 }
@@ -995,7 +1030,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.categories.includes('DEBIT') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.selectCategory('DEDIT');
+      return $setup.selectCategory('DEBIT');
     }),
     onMouseenter: _cache[1] || (_cache[1] = function ($event) {
       return $setup.hovers.debit = true;
@@ -1008,7 +1043,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     fill: "#374151",
     hover: "#fff",
     "is-hover": $setup.hovers.debit,
-    type: "debit"
+    type: "DEBIT"
   }, null, 8
   /* PROPS */
   , ["is-hover"]), _hoisted_2], 32
@@ -1029,7 +1064,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     fill: "#374151",
     hover: "#fff",
     "is-hover": $setup.hovers.credit,
-    type: "credit"
+    type: "CREDIT"
   }, null, 8
   /* PROPS */
   , ["is-hover"]), _hoisted_3], 32
@@ -1274,7 +1309,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     width: "24",
     height: "24",
     viewBox: "0 0 24 24"
-  }, [$props.type === 'debit' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type === 'credit' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+  }, [$props.type === 'DEBIT' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type === 'CREDIT' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
   /* PROPS */
   , _hoisted_1);
 }
