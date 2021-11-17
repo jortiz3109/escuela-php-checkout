@@ -13,13 +13,12 @@ class Merchant extends Model
 
     public $timestamps = false;
 
-    public function sessions(): HasMany
-    {
-        return $this->hasMany(Session::class);
-    }
-
     public function paymentMethods(): BelongsToMany
     {
         return $this->belongsToMany(PaymentMethod::class);
+    }
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(Session::class);
     }
 }
