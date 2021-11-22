@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\ReasonCodes;
 use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,15 +12,15 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignId('payer_id')->constrained('persons');
             $table->foreignId('session_id');
-            $table->enum('status', Transaction::STATUSES);
-            $table->char('response_code', 2);
-            $table->foreignId('payment_method_id');
-            $table->string('pan', 19);
-            $table->string('receipt', 16);
-            $table->string('authorization', 40);
-            $table->dateTime('date');
+            $table->enum('status', Transaction::STATUSES)->default(Transaction::STATUS_PENDING);
+            $table->char('response_code', 2)->default(ReasonCodes::REQUEST_IN_PROGRESS);
+            $table->morphs('instrument');
+            $table->string('receipt', 16)->nullable();
+            $table->string('authorization', 40)->nullable();
+            $table->timestamps();
         });
     }
 
