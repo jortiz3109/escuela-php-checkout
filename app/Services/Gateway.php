@@ -22,11 +22,9 @@ class Gateway implements GatewayContract
     {
         $response = $this->request($transaction);
 
-        $data = json_decode($response->getBody()->getContents(), true);
+        $this->updateTransaction($response, $transaction);
 
-        $this->updateTransaction($data, $transaction);
-
-        if ($transaction->status == Transaction::STATUS_APPROVED) {
+        if ($transaction->status === Transaction::STATUS_APPROVED) {
             $this->updateSession($transaction);
         }
 
@@ -52,21 +50,22 @@ class Gateway implements GatewayContract
         ]);
     }
 
-    private function updateTransaction($data, Transaction $transaction): void
+    private function updateTransaction(ResponseInterface $response, Transaction $transaction): void
     {
-        $transaction->status = $data['status']['status'] ?? Transaction::STATUS_FAILED;
-        $transaction->response_code = $data['status']['reason'] ?? ReasonCodes::INVALID_RESPONSE;
-        $transaction->receipt = $data['receipt'] ?? null;
-        $transaction->authorization = $data['authorization'] ?? null;
+        $data = json_decode($response->getBody()->getContents(), true);
 
-        $transaction->save();
+        $transaction->update([
+            'status' => $data['status']['status'] ?? Transaction::STATUS_FAILED,
+            'response_code' => $data['status']['reason'] ?? ReasonCodes::INVALID_RESPONSE,
+            'receipt' => $data['receipt'] ?? null,
+            'authorization' => $data['authorization'] ?? null,
+        ]);
     }
 
     private function updateSession(Transaction $transaction): void
     {
-        $session = $transaction->session;
-        $session->status = Session::STATUS_APPROVED;
-
-        $session->save();
+        $transaction->session->update([
+            'status' => Session::STATUS_APPROVED,
+        ]);
     }
 }

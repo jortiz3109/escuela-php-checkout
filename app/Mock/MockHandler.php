@@ -40,7 +40,7 @@ class MockHandler
         ];
     }
 
-    private function getStatus(array $data)
+    private function getStatus(array $data): array
     {
         try {
             $card = $data['instrument']['card'];

@@ -15,6 +15,8 @@ class Session extends Model
         'expiration' => 'datetime',
     ];
 
+    protected $guarded = [];
+
     public const STATUS_APPROVED = 'APPROVED';
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_EXPIRED = 'EXPIRED';
@@ -43,10 +45,5 @@ class Session extends Model
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
-    }
-
-    public function lastTransaction(): ?Transaction
-    {
-        return $this->transactions->last();
     }
 }
