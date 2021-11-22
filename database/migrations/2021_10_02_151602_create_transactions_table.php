@@ -12,6 +12,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignId('payer_id')->constrained('persons');
             $table->foreignId('session_id');
             $table->enum('status', Transaction::STATUSES)->default(Transaction::STATUS_PENDING);

@@ -9,6 +9,7 @@ use App\Models\Session;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class StoreTransactionAction
 {
@@ -19,6 +20,7 @@ class StoreTransactionAction
 
         $transaction = new Transaction([
             'status' => Transaction::STATUS_PENDING,
+            'uuid' => Str::uuid(),
             'response_code' => ReasonCodes::REQUEST_IN_PROGRESS,
         ]);
 
