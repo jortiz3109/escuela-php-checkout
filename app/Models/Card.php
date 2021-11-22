@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class Card extends Model
 {
@@ -17,6 +18,7 @@ class Card extends Model
     protected ?string $pin = null;
 
     public $timestamps = false;
+    protected $guarded = [];
 
     public function transactions(): MorphMany
     {
@@ -26,6 +28,16 @@ class Card extends Model
     public function paymentMethod(): BelongsTo
     {
         return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function setPanAttribute($value): void
+    {
+        $this->attributes['pan'] = Crypt::encryptString($value);
+    }
+
+    public function getPanAttribute(): string
+    {
+        return Crypt::decryptString($this->attributes['pan']);
     }
 
     public function cvv(): ?string
@@ -58,15 +70,29 @@ class Card extends Model
         $this->pin = $pin;
     }
 
+    public function securedPan(): string
+    {
+        return Str::mask($this->pan, '*', 6, 6);
+    }
+
     public function toArray(): array
     {
         return [
             'card' => [
-                'number' => Crypt::decryptString($this->pan),
+                'number' => $this->pan,
                 'cvv' => $this->cvv(),
                 'expiration' => $this->expiration(),
                 'pin' => $this->pin(),
             ],
+        ];
+    }
+
+    public function toResponse(): array
+    {
+        return [
+            'card' => [
+                'number' => $this->securedPan(),
+            ]
         ];
     }
 }

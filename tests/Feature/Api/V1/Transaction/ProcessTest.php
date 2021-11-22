@@ -8,6 +8,7 @@ use App\Models\Session;
 use App\Models\Transaction;
 use Database\Seeders\PaymentMethodSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Testing\TestResponse;
 use Tests\Concerns\SessionHasDataProvider;
@@ -85,8 +86,8 @@ class ProcessTest extends TestCase
                         ->where('surname', $this->transactionData['payer']['surname'])
                         ->where('documentType', $this->transactionData['payer']['documentType'])
                         ->where('document', $this->transactionData['payer']['document'])
-                        ->where('email', $this->transactionData['payer']['email'])
-                        ->where('mobile', $this->transactionData['payer']['mobile'])
+                        ->where('email', 't***@example.com')
+                        ->where('mobile', Str::mask($this->transactionData['payer']['mobile'], '*', 3, 3))
                 )
                 ->has(
                     'buyer',
@@ -95,8 +96,8 @@ class ProcessTest extends TestCase
                         ->where('surname', $this->session->buyer->surname)
                         ->where('documentType', $this->session->buyer->document_type)
                         ->where('document', $this->session->buyer->document_number)
-                        ->where('email', $this->session->buyer->email)
-                        ->where('mobile', $this->session->buyer->mobile)
+                        ->where('email', $this->session->buyer->securedEmail())
+                        ->where('mobile', $this->session->buyer->securedMobile())
                 )
                 ->where('session', $this->session->uuid)
                 ->where('reference', $this->session->reference)
@@ -111,7 +112,7 @@ class ProcessTest extends TestCase
                     'paymentMethod',
                     PaymentMethod::find($this->transactionData['instrument']['paymentMethodId'])->name
                 )
-                ->where('card', '411076******0008')
+                ->where('instrument.card.number', '411076******0008')
                 ->has('receipt')
                 ->has('authorization')
             )
@@ -143,8 +144,8 @@ class ProcessTest extends TestCase
                             ->where('surname', $this->transactionData['payer']['surname'])
                             ->where('documentType', $this->transactionData['payer']['documentType'])
                             ->where('document', $this->transactionData['payer']['document'])
-                            ->where('email', $this->transactionData['payer']['email'])
-                            ->where('mobile', $this->transactionData['payer']['mobile'])
+                            ->where('email', 't***@example.com')
+                            ->where('mobile', Str::mask($this->transactionData['payer']['mobile'], '*', 3, 3))
                     )
                     ->has(
                         'buyer',
@@ -153,8 +154,8 @@ class ProcessTest extends TestCase
                             ->where('surname', $this->session->buyer->surname)
                             ->where('documentType', $this->session->buyer->document_type)
                             ->where('document', $this->session->buyer->document_number)
-                            ->where('email', $this->session->buyer->email)
-                            ->where('mobile', $this->session->buyer->mobile)
+                            ->where('email', $this->session->buyer->securedEmail())
+                            ->where('mobile', $this->session->buyer->securedMobile())
                     )
                     ->where('session', $this->session->uuid)
                     ->where('reference', $this->session->reference)
@@ -169,7 +170,7 @@ class ProcessTest extends TestCase
                         'paymentMethod',
                         PaymentMethod::find($this->transactionData['instrument']['paymentMethodId'])->name
                     )
-                    ->where('card', '411076******0016')
+                    ->where('instrument.card.number', '411076******0016')
                     ->where('authorization', null)
                     ->has('receipt')
             )

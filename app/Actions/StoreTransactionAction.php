@@ -8,7 +8,6 @@ use App\Models\Person;
 use App\Models\Session;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 class StoreTransactionAction
@@ -35,29 +34,27 @@ class StoreTransactionAction
 
     private function createCard(Request $request): Card
     {
-        $card = new Card();
+        $card = Card::create([
+            'payment_method_id' => $request->input('instrument.paymentMethodId'),
+            'pan' => $request->input('instrument.card.number')
+        ]);
 
-        $card->payment_method_id = $request->input('instrument.paymentMethodId');
-        $card->pan = Crypt::encryptString($request->input('instrument.card.number'));
+        $card->setExpiration($request->input('instrument.card.expiration'));
         $card->setCvv($request->input('instrument.card.cvv'));
-        $card->save();
+        $card->setPin($request->input('instrument.card.pin'));
 
         return $card;
     }
 
     private function createPayer(Request $request): Person
     {
-        $payer = new Person();
-
-        $payer->name = $request->input('payer.name');
-        $payer->surname = $request->input('payer.surname');
-        $payer->document_type = $request->input('payer.documentType');
-        $payer->document_number = $request->input('payer.document');
-        $payer->email = $request->input('payer.email');
-        $payer->mobile = $request->input('payer.mobile');
-
-        $payer->save();
-
-        return $payer;
+        return Person::create([
+            'name' => $request->input('payer.name'),
+            'surname' => $request->input('payer.surname'),
+            'document_type' => $request->input('payer.documentType'),
+            'document_number' => $request->input('payer.document'),
+            'email' => $request->input('payer.email'),
+            'mobile' => $request->input('payer.mobile'),
+        ]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Helpers\StatusHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Crypt;
 
 class TransactionResource extends JsonResource
 {
@@ -20,8 +19,8 @@ class TransactionResource extends JsonResource
                 'date' => $this->created_at->format('c'),
             ],
             'uuid' => $this->uuid,
-            'payer' => $this->payer->toArray(),
-            'buyer' => $this->session->buyer->toArray(),
+            'payer' => $this->payer->toResponse(),
+            'buyer' => $this->session->buyer->toResponse(),
             'session' => $this->session->uuid,
             'reference' => $this->session->reference,
             'description' => $this->session->description,
@@ -30,7 +29,7 @@ class TransactionResource extends JsonResource
                 'total' => $this->session->total_amount,
             ],
             'paymentMethod' => $this->instrument->paymentMethod->name,
-            'card' => substr_replace(Crypt::decryptString($this->instrument->pan), '******', 6, -4),
+            'instrument' => $this->instrument->toResponse(),
             'receipt' => $this->receipt,
             'authorization' => $this->authorization,
         ];
