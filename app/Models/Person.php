@@ -36,7 +36,7 @@ class Person extends Model
             'documentType' => $this->document_type,
             'document' => $this->document_number,
             'email' => $this->securedEmail(),
-            'mobile' => $this->securedMobile()
+            'mobile' => $this->securedMobile(),
         ];
     }
 
@@ -44,7 +44,7 @@ class Person extends Model
     {
         list($user, $domain) = explode('@', $this->email);
 
-        return Str::of($user)->mask('*', -3)->append('@'.$domain);
+        return Str::of($user)->mask('*', -3)->append('@' . $domain);
     }
 
     public function securedMobile(): string

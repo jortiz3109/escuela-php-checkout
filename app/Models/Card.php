@@ -92,7 +92,7 @@ class Card extends Model
         return [
             'card' => [
                 'number' => $this->securedPan(),
-            ]
+            ],
         ];
     }
 }

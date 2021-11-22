@@ -36,7 +36,7 @@ class StoreTransactionAction
     {
         $card = Card::create([
             'payment_method_id' => $request->input('instrument.paymentMethodId'),
-            'pan' => $request->input('instrument.card.number')
+            'pan' => $request->input('instrument.card.number'),
         ]);
 
         $card->setExpiration($request->input('instrument.card.expiration'));
