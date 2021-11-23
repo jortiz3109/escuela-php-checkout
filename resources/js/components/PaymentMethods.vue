@@ -1,7 +1,7 @@
 <template>
     <div class="flex gap-4 justify-center w-full">
         <button
-            v-if="categories.includes('DEBIT')"
+            v-if="paymentMethods.DEBIT"
             class="bg-gray-200 border-2 border-gray-700 f focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm"
             @click="selectCategory('DEBIT')"
             @mouseenter="hovers.debit = true"
@@ -16,7 +16,7 @@
             Debit Card
         </button>
         <button
-            v-if="categories.includes('CREDIT')"
+            v-if="paymentMethods.CREDIT"
             class="bg-gray-200 border-2 border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 font-bold font-medium gap-2 hover:bg-gray-700 hover:text-white inline-flex items-center px-4 py-2 rounded-md shadow-sm text-sm"
             @click="selectCategory('CREDIT')"
             @mouseenter="hovers.credit = true"
@@ -64,7 +64,6 @@ export default {
             hovers,
             selectCategory,
             paymentMethods: paymentMethodsData.data,
-            categories: paymentMethodsData.meta.categories,
         }
     },
 }

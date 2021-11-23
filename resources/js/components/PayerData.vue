@@ -75,10 +75,10 @@
 <script>
 import { useForm, useField } from 'vee-validate'
 import { useHelpers, useStep } from '../use'
-import CustomButton from './CustomButton'
+import CustomButton from './custom_fields/buttons/CustomButton'
 import '../use/validators'
-import CustomInput from './CustomInput'
-import CustomSelect from './CustomSelect'
+import CustomInput from './custom_fields/inputs/CustomInput'
+import CustomSelect from './custom_fields/selects/CustomSelect'
 
 export default {
     name: 'PayerData',

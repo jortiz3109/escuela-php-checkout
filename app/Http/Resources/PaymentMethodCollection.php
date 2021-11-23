@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\CategoriesHelper;
+use App\Models\PaymentMethod;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PaymentMethodCollection extends ResourceCollection
@@ -10,10 +10,11 @@ class PaymentMethodCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
-            'data' => PaymentMethodResource::collection($this->collection),
+            'data' => $this->collection->groupBy(function (PaymentMethodResource $paymentMethod) {
+                return $paymentMethod->category;
+            }),
             'meta' => [
                 'payment_methods_count' => $this->collection->count(),
-                'categories' => CategoriesHelper::obtain(PaymentMethodResource::collection($this->collection)),
             ],
         ];
     }

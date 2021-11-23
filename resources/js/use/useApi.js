@@ -6,7 +6,7 @@ export default function useApi() {
 
     const urls = {
         paymentMethods: `/api/v1/session/${session}/payment-methods`,
-        validateCardInformation: 'api/v1/validate-card-information',
+        validateCardSettings: `api/v1/session/${session}/card-settings`,
     }
 
     const headers = {
@@ -21,8 +21,8 @@ export default function useApi() {
         return response.data
     }
 
-    const postValidateCardInformation = async function (body) {
-        const response = await axios.post(urls.validateCardInformation, {
+    const postValidateCardSettings = async function (body) {
+        const response = await axios.post(urls.validateCardSettings, {
             headers: headers,
             data: body,
         })
@@ -31,6 +31,6 @@ export default function useApi() {
 
     return {
         getPaymentMethods,
-        postValidateCardInformation
+        postValidateCardSettings,
     }
 }

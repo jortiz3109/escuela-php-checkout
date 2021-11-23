@@ -6,7 +6,7 @@
             <SuspenseComponent v-if="inStep(2)">
                 <PaymentMethods />
             </SuspenseComponent>
-            <CardInformation v-if="inStep(3)"/>
+            <CardInformation v-if="inStep(3)" />
         </div>
         <TransactionFooter />
     </div>

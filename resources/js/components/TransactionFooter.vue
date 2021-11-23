@@ -21,7 +21,7 @@
 
 <script>
 import useStep from '../use/useStep'
-import CustomButton from './CustomButton'
+import CustomButton from './custom_fields/buttons/CustomButton'
 
 export default {
     name: 'Footer',
