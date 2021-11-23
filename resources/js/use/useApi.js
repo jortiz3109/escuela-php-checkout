@@ -6,7 +6,7 @@ export default function useApi() {
 
     const urls = {
         paymentMethods: `/api/v1/session/${session}/payment-methods`,
-        validateCardSettings: `api/v1/session/${session}/card-settings`,
+        validateCardSettings: `/api/v1/session/${session}/card-settings`,
     }
 
     const headers = {

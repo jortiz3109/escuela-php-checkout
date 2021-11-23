@@ -1523,7 +1523,7 @@ function useApi() {
   var token = window.document.querySelector('meta[name="token"]').content;
   var urls = {
     paymentMethods: "/api/v1/session/".concat(session, "/payment-methods"),
-    validateCardSettings: "api/v1/session/".concat(session, "/card-settings")
+    validateCardSettings: "/api/v1/session/".concat(session, "/card-settings")
   };
   var headers = {
     Accept: 'application/json',
