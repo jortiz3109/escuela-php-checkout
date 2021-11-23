@@ -47,13 +47,18 @@
                     :maxlength="settings.pin.toString()"
                 />
             </div>
-            <custom-button text="Pay" class="justify-center" disabled/>
+            <custom-button
+                text="Pay"
+                class="justify-center"
+                :disabled="payDisabled"
+                @click="pay"
+            />
         </div>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useApi, useStore } from '../use'
 import CardIcon from './assets/CardIcon'
 import CustomInput from './custom_fields/inputs/CustomInput'
@@ -86,6 +91,27 @@ export default {
 
         const settings = ref(defaultSettings)
 
+        const payDisabled = computed(() => {
+            if (!cardNumber.value) return true
+            if (settings.value.expiration && !expiration.value) return true
+            if (settings.value.cardholderName && !cardholderName.value) return true
+            if (settings.value.cvv && !cvv.value) return true
+            return settings.value.pin && !pin.value
+        })
+
+        const pay = () => {
+            console.log({
+                payer: state.payer,
+                cardInformation: {
+                    cardNumber: cardNumber.value,
+                    expiration: expiration.value,
+                    cardholderName: cardholderName.value,
+                    cvv: cvv.value,
+                    pin: pin.value,
+                }
+            })
+        }
+
         const cardNumberOptions = {
             creditCard: true,
             delimiter: ' ',
@@ -116,6 +142,8 @@ export default {
             cvv,
             pin,
             settings,
+            payDisabled,
+            pay,
             requestCardSettings,
         }
     },

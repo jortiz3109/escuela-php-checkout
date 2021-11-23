@@ -59,6 +59,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       pin: false
     };
     var settings = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(defaultSettings);
+    var payDisabled = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+      if (!cardNumber.value) return true;
+      if (settings.value.expiration && !expiration.value) return true;
+      if (settings.value.cardholderName && !cardholderName.value) return true;
+      if (settings.value.cvv && !cvv.value) return true;
+      return settings.value.pin && !pin.value;
+    });
+
+    var pay = function pay() {
+      console.log({
+        payer: state.payer,
+        cardInformation: {
+          cardNumber: cardNumber.value,
+          expiration: expiration.value,
+          cardholderName: cardholderName.value,
+          cvv: cvv.value,
+          pin: pin.value
+        }
+      });
+    };
+
     var cardNumberOptions = {
       creditCard: true,
       delimiter: ' ',
@@ -111,6 +132,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cvv: cvv,
       pin: pin,
       settings: settings,
+      payDisabled: payDisabled,
+      pay: pay,
       requestCardSettings: requestCardSettings
     };
   }
@@ -859,8 +882,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["modelValue", "maxlength"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_button, {
     text: "Pay",
     "class": "justify-center",
-    disabled: ""
-  })])]);
+    disabled: $setup.payDisabled,
+    onClick: $setup.pay
+  }, null, 8
+  /* PROPS */
+  , ["disabled", "onClick"])])]);
 }
 
 /***/ }),
