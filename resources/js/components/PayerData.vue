@@ -74,7 +74,7 @@
 
 <script>
 import { useForm, useField } from 'vee-validate'
-import { useHelpers, useStep } from '../use'
+import { useStore, useStep } from '../use'
 import CustomButton from './custom_fields/buttons/CustomButton'
 import '../use/validators'
 import CustomInput from './custom_fields/inputs/CustomInput'
@@ -86,7 +86,7 @@ export default {
     setup() {
         const documentTypes = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT']
 
-        const { state } = useHelpers()
+        const { state } = useStore()
         const { stepForward } = useStep()
 
         const { handleSubmit, errors } = useForm({

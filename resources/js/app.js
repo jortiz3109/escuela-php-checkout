@@ -3,7 +3,7 @@ require('./bootstrap')
 import { createApp } from 'vue'
 
 import Cleave from 'vue-cleave-component'
-import { useHelpers } from './use'
+import { useStore } from './use'
 import Countdown from './components/Countdown'
 import Stepper from './components/Stepper'
 import Transaction from './components/Transaction'
@@ -15,7 +15,7 @@ const app = createApp({
         Transaction,
     },
     setup() {
-        const { syncStatus } = useHelpers()
+        const { syncStatus } = useStore()
         syncStatus()
     },
 })

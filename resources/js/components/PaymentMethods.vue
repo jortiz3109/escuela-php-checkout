@@ -35,7 +35,7 @@
 
 <script>
 import useApi from '../use/useApi'
-import { useHelpers, useStep } from '../use'
+import { useStore, useStep } from '../use'
 import CardIcon from './assets/CardIcon'
 import { reactive } from 'vue'
 
@@ -45,7 +45,7 @@ export default {
 
     async setup() {
         const { getPaymentMethods } = useApi()
-        const { state } = useHelpers()
+        const { state } = useStore()
         const { stepForward } = useStep()
 
         const paymentMethodsData = await getPaymentMethods()

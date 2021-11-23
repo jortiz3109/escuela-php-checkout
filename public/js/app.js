@@ -11,11 +11,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _custom_fields_inputs_CustomInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./custom_fields/inputs/CustomInput */ "./resources/js/components/custom_fields/inputs/CustomInput.vue");
-/* harmony import */ var _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/CardIcon */ "./resources/js/components/assets/CardIcon.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../use */ "./resources/js/use/index.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _custom_fields_buttons_CustomButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./custom_fields/buttons/CustomButton */ "./resources/js/components/custom_fields/buttons/CustomButton.vue");
+/* harmony import */ var _assets_CardIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./assets/CardIcon */ "./resources/js/components/assets/CardIcon.vue");
+/* harmony import */ var _custom_fields_inputs_CustomInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./custom_fields/inputs/CustomInput */ "./resources/js/components/custom_fields/inputs/CustomInput.vue");
+/* harmony import */ var _custom_fields_buttons_CustomButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./custom_fields/buttons/CustomButton */ "./resources/js/components/custom_fields/buttons/CustomButton.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -24,24 +32,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CardInformation',
   components: {
-    CustomButton: _custom_fields_buttons_CustomButton__WEBPACK_IMPORTED_MODULE_4__["default"],
-    CustomInput: _custom_fields_inputs_CustomInput__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CardIcon: _assets_CardIcon__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CustomButton: _custom_fields_buttons_CustomButton__WEBPACK_IMPORTED_MODULE_5__["default"],
+    CustomInput: _custom_fields_inputs_CustomInput__WEBPACK_IMPORTED_MODULE_4__["default"],
+    CardIcon: _assets_CardIcon__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   setup: function setup() {
     var title;
 
-    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(),
-        state = _useHelpers.state;
+    var _useStore = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useStore)(),
+        state = _useStore.state;
 
     var _useApi = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useApi)(),
         postValidateCardSettings = _useApi.postValidateCardSettings;
 
     var category = state.paymentMethod.category;
     if (category === 'DEBIT') title = 'Debit Card';else title = 'Credit Card';
-    var cardNumber = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
-    var cardDate = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
-    var cardCvv = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)();
+    var cardNumber = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var expiration = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var cardholderName = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var cvv = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var pin = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var defaultSettings = {
+      expiration: true,
+      cardholderName: false,
+      cvv: false,
+      pin: false
+    };
+    var settings = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(defaultSettings);
     var cardNumberOptions = {
       creditCard: true,
       delimiter: ' ',
@@ -54,12 +71,34 @@ __webpack_require__.r(__webpack_exports__);
       datePattern: ['m', 'y']
     };
 
-    var requestCardSettings = function requestCardSettings() {
-      postValidateCardSettings({
-        cardNumber: cardNumber.value
-      });
-      console.log(cardNumber.value);
-    };
+    var requestCardSettings = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return postValidateCardSettings({
+                  cardNumber: cardNumber.value
+                });
+
+              case 2:
+                response = _context.sent;
+                if (response['settings']) settings.value = response.settings;else settings.value = defaultSettings;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function requestCardSettings() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
     return {
       title: title,
@@ -67,9 +106,12 @@ __webpack_require__.r(__webpack_exports__);
       cardNumberOptions: cardNumberOptions,
       dateOptions: dateOptions,
       cardNumber: cardNumber,
-      cardDate: cardDate,
-      cardCvv: cardCvv,
-      test: requestCardSettings
+      cardholderName: cardholderName,
+      expiration: expiration,
+      cvv: cvv,
+      pin: pin,
+      settings: settings,
+      requestCardSettings: requestCardSettings
     };
   }
 });
@@ -183,8 +225,8 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup() {
     var documentTypes = ['CC', 'CE', 'NIT', 'PPN', 'TI', 'RUT'];
 
-    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_0__.useHelpers)(),
-        state = _useHelpers.state;
+    var _useStore = (0,_use__WEBPACK_IMPORTED_MODULE_0__.useStore)(),
+        state = _useStore.state;
 
     var _useStep = (0,_use__WEBPACK_IMPORTED_MODULE_0__.useStep)(),
         stepForward = _useStep.stepForward;
@@ -275,14 +317,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   setup: function setup() {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var _useApi, getPaymentMethods, _useHelpers, state, _useStep, stepForward, paymentMethodsData, hovers, selectCategory;
+      var _useApi, getPaymentMethods, _useStore, state, _useStep, stepForward, paymentMethodsData, hovers, selectCategory;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _useApi = (0,_use_useApi__WEBPACK_IMPORTED_MODULE_1__["default"])(), getPaymentMethods = _useApi.getPaymentMethods;
-              _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(), state = _useHelpers.state;
+              _useStore = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useStore)(), state = _useStore.state;
               _useStep = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useStep)(), stepForward = _useStep.stepForward;
               _context.next = 5;
               return getPaymentMethods();
@@ -762,22 +804,59 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.cardNumber = $event;
     }),
+    label: "Card number",
     placeholder: "0000 0000 0000 0000",
     cleave: $setup.cardNumberOptions,
-    onFocusout: $setup.test
+    onFocusout: $setup.requestCardSettings
   }, null, 8
   /* PROPS */
   , ["modelValue", "cleave", "onFocusout"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "date",
-    modelValue: $setup.cardDate,
+    modelValue: $setup.expiration,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $setup.cardDate = $event;
+      return $setup.expiration = $event;
     }),
+    label: "Expiration",
     placeholder: "MM/YY",
     cleave: $setup.dateOptions
   }, null, 8
   /* PROPS */
-  , ["modelValue", "cleave"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <custom-input"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    id=\"cvv\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    v-model=\"cardCvv\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    placeholder=\"CVV\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    maxlength=\"3\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                />")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_button, {
+  , ["modelValue", "cleave"]), $setup.settings.cardholderName ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_custom_input, {
+    key: 0,
+    id: "cardholderName",
+    modelValue: $setup.cardholderName,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.cardholderName = $event;
+    }),
+    label: "Name on the card",
+    maxlength: "120"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.settings.cvv ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_custom_input, {
+    key: 1,
+    id: "cvv",
+    modelValue: $setup.cvv,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $setup.cvv = $event;
+    }),
+    label: "Security code",
+    placeholder: "CVV",
+    maxlength: $setup.settings.cvv.toString()
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "maxlength"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.settings.pin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_custom_input, {
+    key: 2,
+    id: "pin",
+    modelValue: $setup.pin,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $setup.pin = $event;
+    }),
+    label: "Pin",
+    placeholder: "***",
+    maxlength: $setup.settings.pin.toString()
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "maxlength"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_button, {
     text: "Pay",
     "class": "justify-center",
     disabled: ""
@@ -1428,8 +1507,8 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
     Transaction: _components_Transaction__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   setup: function setup() {
-    var _useHelpers = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useHelpers)(),
-        syncStatus = _useHelpers.syncStatus;
+    var _useStore = (0,_use__WEBPACK_IMPORTED_MODULE_2__.useStore)(),
+        syncStatus = _useStore.syncStatus;
 
     syncStatus();
   }
@@ -1480,12 +1559,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useApi": () => (/* reexport safe */ _useApi__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   "useHelpers": () => (/* reexport safe */ _useHelpers__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "useStore": () => (/* reexport safe */ _useStore__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "useState": () => (/* reexport safe */ _useState__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   "useStep": () => (/* reexport safe */ _useStep__WEBPACK_IMPORTED_MODULE_3__["default"])
 /* harmony export */ });
 /* harmony import */ var _useApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./useApi */ "./resources/js/use/useApi.js");
-/* harmony import */ var _useHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useHelpers */ "./resources/js/use/useHelpers.js");
+/* harmony import */ var _useStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useStore */ "./resources/js/use/useStore/index.js");
 /* harmony import */ var _useState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useState */ "./resources/js/use/useState.js");
 /* harmony import */ var _useStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useStep */ "./resources/js/use/useStep.js");
 
@@ -1597,53 +1676,6 @@ function useApi() {
 
 /***/ }),
 
-/***/ "./resources/js/use/useHelpers.js":
-/*!****************************************!*\
-  !*** ./resources/js/use/useHelpers.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ useHelpers)
-/* harmony export */ });
-/* harmony import */ var _useStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./useStep */ "./resources/js/use/useStep.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-
-var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
-  payer: {
-    name: undefined,
-    surname: undefined,
-    documentType: undefined,
-    document: undefined,
-    email: undefined,
-    mobile: undefined
-  },
-  paymentMethod: {
-    category: undefined
-  }
-});
-
-var syncStatus = function syncStatus() {
-  var _useStep = (0,_useStep__WEBPACK_IMPORTED_MODULE_0__["default"])(),
-      step = _useStep.step,
-      firstStep = _useStep.firstStep;
-
-  var stepSaved = localStorage.getItem('step');
-  if (stepSaved) step.value = parseInt(stepSaved);else localStorage.setItem('step', firstStep);
-};
-
-function useHelpers() {
-  return {
-    state: state,
-    syncStatus: syncStatus
-  };
-}
-
-/***/ }),
-
 /***/ "./resources/js/use/useState.js":
 /*!**************************************!*\
   !*** ./resources/js/use/useState.js ***!
@@ -1710,6 +1742,93 @@ var inStep = function inStep(value) {
     inStep: inStep
   };
 }
+
+/***/ }),
+
+/***/ "./resources/js/use/useStore/functions.js":
+/*!************************************************!*\
+  !*** ./resources/js/use/useStore/functions.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _useStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../useStep */ "./resources/js/use/useStep.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  syncStatus: function syncStatus() {
+    var _useStep = (0,_useStep__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+        step = _useStep.step,
+        firstStep = _useStep.firstStep;
+
+    var stepSaved = localStorage.getItem('step');
+    if (stepSaved) step.value = parseInt(stepSaved);else localStorage.setItem('step', firstStep);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/use/useStore/index.js":
+/*!********************************************!*\
+  !*** ./resources/js/use/useStore/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useStore)
+/* harmony export */ });
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./resources/js/use/useStore/state.js");
+/* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./resources/js/use/useStore/functions.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function useStore() {
+  return _objectSpread({
+    state: _state__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }, _functions__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}
+
+/***/ }),
+
+/***/ "./resources/js/use/useStore/state.js":
+/*!********************************************!*\
+  !*** ./resources/js/use/useStore/state.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+  payer: {
+    name: undefined,
+    surname: undefined,
+    documentType: undefined,
+    document: undefined,
+    email: undefined,
+    mobile: undefined
+  },
+  paymentMethod: {
+    category: undefined
+  },
+  session: {
+    expired: false
+  }
+}));
 
 /***/ }),
 

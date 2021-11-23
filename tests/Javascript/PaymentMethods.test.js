@@ -2,7 +2,7 @@ import PaymentMethods from '../../resources/js/components/PaymentMethods'
 import { flushPromises, mount } from '@vue/test-utils'
 import { defineComponent, h, Suspense } from 'vue'
 import axios from 'axios'
-import { useHelpers } from '../../resources/js/use'
+import { useStore } from '../../resources/js/use'
 
 jest.mock('axios')
 
@@ -10,23 +10,20 @@ describe('paymentMethods', () => {
     let wrapper
 
     const mockPaymentMethodsResponse = {
-        data: [
-            {
+        data: {
+            CREDIT: {
                 id: 1,
                 name: 'Visa credit',
-                category: 'credit',
                 logo: 'https://logos-marcas.com/wp-content/uploads/2020/04/Visa-Emblema.png',
             },
-            {
+            DEBIT: {
                 id: 2,
                 name: 'Visa debit',
-                category: 'debit',
                 logo: 'https://seeklogo.com/images/V/visa-electron-logo-71BEC57E8F-seeklogo.com.png',
             },
-        ],
+        },
         meta: {
             payment_methods_count: 2,
-            categories: ['DEBIT', 'CREDIT'],
         },
     }
 
@@ -67,7 +64,7 @@ describe('paymentMethods', () => {
     })
 
     it('broadcasts when a payment method is selected', async () => {
-        const { state } = useHelpers()
+        const { state } = useStore()
         const paymentMethodsComponent = wrapper.findComponent(PaymentMethods)
 
         expect(state.paymentMethod.category).toBeUndefined()

@@ -9,24 +9,43 @@
                 <custom-input
                     id="cardNumber"
                     v-model="cardNumber"
+                    label="Card number"
                     placeholder="0000 0000 0000 0000"
                     :cleave="cardNumberOptions"
-                    @focusout="test"
+                    @focusout="requestCardSettings"
                 />
             </div>
             <div class="gap-2 grid grid-cols-2">
                 <custom-input
                     id="date"
-                    v-model="cardDate"
+                    v-model="expiration"
+                    label="Expiration"
                     placeholder="MM/YY"
                     :cleave="dateOptions"
                 />
-<!--                <custom-input-->
-<!--                    id="cvv"-->
-<!--                    v-model="cardCvv"-->
-<!--                    placeholder="CVV"-->
-<!--                    maxlength="3"-->
-<!--                />-->
+                <custom-input
+                    v-if="settings.cardholderName"
+                    id="cardholderName"
+                    v-model="cardholderName"
+                    label="Name on the card"
+                    maxlength="120"
+                />
+                <custom-input
+                    v-if="settings.cvv"
+                    id="cvv"
+                    v-model="cvv"
+                    label="Security code"
+                    placeholder="CVV"
+                    :maxlength="settings.cvv.toString()"
+                />
+                <custom-input
+                    v-if="settings.pin"
+                    id="pin"
+                    v-model="pin"
+                    label="Pin"
+                    placeholder="***"
+                    :maxlength="settings.pin.toString()"
+                />
             </div>
             <custom-button text="Pay" class="justify-center" disabled/>
         </div>
@@ -34,10 +53,10 @@
 </template>
 
 <script>
-import CustomInput from './custom_fields/inputs/CustomInput'
-import CardIcon from './assets/CardIcon'
-import { useApi, useHelpers } from '../use'
 import { ref } from 'vue'
+import { useApi, useStore } from '../use'
+import CardIcon from './assets/CardIcon'
+import CustomInput from './custom_fields/inputs/CustomInput'
 import CustomButton from './custom_fields/buttons/CustomButton'
 
 export default {
@@ -45,7 +64,7 @@ export default {
     components: { CustomButton, CustomInput, CardIcon },
     setup() {
         let title
-        const { state } = useHelpers()
+        const { state } = useStore()
         const { postValidateCardSettings } = useApi()
         const category = state.paymentMethod.category
 
@@ -53,8 +72,19 @@ export default {
         else title = 'Credit Card'
 
         const cardNumber = ref()
-        const cardDate = ref()
-        const cardCvv = ref()
+        const expiration = ref()
+        const cardholderName = ref()
+        const cvv = ref()
+        const pin = ref()
+
+        const defaultSettings = {
+            expiration: true,
+            cardholderName: false,
+            cvv: false,
+            pin: false,
+        }
+
+        const settings = ref(defaultSettings)
 
         const cardNumberOptions = {
             creditCard: true,
@@ -69,9 +99,10 @@ export default {
             datePattern: ['m', 'y'],
         }
 
-        const requestCardSettings = () => {
-            postValidateCardSettings({ cardNumber: cardNumber.value })
-            console.log(cardNumber.value)
+        const requestCardSettings = async () => {
+            const response = await postValidateCardSettings({ cardNumber: cardNumber.value })
+            if (response['settings']) settings.value = response.settings
+            else settings.value = defaultSettings
         }
 
         return {
@@ -80,9 +111,12 @@ export default {
             cardNumberOptions,
             dateOptions,
             cardNumber,
-            cardDate,
-            cardCvv,
-            test: requestCardSettings
+            cardholderName,
+            expiration,
+            cvv,
+            pin,
+            settings,
+            requestCardSettings,
         }
     },
 }
