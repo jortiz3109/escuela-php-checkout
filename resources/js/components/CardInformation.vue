@@ -12,6 +12,7 @@
                     label="Card number"
                     placeholder="0000 0000 0000 0000"
                     :cleave="cardNumberOptions"
+                    :errors="errors.cardNumber"
                     @focusout="requestCardSettings"
                 />
             </div>
@@ -96,8 +97,11 @@ export default {
             if (settings.value.expiration && !expiration.value) return true
             if (settings.value.cardholderName && !cardholderName.value) return true
             if (settings.value.cvv && !cvv.value) return true
-            return settings.value.pin && !pin.value
+            if (settings.value.pin && !pin.value) return true
+            return !!Object.keys(errors.value).length
         })
+
+        const errors = ref({})
 
         const pay = () => {
             console.log({
@@ -126,9 +130,14 @@ export default {
         }
 
         const requestCardSettings = async () => {
-            const response = await postValidateCardSettings({ cardNumber: cardNumber.value })
-            if (response['settings']) settings.value = response.settings
-            else settings.value = defaultSettings
+            const response = (await postValidateCardSettings({ cardNumber: cardNumber.value })).data
+            if (response['settings']) {
+                settings.value = response.settings
+                errors.value = {}
+            } else {
+                settings.value = defaultSettings
+                errors.value = response.errors
+            }
         }
 
         return {
@@ -144,6 +153,7 @@ export default {
             settings,
             payDisabled,
             pay,
+            errors,
             requestCardSettings,
         }
     },

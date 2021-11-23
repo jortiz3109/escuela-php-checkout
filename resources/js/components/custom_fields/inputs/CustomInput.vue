@@ -22,6 +22,14 @@
             :placeholder="placeholder"
             :maxlength="maxlength"
         />
+        <span
+            v-for="pError in errors"
+            v-show="errors"
+            :key="pError"
+            class="error-message"
+        >
+            {{ '&bull; ' + pError }}
+        </span>
         <span v-show="error" class="error-message">
             {{ error }}
         </span>
@@ -42,6 +50,7 @@ export default {
         placeholder: { type: String, default: null },
         modelValue: { type: String, default: null },
         error: { type: String, default: null },
+        errors: { type: Array, default: null },
         cleave: { type: Object, default: null },
         maxlength: { type: String, default: null }
     },

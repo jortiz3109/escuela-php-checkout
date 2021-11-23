@@ -64,8 +64,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (settings.value.expiration && !expiration.value) return true;
       if (settings.value.cardholderName && !cardholderName.value) return true;
       if (settings.value.cvv && !cvv.value) return true;
-      return settings.value.pin && !pin.value;
+      if (settings.value.pin && !pin.value) return true;
+      return !!Object.keys(errors.value).length;
     });
+    var errors = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)({});
 
     var pay = function pay() {
       console.log({
@@ -105,8 +107,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                response = _context.sent;
-                if (response['settings']) settings.value = response.settings;else settings.value = defaultSettings;
+                response = _context.sent.data;
+
+                if (response['settings']) {
+                  settings.value = response.settings;
+                  errors.value = {};
+                } else {
+                  settings.value = defaultSettings;
+                  errors.value = response.errors;
+                }
 
               case 4:
               case "end":
@@ -134,6 +143,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       settings: settings,
       payDisabled: payDisabled,
       pay: pay,
+      errors: errors,
       requestCardSettings: requestCardSettings
     };
   }
@@ -696,6 +706,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
+    errors: {
+      type: Array,
+      "default": null
+    },
     cleave: {
       type: Object,
       "default": null
@@ -830,10 +844,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     label: "Card number",
     placeholder: "0000 0000 0000 0000",
     cleave: $setup.cardNumberOptions,
+    errors: $setup.errors.cardNumber,
     onFocusout: $setup.requestCardSettings
   }, null, 8
   /* PROPS */
-  , ["modelValue", "cleave", "onFocusout"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
+  , ["modelValue", "cleave", "errors", "onFocusout"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_input, {
     id: "date",
     modelValue: $setup.expiration,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -1450,7 +1465,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     maxlength: $props.maxlength
   }, null, 8
   /* PROPS */
-  , _hoisted_3)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $setup.inputValue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  , _hoisted_3)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $setup.inputValue]]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.errors, function (pError) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+      key: pError,
+      "class": "error-message"
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)('• ' + pError), 513
+    /* TEXT, NEED_PATCH */
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.errors]]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "error-message"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.error), 513
   /* TEXT, NEED_PATCH */
