@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\PaymentMethod;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PaymentMethodCollection extends ResourceCollection
