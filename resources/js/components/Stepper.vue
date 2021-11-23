@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import useStep from '../functions/useStep'
+import useStep from '../use/useStep'
 
 export default {
   name: 'Stepper',

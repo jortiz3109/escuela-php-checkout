@@ -1,7 +1,7 @@
 import Countdown from '../../resources/js/components/Countdown'
 import { mount } from '@vue/test-utils'
 import { DateTime } from 'luxon'
-import useState from '../../resources/js/functions/useState'
+import useState from '../../resources/js/use/useState'
 
 describe('countdown', () => {
     let wrapper, clock

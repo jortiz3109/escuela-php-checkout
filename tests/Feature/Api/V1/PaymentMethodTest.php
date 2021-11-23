@@ -47,7 +47,7 @@ class PaymentMethodTest extends TestCase
             fn (AssertableJson $json) => $json->has('meta')
                 ->has('data', 1)
                 ->has(
-                    'data.0',
+                    'data.DEBIT.0',
                     fn (AssertableJson $json) => $json
                     ->where('id', $paymentMethod->id)
                     ->where('name', $paymentMethod->name)

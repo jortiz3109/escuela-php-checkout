@@ -9,6 +9,9 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        minWidth: {
+            '96': '24rem',
+        },
         extend: {
             fontFamily: {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
@@ -22,4 +25,4 @@ module.exports = {
     },
 
     plugins: [require("@tailwindcss/forms")],
-};
+}

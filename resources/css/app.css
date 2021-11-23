@@ -17,3 +17,7 @@
 .error-message {
     @apply text-red-500 pt-1;
 }
+
+.max-h-192 {
+    max-height: 48rem;
+}

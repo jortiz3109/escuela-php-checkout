@@ -5,7 +5,8 @@ export default function useApi() {
     const token = window.document.querySelector('meta[name="token"]').content
 
     const urls = {
-        paymentMethods: `/api/session/${session}/paymentMethods`,
+        paymentMethods: `/api/v1/session/${session}/payment-methods`,
+        validateCardSettings: `/api/v1/session/${session}/card-settings`,
     }
 
     const headers = {
@@ -20,7 +21,16 @@ export default function useApi() {
         return response.data
     }
 
+    const postValidateCardSettings = async function (body) {
+        const response = await axios.post(urls.validateCardSettings, {
+            headers: headers,
+            data: body,
+        })
+        return response.data
+    }
+
     return {
         getPaymentMethods,
+        postValidateCardSettings,
     }
 }

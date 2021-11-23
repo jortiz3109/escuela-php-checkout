@@ -8,6 +8,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="shortcut icon" href="{{ asset('checkoutIcon.svg') }}" type="svg/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -16,7 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased flex flex-col h-screen" id="app">
-        <header class=" bg-gray-100 shadow-2xl flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
+        <header class=" bg-gray-100 shadow-lg flex justify-between items-center py-3 px-4 sm:px-6 lg:px-12">
             {{ $header }}
         </header>
 

@@ -1,6 +1,6 @@
-import Footer from '../../resources/js/components/Footer'
+import TransactionFooter from '../../resources/js/components/TransactionFooter'
 import { flushPromises, mount } from '@vue/test-utils'
-import useStep from '../../resources/js/functions/useStep'
+import useStep from '../../resources/js/use/useStep'
 
 describe('footer', () => {
     let wrapper
@@ -9,7 +9,7 @@ describe('footer', () => {
     const cancelLinkText = 'Do not want to continue'
     const backButtonText = 'Back'
 
-    beforeEach(() => (wrapper = mount(Footer)))
+    beforeEach(() => (wrapper = mount(TransactionFooter)))
 
     afterEach(() => (step.value = 1))
 
