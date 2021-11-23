@@ -1,6 +1,6 @@
 import PayerData from '../../resources/js/components/PayerData'
 import { mount, flushPromises } from '@vue/test-utils'
-import { useHelpers } from '../../resources/js/use'
+import { useStore } from '../../resources/js/use'
 
 const invalidMessageText = (field) => `The field ${field} is invalid`
 
@@ -219,7 +219,7 @@ describe('payerData', () => {
         jest.runAllTimers()
         await flushPromises()
 
-        const { state } = useHelpers()
+        const { state } = useStore()
         expect(state.payer).toEqual({
             name: 'Julia',
             surname: 'Costa',
